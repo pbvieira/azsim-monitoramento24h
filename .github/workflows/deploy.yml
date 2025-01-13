@@ -22,13 +22,18 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
+
     - name: Set up JDK 11
       uses: actions/setup-java@v3
       with:
         java-version: '11'
         distribution: 'temurin'
         cache: maven
-    - name: Build
+
+    - name: Build React
+      run: cd react && npm install -g vite && npm install && vite build --base=/azsim/
+
+    - name: Build Java
       run: mvn -P release -B package --file pom.xml
 
     - name: Undeploy Tomcat
@@ -37,7 +42,7 @@ jobs:
         TOMCAT_USER: ${{ secrets.TOMCAT_USER }}
         TOMCAT_PASSWORD: ${{ secrets.TOMCAT_PASSWORD }}
       run: |
-        curl -v -u "$TOMCAT_USER:$TOMCAT_PASSWORD" -T target/azsim-api.war "http://www.application.dev.br/manager/text/undeploy?path=/azsim-api"
+        curl -v -u "$TOMCAT_USER:$TOMCAT_PASSWORD" "http://www.application.dev.br/manager/text/undeploy?path=/azsim"
 
     - name: Deploy Tomcat
       shell: bash
@@ -45,4 +50,4 @@ jobs:
         TOMCAT_USER: ${{ secrets.TOMCAT_USER }}
         TOMCAT_PASSWORD: ${{ secrets.TOMCAT_PASSWORD }}
       run: |
-        curl -v -u "$TOMCAT_USER:$TOMCAT_PASSWORD" -T target/azsim-api.war "http://www.application.dev.br/manager/text/deploy?path=/azsim-api"
+        curl -v -u "$TOMCAT_USER:$TOMCAT_PASSWORD" -T target/azsim.war "http://www.application.dev.br/manager/text/deploy?path=/azsim"

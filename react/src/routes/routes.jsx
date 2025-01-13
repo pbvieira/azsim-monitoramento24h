@@ -11,14 +11,14 @@ function Router() {
     return (
         <Routes>
             <Route element={<DefaultLayout />}>
-                <Route path="/" element={< ConsultaCliente />} />
-                <Route path="/monitor" element={< Monitor />} />
-                <Route path='/cadastroOS' element={<CadastroOS />} />
-                <Route path="/consultaOS" element={< ConsultaOS />} />
-                <Route path="/cadastroCliente" element={<CadastroClientes />} />
-                <Route path='/edicaoCliente/:id' element={<CadastroClientes />} />
-                <Route path="/consultaCliente" element={< ConsultaCliente />} />
-                <Route path="/consultaCodificador" element={< ConsultaCodificador />} />
+                <Route path="/azsim" element={< Monitor />} />
+                <Route path="/azsim/monitor" element={< Monitor />} />
+                <Route path='/azsim/cadastroOS' element={<CadastroOS />} />
+                <Route path="/azsim/consultaOS" element={< ConsultaOS />} />
+                <Route path="/azsim/cadastroCliente" element={<CadastroClientes />} />
+                <Route path='/azsim/edicaoCliente/:id' element={<CadastroClientes />} />
+                <Route path="/azsim/consultaCliente" element={< ConsultaCliente />} />
+                <Route path="/azsim/consultaCodificador" element={< ConsultaCodificador />} />
             </Route>
         </Routes>
     )

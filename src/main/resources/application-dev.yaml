@@ -1,9 +1,22 @@
 server:
+  port: 8080
   error:
-    include-stacktrace: always
+    include-stacktrace: never
   servlet:
-    context-path: /azsim-api
+    context-path: /azsim
+
 spring:
   data:
     mongodb:
-      uri: mongodb://localhost:27017/azsimdb
+      uri: mongodb://${USER_DB}:${PASS_DB}@${HOST_DB}:27017/${DATABASE_DB}?authSource=${DATABASE_DB}
+
+
+
+
+  web:
+    resources:
+      static-locations: classpath:/static/
+
+logging:
+  level:
+    ROOT: INFO
