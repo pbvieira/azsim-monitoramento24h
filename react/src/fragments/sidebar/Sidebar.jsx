@@ -21,8 +21,7 @@ function Sidebar() {
         <>
             <nav className=" navbar navbar-dark bg-primary fixed-top mb-5" id="navbar">
                 <button className="navbar-toggler ms-3" type="button" data-bs-toggle="offcanvas"
-                    data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar" data-bs-backdrop="false"
-                >
+                    data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar" data-bs-backdrop="false">
                     <span className="navbar-toggler-icon"></span>
                 </button>
 
@@ -39,57 +38,59 @@ function Sidebar() {
 
                             <li className="nav-item mb-5">
                                 <h2 id="titulo"><strong>Monitor</strong></h2>
-                                <Link className="nav-link" id="subtitulo" aria-current="page" to="/monitor"><strong>Monitor de Eventos</strong></Link>
+                                <Link className="nav-link" id="subtitulo" aria-current="page" to="/azsim/monitor"><strong>Monitor de Eventos</strong></Link>
                                 <Link className="nav-link" id="subtitulo" aria-current="page" to="/#"><strong>Consulta Atendimento</strong></Link>
                             </li>
+
                             <li className="nav-item mb-5">
                                 <h2 id="titulo"><strong>Clientes</strong></h2>
-                                <Link className="nav-link" id="subtitulo" aria-current="page" to="/cadastroCliente"><strong>Cadastro cliente</strong></Link>
-                                <Link className="nav-link" id="subtitulo" aria-current="page" to="/consultaCliente"><strong>Consulta cliente</strong></Link>
+                                <Link className="nav-link" id="subtitulo" aria-current="page" to="/azsim/cadastroCliente"><strong>Cadastro cliente</strong></Link>
+                                <Link className="nav-link" id="subtitulo" aria-current="page" to="/azsim/consultaCliente"><strong>Consulta cliente</strong></Link>
                             </li>
+
                             <li className="nav-item mb-5">
                                 <h2 id="titulo"><strong>Ordens de serviço</strong></h2>
-                                <Link className="nav-link" id="subtitulo" aria-current="page" to="/cadastroOS"><strong>Cadastro OS</strong></Link>
+                                <Link className="nav-link" id="subtitulo" aria-current="page" to="/azsim/cadastroOS"><strong>Cadastro OS</strong></Link>
                                 <Link className="nav-link" id="subtitulo" aria-current="page" to="/#"><strong>Consulta OS</strong></Link>
                             </li>
+
                             <h2 id="titulo"><strong>Relatórios</strong></h2>
                             <h2 id="titulo"><strong>Administração</strong></h2>
-
-
 
                         </ul>
                     </div>
                 </div>
+
                 {showShortcuts && (
                     <div className="atalhos t-start">
-                        <Link className="btnAtalho me-3" to="/monitor">
+                        <Link className="btnAtalho me-3" to="/azsim/monitor">
                             <i className="bi bi-display"> Monitor de Eventos</i>
                         </Link>
-                        <Link className="btnAtalho me-3" to="/cadastroCliente">
+
+                        <Link className="btnAtalho me-3" to="/azsim/cadastroCliente">
                             <i className="bi bi-person-fill-add"> Cadastro de Clientes</i>
                         </Link>
-                        <Link className="btnAtalho me-3" to="/consultaCliente">
+
+                        <Link className="btnAtalho me-3" to="/azsim/consultaCliente">
                             <i className="bi bi-search"> Consulta de Clientes</i>
                         </Link>
-                        <Link className="btnAtalho me-3" to="/cadastroOS">
+
+                        <Link className="btnAtalho me-3" to="/azsim/cadastroOS">
                             <i className="bi bi-file-earmark-plus-fill"> Cadastro de OS</i>
                         </Link>
-                        <Link className="btnAtalho me-3" to="/consultaOS">
+
+                        <Link className="btnAtalho me-3" to="/azsim/consultaOS">
                             <i className="bi bi-search"> Consulta de OS</i>
                         </Link>
-                        <Link className="btnAtalho me-3" to="/consultaCodificador">
+
+                        <Link className="btnAtalho me-3" to="/azsim/consultaCodificador">
                             <i className="bi bi-search"> Consulta de Codificador</i>
                         </Link>
                     </div>
                 )}
             </nav>
-
-
-
         </>
-
     )
-
 }
 
 export default Sidebar
