@@ -11,7 +11,7 @@ import org.springframework.test.context.ContextConfiguration;
 
 @SpringBootTest
 @ContextConfiguration(initializers = AzsimApplicationTest.MongoDbInitializer.class)
-@EnableMongoRepositories(basePackages = "br.com.azindustria.azsim.adapter.repository.mongo")
+@EnableMongoRepositories(basePackages = "br.com.azindustria.azsim.adapter.out.repository.mongodb")
 @ActiveProfiles("test")
 public abstract class AzsimApplicationTest {
 

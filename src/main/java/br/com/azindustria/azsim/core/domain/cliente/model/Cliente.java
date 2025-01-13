@@ -1,5 +1,6 @@
 package br.com.azindustria.azsim.core.domain.cliente.model;
 
+import br.com.azindustria.azsim.core.domain.cliente.type.NaturezaEnum;
 import lombok.Data;
 
 import java.io.Serializable;

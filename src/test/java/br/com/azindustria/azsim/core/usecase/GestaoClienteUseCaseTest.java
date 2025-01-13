@@ -2,9 +2,13 @@ package br.com.azindustria.azsim.core.usecase;
 
 import br.com.azindustria.azsim.AzsimApplicationTest;
 import br.com.azindustria.azsim.container.MongoDbContainer;
+import br.com.azindustria.azsim.core.domain.cliente.model.Cliente;
+import br.com.azindustria.azsim.core.domain.cliente.model.Contato;
+import br.com.azindustria.azsim.core.domain.cliente.model.Setor;
+import br.com.azindustria.azsim.core.domain.cliente.model.Viagem;
 import br.com.azindustria.azsim.core.domain.cliente.exception.CodificadorEmUsoException;
-import br.com.azindustria.azsim.core.domain.cliente.model.*;
-import br.com.azindustria.azsim.core.port.in.GestaoClientePort;
+import br.com.azindustria.azsim.core.domain.cliente.type.NaturezaEnum;
+import br.com.azindustria.azsim.core.application.in.GestaoClienteService;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -23,7 +27,7 @@ class GestaoClienteUseCaseTest extends AzsimApplicationTest {
     public static final int CODIFICADOR = 98657898;
 
     @Autowired
-    GestaoClientePort gestaoClientePort;
+    GestaoClienteService gestaoClienteService;
 
     Cliente cliente;
 
@@ -35,7 +39,7 @@ class GestaoClienteUseCaseTest extends AzsimApplicationTest {
 
     @BeforeEach
     void setUp() {
-        Cliente clienteExistente = gestaoClientePort.findOneByCodificador(CODIFICADOR);
+        Cliente clienteExistente = gestaoClienteService.findOneByCodificador(CODIFICADOR);
 
         if (nonNull(clienteExistente)) {
             cliente = clienteExistente;
@@ -88,7 +92,7 @@ class GestaoClienteUseCaseTest extends AzsimApplicationTest {
             viagem.setObservacaoEncerramento("ObservacaoEncerramento");
 
             cliente.setViagens(Collections.singletonList(viagem));
-            cliente = gestaoClientePort.save(cliente);
+            cliente = gestaoClienteService.save(cliente);
         }
     }
 
@@ -104,7 +108,7 @@ class GestaoClienteUseCaseTest extends AzsimApplicationTest {
         Exception exception = assertThrows(CodificadorEmUsoException.class, () -> {
             Cliente clienteFake = SerializationUtils.clone(cliente);
             clienteFake.setId(cliente.getId() + "x");
-            gestaoClientePort.save(clienteFake);
+            gestaoClienteService.save(clienteFake);
         });
 
         String expectedMessage = "Codificador 98657898 já está em uso no cliente nome do cliente";
@@ -114,19 +118,19 @@ class GestaoClienteUseCaseTest extends AzsimApplicationTest {
 
     @Test
     void buscarPorNomeTest() {
-        List<Cliente> nomes = gestaoClientePort.findByNomeOrNomeFantasia("fantasia");
+        List<Cliente> nomes = gestaoClienteService.findByNomeOrNomeFantasia("fantasia");
         assertTrue(nomes.size() > 0);
     }
 
     @Test
     void buscarPorIdTest() {
-        Cliente buscarPorId = gestaoClientePort.findById(cliente.getId());
+        Cliente buscarPorId = gestaoClienteService.findById(cliente.getId());
         assertNotNull(buscarPorId);
     }
 
     @Test
     void listarTest() {
-        List<Cliente> nomes = gestaoClientePort.findAll();
+        List<Cliente> nomes = gestaoClienteService.findAll();
         assertTrue(nomes.size() > 0);
     }
 

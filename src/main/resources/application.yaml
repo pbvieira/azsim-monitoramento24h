@@ -1,12 +1,21 @@
 server:
+  port: 9000
   error:
     include-stacktrace: never
   servlet:
-    context-path: /azsim-api
+    context-path: /
+
 spring:
   data:
     mongodb:
-      uri: mongodb://${user_db}:${pass_db}@${host_db}:27017/${database_db}
+      uri: mongodb://${USER_DB}:${PASS_DB}@${HOST_DB}:27017/${DATABASE_DB}?authMechanism=PLAIN&authSource=$external&ssl=true&retryWrites=false&loadBalanced=true
+
+  web:
+    resources:
+      static-locations: classpath:/static/
+
 logging:
   level:
     ROOT: INFO
+
+

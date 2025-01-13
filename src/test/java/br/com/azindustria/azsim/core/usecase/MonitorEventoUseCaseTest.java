@@ -1,13 +1,17 @@
 package br.com.azindustria.azsim.core.usecase;
 
 import br.com.azindustria.azsim.AzsimApplicationTest;
-import br.com.azindustria.azsim.adapter.web.valueobject.EventoVO;
+import br.com.azindustria.azsim.adapter.in.vo.EventoVO;
 import br.com.azindustria.azsim.container.MongoDbContainer;
-import br.com.azindustria.azsim.core.domain.cliente.model.*;
-import br.com.azindustria.azsim.core.domain.monitoramento.model.ConfigEvento;
-import br.com.azindustria.azsim.core.port.in.GestaoClientePort;
-import br.com.azindustria.azsim.core.port.in.MonitorEventoPort;
-import br.com.azindustria.azsim.core.port.out.GestaoConfigEventoRepository;
+import br.com.azindustria.azsim.core.domain.cliente.model.Cliente;
+import br.com.azindustria.azsim.core.domain.cliente.model.Contato;
+import br.com.azindustria.azsim.core.domain.cliente.model.Setor;
+import br.com.azindustria.azsim.core.domain.cliente.model.Viagem;
+import br.com.azindustria.azsim.core.domain.monitor.model.ConfigEvento;
+import br.com.azindustria.azsim.core.domain.cliente.type.NaturezaEnum;
+import br.com.azindustria.azsim.core.application.in.GestaoClienteService;
+import br.com.azindustria.azsim.core.application.in.MonitorEventoService;
+import br.com.azindustria.azsim.core.application.out.GestaoConfigEventoRepository;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -25,13 +29,13 @@ class MonitorEventoUseCaseTest extends AzsimApplicationTest {
     public static final int CODIFICADOR = 98657898;
 
     @Autowired
-    GestaoClientePort gestaoClientePort;
+    GestaoClienteService gestaoClienteService;
 
     @Autowired
     GestaoConfigEventoRepository gestaoConfigEventoRepository;
 
     @Autowired
-    MonitorEventoPort monitorEventoPort;
+    MonitorEventoService monitorEventoService;
 
     Cliente cliente;
 
@@ -43,7 +47,7 @@ class MonitorEventoUseCaseTest extends AzsimApplicationTest {
 
     @BeforeEach
     void setUp() {
-        Cliente clienteExistente = gestaoClientePort.findOneByCodificador(CODIFICADOR);
+        Cliente clienteExistente = gestaoClienteService.findOneByCodificador(CODIFICADOR);
 
         if (nonNull(clienteExistente)) {
             cliente = clienteExistente;
@@ -96,7 +100,7 @@ class MonitorEventoUseCaseTest extends AzsimApplicationTest {
             viagem.setObservacaoEncerramento("ObservacaoEncerramento");
 
             cliente.setViagens(Collections.singletonList(viagem));
-            cliente = gestaoClientePort.save(cliente);
+            cliente = gestaoClienteService.save(cliente);
         }
 
         ConfigEvento configEvento1 = new ConfigEvento();
@@ -152,7 +156,7 @@ class MonitorEventoUseCaseTest extends AzsimApplicationTest {
         evento.setDestatus("INVASAO SETOR");
         evento.setDataevento(new Date());
 
-        evento = monitorEventoPort.save(evento);
+        evento = monitorEventoService.save(evento);
 
         assertEquals("MONTENEGRO", evento.getUnidade());
         assertEquals(1001, evento.getCtx());
@@ -187,7 +191,7 @@ class MonitorEventoUseCaseTest extends AzsimApplicationTest {
         evento.setDestatus("INVASAO SETOR");
         evento.setDataevento(new Date());
 
-        evento = monitorEventoPort.save(evento);
+        evento = monitorEventoService.save(evento);
 
         assertEquals("MONTENEGRO", evento.getUnidade());
         assertEquals(1001, evento.getCtx());
@@ -222,7 +226,7 @@ class MonitorEventoUseCaseTest extends AzsimApplicationTest {
         evento.setDestatus("INVASAO SETOR");
         evento.setDataevento(new Date());
 
-        evento = monitorEventoPort.save(evento);
+        evento = monitorEventoService.save(evento);
 
         assertEquals("MONTENEGRO", evento.getUnidade());
         assertEquals(1001, evento.getCtx());
@@ -257,7 +261,7 @@ class MonitorEventoUseCaseTest extends AzsimApplicationTest {
         evento.setDestatus("INVASAO SETOR");
         evento.setDataevento(new Date());
 
-        evento = monitorEventoPort.save(evento);
+        evento = monitorEventoService.save(evento);
 
         assertEquals("MONTENEGRO", evento.getUnidade());
         assertEquals(1001, evento.getCtx());

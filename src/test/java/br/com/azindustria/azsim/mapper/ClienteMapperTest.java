@@ -1,9 +1,10 @@
 package br.com.azindustria.azsim.mapper;
 
-import br.com.azindustria.azsim.adapter.repository.model.ClienteDocument;
+import br.com.azindustria.azsim.adapter.out.document.ClienteDocument;
 import br.com.azindustria.azsim.core.domain.cliente.model.Cliente;
 import br.com.azindustria.azsim.core.domain.cliente.model.Contato;
-import br.com.azindustria.azsim.core.domain.cliente.model.NaturezaEnum;
+import br.com.azindustria.azsim.core.domain.cliente.type.NaturezaEnum;
+import br.com.azindustria.azsim.core.mapper.ClienteMapper;
 import org.junit.jupiter.api.Test;
 
 import java.util.Collections;
