@@ -16,58 +16,38 @@ on:
     branches: [ "master" ]
 
 jobs:
-  checkout:
+  build:
+
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/cache@v4
+    - uses: actions/checkout@v4
 
-      - name: Set up JDK 11
-        uses: actions/setup-java@v3
-        with:
-          java-version: '11'
-          distribution: 'temurin'
-          cache: maven
+    - name: Set up JDK 11
+      uses: actions/setup-java@v3
+      with:
+        java-version: '11'
+        distribution: 'temurin'
+        cache: maven
 
-  build-frontend:
-    runs-on: ubuntu-latest
-    needs: [checkout]
+    - name: Build React
+      run: cd react && npm install -g vite && npm install && vite build --base=/azsim/
 
-    steps:
-      - name: Build React
-        run: ls -la && cd react && npm install -g vite && npm install && vite build --base=/azsim/
+    - name: Build Java
+      run: mvn -P release -B package --file pom.xml
 
-  build-backend:
-    runs-on: ubuntu-latest
-    needs: [build-frontend]
+    - name: Undeploy Tomcat
+      shell: bash
+      env:
+        TOMCAT_USER: ${{ secrets.TOMCAT_USER }}
+        TOMCAT_PASSWORD: ${{ secrets.TOMCAT_PASSWORD }}
+      run: |
+        curl -v -u "$TOMCAT_USER:$TOMCAT_PASSWORD" "http://www.application.dev.br/manager/text/undeploy?path=/azsim"
 
-    steps:
-      - name: Build Java
-        run: mvn -P release -B package --file pom.xml
-
-  undeploy:
-    runs-on: ubuntu-latest
-    needs: [build-backend]
-
-    steps:
-      - name: Undeploy Tomcat
-        shell: bash
-        env:
-          TOMCAT_USER: ${{ secrets.TOMCAT_USER }}
-          TOMCAT_PASSWORD: ${{ secrets.TOMCAT_PASSWORD }}
-        run: |
-          curl -v -u "$TOMCAT_USER:$TOMCAT_PASSWORD" "http://www.application.dev.br/manager/text/undeploy?path=/azsim"
-
-  deploy:
-    runs-on: ubuntu-latest
-    needs: [undeploy]
-
-    steps:
-      - name: Deploy Tomcat
-        shell: bash
-        env:
-          TOMCAT_USER: ${{ secrets.TOMCAT_USER }}
-          TOMCAT_PASSWORD: ${{ secrets.TOMCAT_PASSWORD }}
-        run: |
-          curl -v -u "$TOMCAT_USER:$TOMCAT_PASSWORD" -T target/azsim.war "http://www.application.dev.br/manager/text/deploy?path=/azsim"
+    - name: Deploy Tomcat
+      shell: bash
+      env:
+        TOMCAT_USER: ${{ secrets.TOMCAT_USER }}
+        TOMCAT_PASSWORD: ${{ secrets.TOMCAT_PASSWORD }}
+      run: |
+        curl -v -u "$TOMCAT_USER:$TOMCAT_PASSWORD" -T target/azsim.war "http://www.application.dev.br/manager/text/deploy?path=/azsim"
