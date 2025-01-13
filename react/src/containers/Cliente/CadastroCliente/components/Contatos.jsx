@@ -9,7 +9,6 @@ function ContatosForm({ dadosBasicos, handleOpenModal, deleteItem }) {
 
     function formatPhoneNumber(phone) {
         if (!phone) return "";
-
         const phoneNumber = parsePhoneNumberFromString(phone, "BR");
         return phoneNumber ? phoneNumber.formatNational() : phone;
     }
@@ -37,7 +36,7 @@ function ContatosForm({ dadosBasicos, handleOpenModal, deleteItem }) {
                                 text2={formatPhoneNumber(contato.telefone) || "Não informado"}
                                 handleOpenModal={handleOpenModal}
                                 deleteItem={deleteItem}
-                                ItemParaDelete={'contatos'}
+                                item={'contatos'}
                             />
                         ))}
                     </Row>
@@ -47,7 +46,6 @@ function ContatosForm({ dadosBasicos, handleOpenModal, deleteItem }) {
                     <p>Nenhum contato registrado.</p>
                 </Row>
             )}
-
         </>
     );
 }
