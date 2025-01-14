@@ -9,8 +9,6 @@ const useEditCliente = ({ dadosBasicos, setDadosBasicos, api }) => {
             if (id) {
                 const response = await api.get(`clientes/${id}`);
                 const clienteParaEdicao = response.data;
-
-
                 setDadosBasicos({
                     ...dadosBasicos,
                     unidade: clienteParaEdicao.unidade,
@@ -33,7 +31,7 @@ const useEditCliente = ({ dadosBasicos, setDadosBasicos, api }) => {
                     viagens: clienteParaEdicao.viagens,
                 });
             }
-            navigateToCadastro(`/edicaoCliente/${id}`);
+            navigateToCadastro(`/azsim/edicaoCliente/${id}`);
         } catch (error) {
             console.error('Erro ao obter detalhes do cliente. Verifique sua conexão e tente novamente.');
         }

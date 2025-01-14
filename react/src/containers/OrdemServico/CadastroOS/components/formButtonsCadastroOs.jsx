@@ -6,7 +6,7 @@ import { Buttons } from '../style';
 function FormButtons() {
     return (
         <Buttons>
-            <Button id="btnCadastro" type="submit" className="btn btn-primary me-3">
+            <Button type="submit" className="btn btn-success me-3">
                 Salvar
             </Button>
             <Link id="bntNovaOS" type="button" className="btn btn-success">

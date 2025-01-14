@@ -1,27 +1,28 @@
 import { useState } from "react";
-import useNavigateToCadastroCliente from "../../../../hooks/UseNavigate";
 import useScrollToTop from "../../../../hooks/UseScrollToTop";
 import useReloadPage from "../../../../hooks/UseReloadPage";
 import { validarCamposObrigatorios } from "../../CadastroCliente/fragments/utils/validaCamposObrigatorios";
 import { prepararDadosRequisicao } from "../../CadastroCliente/fragments/utils/preparaDadosRequisicao";
 import api from "../../../../services/api";
 import { exibirAlerta } from "../../CadastroCliente/fragments/utils/alertaReq";
+import useNavigateToCadastroCliente from "../../../../hooks/UseNavigate";
 
-
-const useSubmitCliente = (idCliente, dadosBasicos, carregarDadosCliente, setError, setIdCliente, setDadosBasicos) => {
+const useSubmitCliente = (idCliente, dadosBasicos, carregarDadosCliente, setError, setIdCliente) => {
     const [loading, setLoading] = useState(false);
-    const navigateToCadastro = useNavigateToCadastroCliente();
     const scrollToTop = useScrollToTop();
+    const navigateToCadastro = useNavigateToCadastroCliente();
     const reloadPage = useReloadPage();
 
-    const onSubmit = async (data) => {
+    const submitHandler = async (data, showAlert = true) => {
+        console.log(data);
         const camposObrigatorios = ['unidade', 'natureza', 'documento', 'nome'];
         validarCamposObrigatorios(data, camposObrigatorios, setError);
         if (loading) return;
 
         try {
+            setLoading(true);
             const dadosRequisicao = prepararDadosRequisicao(dadosBasicos, idCliente);
-            const resposta = await api.post(`cliente`, dadosRequisicao);
+            const resposta = await api.post(`clientes`, dadosRequisicao);
 
             if (resposta.status === 200) {
                 const novoIdCliente = resposta.data.id;
@@ -32,12 +33,15 @@ const useSubmitCliente = (idCliente, dadosBasicos, carregarDadosCliente, setErro
                 }
                 carregarDadosCliente(idCliente);
 
-                const result = await exibirAlerta('Cliente cadastrado com sucesso!', 'Quer cadastrar outro cliente?', 'question');
-
-                if (result.isConfirmed) {
-                    setDadosBasicos(dadosBasicos);
-                    navigateToCadastro('/cadastroCliente');
-                    scrollToTop();
+                if (showAlert) {
+                    const result = await exibirAlerta('Cliente cadastrado com sucesso!', 'Quer cadastrar outro cliente?', 'question');
+                    if (result.isConfirmed) {
+                        navigateToCadastro('/azsim/cadastroCliente');
+                        scrollToTop();
+                        reloadPage();
+                    }
+                } else {
+                    navigateToCadastro('/azsim/cadastroCliente');
                     reloadPage();
                 }
             }
@@ -49,8 +53,10 @@ const useSubmitCliente = (idCliente, dadosBasicos, carregarDadosCliente, setErro
         }
     };
 
+    const onSubmit = (data) => submitHandler(data, true);
+    const onSubmitAndReload = (data) => submitHandler(data, false);
 
-    return { onSubmit, loading };
+    return { onSubmit, onSubmitAndReload, loading };
 };
 
 export default useSubmitCliente;

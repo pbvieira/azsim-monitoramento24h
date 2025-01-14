@@ -3,24 +3,21 @@ import { Link } from 'react-router-dom';
 import { Buttons } from '../../styles';
 import PropTypes from 'prop-types';
 
-function FormButtons({ handleSubmit, onSubmit, handleNovoCliente, handleOpenModal, tabSelected }) {
-	
-	console.log("TAB:" + tabSelected);
-	
+function FormButtons({ handleSubmit, onSubmit, onSubmitAndReload, handleOpenModal, tabSelected }) {
     return (
         <Buttons>
-            <Button id="btnCadastro" onClick={() => handleSubmit(onSubmit)} type="submit" className="btn btn-primary me-3">
+            <Button onClick={handleSubmit(onSubmit)} type="submit" className="btn btn-success me-3">
                 Salvar
             </Button>
-			
-            <Link id="bntNovoCliente" onClick={handleNovoCliente} type="button" className="btn btn-success">
+
+            <Button id="bntNovoCliente" onClick={handleSubmit(onSubmitAndReload)} type="button" className="btn btn-success">
                 <i className="bi bi-person-fill-add" /> Salvar e Adicionar Novo
-            </Link>
-			
-            <Link className="ms-3 btn btn-danger" to="/consultaCliente">
+            </Button>
+
+            <Link className="ms-3 btn btn-danger" to="/azsim/consultaCliente">
                 Cancelar
             </Link>
-			
+
             {tabSelected !== '' && (
                 <button id='buttonNovoItem' className='btn ms-3 btn-success' onClick={() => handleOpenModal()}>Adicionar {tabSelected}</button>
             )}
@@ -31,9 +28,10 @@ function FormButtons({ handleSubmit, onSubmit, handleNovoCliente, handleOpenModa
 FormButtons.propTypes = {
     handleSubmit: PropTypes.func.isRequired,
     onSubmit: PropTypes.func.isRequired,
-    handleNovoCliente: PropTypes.func.isRequired,
+    onSubmitAndReload: PropTypes.func.isRequired,
     tabSelected: PropTypes.string.isRequired,
     handleOpenModal: PropTypes.func.isRequired,
 };
 
 export default FormButtons;
+

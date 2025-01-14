@@ -10,7 +10,7 @@ const useHandleNovoCliente = (dadosBasicos, setDadosBasicos) => {
 
     const handleNovoCliente = () => {
         setDadosBasicos(dadosBasicos);
-        navigateToCadastro('/cadastroCliente')
+        navigateToCadastro('/azsim/cadastroCliente')
         scrollToTop();
         reloadPage();
     };

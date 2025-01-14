@@ -16,13 +16,15 @@ function Modal({ dadosBasicos, setDadosBasicos, setShowModal, index, tabSelected
         senha: '',
         contraSenha: '',
         dataNascimento: '',
-        observacao: ''
+        observacao: '',
+        index: index
     });
 
     const [setor, setSetor] = useState({
         setor: '',
         localizacao: '',
-        observacao: ''
+        observacao: '',
+        index: index
     });
 
     const [viagens, setViagens] = useState({
@@ -31,7 +33,8 @@ function Modal({ dadosBasicos, setDadosBasicos, setShowModal, index, tabSelected
         observacao: '',
         dataSaida: '',
         dataVolta: '',
-        procedimentos: ''
+        procedimentos: '',
+        index: index
     });
 
     useEffect(() => {
@@ -83,21 +86,23 @@ function Modal({ dadosBasicos, setDadosBasicos, setShowModal, index, tabSelected
         setShowModal
     });
 
+    console.log(index)
+
     return (
         <Background>
             {tabSelected === 'contatos' && (
                 <Container>
-                    <ModalContato setShowModal={setShowModal} contato={contato} setContato={setContato} handleSave={handleSave} handleDateChange={handleDateChange} />
+                    <ModalContato index={index} setShowModal={setShowModal} contato={contato} setContato={setContato} handleSave={handleSave} handleDateChange={handleDateChange} />
                 </Container>
             )}
             {tabSelected === 'setores' && (
                 <Container>
-                    <ModalSetor setShowModal={setShowModal} setor={setor} setSetor={setSetor} handleSave={handleSave} />
+                    <ModalSetor index={index} setShowModal={setShowModal} setor={setor} setSetor={setSetor} handleSave={handleSave} />
                 </Container>
             )}
             {tabSelected === 'viagens' && (
                 <Container>
-                    <ModalViagem setShowModal={setShowModal} viagens={viagens} setViagens={setViagens} handleSave={handleSave} handleViagensDateChange={handleViagensDateChange} />
+                    <ModalViagem index={index} setShowModal={setShowModal} viagens={viagens} setViagens={setViagens} handleSave={handleSave} handleViagensDateChange={handleViagensDateChange} />
                 </Container>
             )}
         </Background>

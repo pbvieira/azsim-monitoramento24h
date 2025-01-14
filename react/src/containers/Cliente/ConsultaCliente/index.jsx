@@ -1,7 +1,7 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.min.js';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import api from '../../../services/api';
 import Filtro from './fragments/Filtro';
 import HeaderCliente from './fragments/HeaderCliente';
@@ -14,15 +14,24 @@ import { Container, Fundo } from '../../../components/Formularios/Form';
 import { Exibicao } from './styles';
 
 function ConsultaCliente() {
-  const [clientes, setClientes] = useState([])
-  const [filtro, setFiltro] = useState('')
+  const [clientes, setClientes] = useState([]);
+  const [filtro, setFiltro] = useState('');
   const [dadosBasicos, setDadosBasicos] = useState({});
+  const [consultaRealizada, setConsultaRealizada] = useState(false);
 
   const handleConsultaClientes = useConsultaCliente({
     setClientes,
+    setConsultaRealizada,
     filtro,
-    api
+    api,
   });
+
+  useEffect(() => {
+    if (!filtro) {
+      setConsultaRealizada(false);
+      setClientes([]);
+    }
+  }, [filtro]);
 
   const clientesLista = filtro ? clientes : '';
 
@@ -44,7 +53,7 @@ function ConsultaCliente() {
                 <ClientesRow key={index} cliente={cliente} index={index} dadosBasicos={dadosBasicos} setDadosBasicos={setDadosBasicos} api={api} />
               ))}
             </>
-          ) : filtro && clientesLista.length === 0 ? (
+          ) : consultaRealizada ? (
             <MensagemTabela msg={'Nenhum resultado encontrado. Refine sua pesquisa para obter resultados.'} />
           ) : (
             <MensagemTabela msg={'Filtre para ter resultados.'} />

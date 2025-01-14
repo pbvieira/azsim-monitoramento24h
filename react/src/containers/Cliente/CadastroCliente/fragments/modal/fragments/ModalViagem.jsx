@@ -3,10 +3,10 @@ import PropTypes from 'prop-types';
 import { Buttons, Form, Input, Row, Title } from '../style';
 import ReactInputMask from 'react-input-mask';
 
-function ModalViagem({ viagens, setShowModal, setViagens, handleViagensDateChange, handleSave }) {
+function ModalViagem({ viagens, setShowModal, setViagens, handleViagensDateChange, handleSave, index }) {
     return (
         <>
-            <Title><h5>{viagens.index !== null ? 'Editar Viagem' : 'Adicionar Nova Viagem'}</h5></Title>
+            <Title><h5>{index !== null ? 'Editar Viagem' : 'Adicionar Nova Viagem'}</h5></Title>
             <div className="divButton">
                 <button id="btnFechar" className="btn " onClick={() => setShowModal(false)}>X</button>
             </div>

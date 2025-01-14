@@ -57,7 +57,6 @@ export const Formulario = styled.div`
 min-height: 90%;
 height: 90%;
 width: 100%;
-border: 1px solid #d0d0d0;
 border-radius: 8px;
 padding: 10px;
 overflow-y: auto;
@@ -118,5 +117,6 @@ div{
 `
 
 export const Input = styled.input`
+
 `
 
