@@ -1,11 +1,9 @@
-/* eslint-disable no-unused-vars */
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.min.js';
 import { useForm } from "react-hook-form";
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Container, Formulario, Fundo } from '../../../components/Formularios/Form';
-import TabsNavegacao from './fragments/FormsCadastro/tabsNavegacao';
 import FormButtons from './fragments/FormsCadastro/formButtonsCadastro';
 import Modal from './fragments/modal/modal';
 import useSubmitCliente from './hooks/UseOnSubmit';
@@ -21,6 +19,7 @@ import ContatosForm from './components/Contatos';
 import SetoresForm from './components/Setores';
 import ViagensForm from './components/Viagens';
 import HeaderPage from '../../../components/HeaderPages';
+import { TabButton, TabContent, Tabs } from './fragments/FormsCadastro/styles';
 
 function CadastroCliente() {
     const { register, handleSubmit, formState: { errors }, setError, setValue } = useForm({});
@@ -50,15 +49,72 @@ function CadastroCliente() {
         setores: [],
         viagens: [],
     });
+    const [activeTab, setActiveTab] = useState(0);
+
 
     useFormatDadosBasicos(dadosBasicos, setDadosBasicos);
     const carregarDadosCliente = useCarregarDadosCliente(idNaURL, setDadosBasicos, setValue);
-    const { onSubmit } = useSubmitCliente(idCliente, dadosBasicos, carregarDadosCliente, setError, setIdCliente);
+    const { onSubmit, onSubmitAndReload } = useSubmitCliente(idCliente, dadosBasicos, carregarDadosCliente, setError, setIdCliente);
     const deleteItem = useDeleteItem(dadosBasicos, setDadosBasicos);
     useChamaCarregaDadosCliente(carregarDadosCliente);
     const handleNovoCliente = useHandleNovoCliente(dadosBasicos, setDadosBasicos);
     const handleChangeNatureza = useHandleChangeNatureza(setNatureza);
     const handleOpenModal = useHandleOpenModal(setShowModal, setIndex);
+
+    const tabs = [
+        {
+            label: "Dados Básicos",
+            value: '',
+            component: (
+                <DadosBasicosForm
+                    dadosBasicos={dadosBasicos}
+                    register={register}
+                    setDadosBasicos={setDadosBasicos}
+                    errors={errors}
+                    natureza={natureza}
+                    handleChangeNatureza={handleChangeNatureza}
+                />
+            ),
+        },
+        {
+            label: "Contatos",
+            value: 'contatos',
+            component: (
+                <ContatosForm
+                    dadosBasicos={dadosBasicos}
+                    handleOpenModal={handleOpenModal}
+                    deleteItem={deleteItem}
+                />
+            ),
+        },
+        {
+            label: "Setorização",
+            value: 'setores',
+            component: (
+                <SetoresForm
+                    dadosBasicos={dadosBasicos}
+                    handleOpenModal={handleOpenModal}
+                    deleteItem={deleteItem}
+                />
+            ),
+        },
+        {
+            label: "Viagens",
+            value: 'viagens',
+            component: (
+                <ViagensForm
+                    dadosBasicos={dadosBasicos}
+                    handleOpenModal={handleOpenModal}
+                    deleteItem={deleteItem}
+                />
+            ),
+        },
+    ];
+
+
+    function MudaValue(value) {
+        setTabSelected(value);
+    }
 
     return (
         <Container>
@@ -66,52 +122,24 @@ function CadastroCliente() {
             <HeaderPage title="Cadastro de Clientes" subtitle={'Cadastre e edite seus clientes'} location={'Home > Cadastro de clientes'} />
             <Fundo>
                 <Formulario>
-                    <TabsNavegacao setTabSelected={setTabSelected} />
-                    <div className="tab-content" id="myTabContent">
-                        <div className="tab-pane fade show active" id="dadosBasicos" role="tabpanel" aria-labelledby="dadosBasicos-tab">
-                            <DadosBasicosForm
-                                dadosBasicos={dadosBasicos}
-                                register={register}
-                                setDadosBasicos={setDadosBasicos}
-                                errors={errors}
-                                natureza={natureza}
-                                handleChangeNatureza={handleChangeNatureza}
-                            />
-                        </div>
-
-                        <div className="tab-pane fade" id="contatos" role="tabpanel" aria-labelledby="contatos-tab">
-                            <ContatosForm
-                                dadosBasicos={dadosBasicos}
-                                handleOpenModal={handleOpenModal}
-                                deleteItem={deleteItem}
-                            />
-
-                        </div>
-
-                        <div className="tab-pane fade" id="setorizacao" role="tabpanel" aria-labelledby="setorizacao-tab">
-                            <SetoresForm
-                                dadosBasicos={dadosBasicos}
-                                handleOpenModal={handleOpenModal}
-                                deleteItem={deleteItem}
-                            />
-
-                        </div>
-
-                        <div className="tab-pane fade" id="viagens" role="tabpanel" aria-labelledby="viagens-tab">
-                            <ViagensForm
-                                dadosBasicos={dadosBasicos}
-                                handleOpenModal={handleOpenModal}
-                                deleteItem={deleteItem}
-                            />
-                        </div>
-                    </div>
+                    <Tabs>
+                        {tabs.map((tab, index) => (
+                            <TabButton
+                                key={index}
+                                active={activeTab === index}
+                                onClick={() => { setActiveTab(index), MudaValue(tab.value) }}
+                            >
+                                {tab.label}
+                            </TabButton>
+                        ))}
+                    </Tabs>
+                    <TabContent>{tabs[activeTab].component}</TabContent>
                 </Formulario>
-				
-                <FormButtons handleSubmit={handleSubmit} onSubmit={onSubmit} handleNovoCliente={handleNovoCliente} handleOpenModal={handleOpenModal} setTabSelected={setTabSelected} />
+                <FormButtons handleSubmit={handleSubmit} onSubmitAndReload={onSubmitAndReload} onSubmit={onSubmit} handleNovoCliente={handleNovoCliente} handleOpenModal={handleOpenModal} tabSelected={tabSelected} />
 
             </Fundo>
 
-        </Container>
+        </Container >
     );
 
 

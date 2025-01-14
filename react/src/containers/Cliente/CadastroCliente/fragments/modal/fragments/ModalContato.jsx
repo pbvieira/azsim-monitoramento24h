@@ -3,11 +3,13 @@ import PropTypes from 'prop-types';
 import { Buttons, Form, Input, Row, Title } from '../style';
 import ReactInputMask from 'react-input-mask';
 
-function ModalContato({ contato, setContato, handleDateChange, handleSave, setShowModal }) {
+function ModalContato({ contato, setContato, handleDateChange, handleSave, setShowModal, index }) {
+
+    console.log(contato)
 
     return (
         <>
-            <Title><h5>{contato.index !== null ? 'Editar Contato' : 'Adicionar Novo Contato'}</h5></Title>
+            <Title><h5>{index !== null ? 'Editar Contato' : 'Adicionar Novo Contato'}</h5></Title>
             <div className="divButton">
                 <button id="btnFechar" className="btn " onClick={() => setShowModal(false)}>X</button>
             </div>

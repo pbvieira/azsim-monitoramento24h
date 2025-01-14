@@ -2,10 +2,10 @@
 import PropTypes from 'prop-types';
 import { Buttons, Form, Input, Row, Title } from '../style';
 
-function ModalSetor({ setor, setShowModal, setSetor, handleSave }) {
+function ModalSetor({ setor, setShowModal, setSetor, handleSave, index }) {
     return (
         <>
-            <Title><h5>{setor.index !== null ? 'Editar Setor' : 'Adicionar Novo Setor'}</h5></Title>
+            <Title><h5>{index !== null ? 'Editar Setor' : 'Adicionar Novo Setor'}</h5></Title>
             <div className="divButton">
                 <button id="btnFechar" className="btn " onClick={() => setShowModal(false)}>X</button>
             </div>

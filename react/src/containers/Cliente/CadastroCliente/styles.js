@@ -115,7 +115,6 @@ width: 100%;
 
 
 #btnCadastro {
-    background: linear-gradient(to bottom right, #02005e, #001e52, #010236);
     width: 150px;
 }
 
