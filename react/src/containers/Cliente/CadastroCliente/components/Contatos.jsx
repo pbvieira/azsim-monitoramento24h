@@ -33,7 +33,13 @@ function ContatosForm({ dadosBasicos, handleOpenModal, deleteItem }) {
                                 title1={"Nome"}
                                 text1={contato.nome ? contato.nome : ""}
                                 title2={"Tel"}
-                                text2={formatPhoneNumber(contato.telefone) || "Não informado"}
+                                text2={formatPhoneNumber(contato.telefone) || ""}
+                                title3={"Senha"}
+                                text3={contato.senha ? contato.senha : ""}
+                                title4={"Contra Senha"}
+                                text4={contato.contraSenha ? contato.contraSenha : ""}
+                                title5={"Observações"}
+                                text5={contato.observacao ? contato.observacao : ""}
                                 handleOpenModal={handleOpenModal}
                                 deleteItem={deleteItem}
                                 item={'contatos'}

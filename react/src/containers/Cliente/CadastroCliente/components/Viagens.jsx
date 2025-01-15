@@ -27,6 +27,10 @@ function ViagensForm({ dadosBasicos, handleOpenModal, deleteItem }) {
                                 text1={viagem.dataSaida ? formatDateForInput(viagem.dataSaida) : ""}
                                 title2={"Data de Volta"}
                                 text2={viagem.dataVolta ? formatDateForInput(viagem.dataVolta) : ""}
+                                title3={"Observações"}
+                                text3={viagem.observacao ? (viagem.observacao) : ""}
+                                title4={"Procedimentos"}
+                                text4={viagem.procedimentos ? (viagem.procedimentos) : ""}
                                 handleOpenModal={handleOpenModal}
                                 deleteItem={deleteItem}
                                 ItemParaDelete={'viagens'}

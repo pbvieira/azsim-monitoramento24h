@@ -56,7 +56,8 @@ label{
 export const Formulario = styled.div`
 min-height: 90%;
 height: 90%;
-width: 100%;
+min-width: 100%;
+max-width: 100%;
 border-radius: 8px;
 padding: 10px;
 overflow-y: auto;
@@ -66,12 +67,12 @@ export const Row = styled.div`
 display: flex;
 gap: 10px;
 margin: 10px;
-
 `
 
 export const Card = styled.div`
 min-width: 32%;
 max-width: 32%;
+position: relative;
 height: auto;
 justify-content: start;
 align-items: start;
@@ -83,6 +84,24 @@ border: 1px solid #d0d0d0;
 border-radius: 8px;
 white-space: nowrap;
 text-overflow: ellipsis;
+
+  .div{
+    max-width: 95%;
+    min-width: 95%;
+    height: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+    h6 {
+      margin: 0;
+      min-width: 100%;
+      max-width:100%;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+    }
 
 .btnExluir{
 background-color: transparent;
@@ -104,6 +123,9 @@ border : none;
 background-color: transparent;
 color:rgb(0, 0, 0);
 border : none;
+display: flex;
+align-items: center;
+width: auto;
 
 :hover{
     background-color: transparent;
@@ -115,21 +137,10 @@ border : none;
     border: none!important;
     color:rgb(0, 0, 0);
 }
+
+span{
+    font-size: 25px;
 }
-
-div{
-        width: 100%;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
-
-    h6{
-    margin: 0;
-    width: auto;
-    max-width: 50%;
-    text-overflow: ellipsis;
-    overflow: hidden;
 }
 `
 
@@ -145,13 +156,14 @@ export const DropdownContainer = styled.div`
 
 export const DropdownContent = styled.div`
   display: ${prop => (prop.show ? 'flex!important' : 'none!important')};
-  min-width: 150px;
-  max-width: 150px;
+  min-width: 150px!important;
+  max-width: 150px!important;
+  height: 100px!important;
   padding: 05px;
   text-align: left;
   position: absolute;
-  margin-top: 130px;
-  margin-left: 40px;
+  margin-top: 0px;
+  margin-left: 0px;
   flex-direction: column;
   background-color: #fff;
   border: 1px solid  #f0f0f0;
@@ -164,17 +176,18 @@ export const DropdownItem = styled.button`
   border: none;
   text-decoration: none;
   display: block;
-background-color: #f2f2f2;
+background-color:${prop => (prop.excluir ? '#dc3545!important' : 'gray!important')};
 margin: 1px 0px;
+color: #fff;
 border-radius: none!important;
 
   &:hover {
-background-color:gray;
+opacity: 0.7;
 color: #fff;
 }
 `;
 
 export const Options = styled.div`
-width: 10%!important;
+width: auto!important;
 position: relative;
 `
