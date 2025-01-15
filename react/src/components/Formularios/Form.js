@@ -100,6 +100,23 @@ border : none;
 }
 }
 
+.btnOptions{
+background-color: transparent;
+color:rgb(0, 0, 0);
+border : none;
+
+:hover{
+    background-color: transparent;
+    opacity: 0.7;
+}
+:active{
+    background-color: transparent;
+    opacity: 0.9;
+    border: none!important;
+    color:rgb(0, 0, 0);
+}
+}
+
 div{
         width: 100%;
         display: flex;
@@ -119,4 +136,45 @@ div{
 export const Input = styled.input`
 
 `
+export const DropdownContainer = styled.div`
+  position: relative;
+  display: inline-block;
+  width: 5%;
+`;
 
+
+export const DropdownContent = styled.div`
+  display: ${prop => (prop.show ? 'flex!important' : 'none!important')};
+  min-width: 150px;
+  max-width: 150px;
+  padding: 05px;
+  text-align: left;
+  position: absolute;
+  margin-top: 130px;
+  margin-left: 40px;
+  flex-direction: column;
+  background-color: #fff;
+  border: 1px solid  #f0f0f0;
+  z-index: 99;
+`;
+
+export const DropdownItem = styled.button`
+  width: 100%;
+  color: black;
+  border: none;
+  text-decoration: none;
+  display: block;
+background-color: #f2f2f2;
+margin: 1px 0px;
+border-radius: none!important;
+
+  &:hover {
+background-color:gray;
+color: #fff;
+}
+`;
+
+export const Options = styled.div`
+width: 10%!important;
+position: relative;
+`
