@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 export const Tabs = styled.div`
+width: 100%;
     display: flex;
     border-bottom: 1px solid #ccc;
     margin-bottom: 20px;
@@ -28,6 +29,7 @@ export const TabButton = styled.button`
         background: #f9f9f9;
     }
 `;
+
 export const TabContent = styled.div`
     width: 100%;
     min-height: 90%;

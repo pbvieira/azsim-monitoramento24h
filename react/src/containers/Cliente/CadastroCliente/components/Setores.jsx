@@ -26,6 +26,8 @@ function SetoresForm({ dadosBasicos, handleOpenModal, deleteItem }) {
                                 text1={setor.setor ? String(setor.setor).trim() : ""}
                                 title2={"Local Instalação"}
                                 text2={setor.localizacao ? String(setor.localizacao).trim() : ""}
+                                title3={"Observações"}
+                                text3={setor.observacao ? (setor.observacao) : ""}
                                 handleOpenModal={handleOpenModal}
                                 deleteItem={deleteItem}
                                 ItemParaDelete={'setores'}

@@ -3,11 +3,11 @@ import { useState, useEffect } from "react";
 import './styles.css';
 
 function Sidebar() {
-    const [showShortcuts, setShowShortcuts] = useState(window.innerWidth >= 1200);
+    const [showAtalhos, setShowAtalhos] = useState(window.innerWidth >= 1200);
 
     useEffect(() => {
         const handleResize = () => {
-            setShowShortcuts(window.innerWidth >= 1150);
+            setShowAtalhos(window.innerWidth >= 1530);
         };
 
         window.addEventListener("resize", handleResize);
@@ -61,7 +61,7 @@ function Sidebar() {
                     </div>
                 </div>
 
-                {showShortcuts && (
+                {showAtalhos && (
                     <div className="atalhos t-start">
                         <Link className="btnAtalho me-3" to="/azsim/monitor">
                             <i className="bi bi-display"> Monitor de Eventos</i>
