@@ -5,7 +5,7 @@ const useDadosComplementares = (setOcorrenciaModal, setShowModal) => {
     const handleDadosComplementares = async (id, idcliente) => {
         try {
             const [response, responseCliente] = await Promise.all([
-                api.get(`ocorrencia/${id}`),
+                api.get(`ocorrencias/${id}`),
                 api.get(`clientes/${idcliente}`)
             ]);
 

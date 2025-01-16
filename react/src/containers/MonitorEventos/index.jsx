@@ -26,14 +26,14 @@ function Monitor() {
     <Container>
 
       <HeaderPage title="Monitor de Eventos" subtitle={'Controle os eventos'} location={'Home > Monitor de Eventos'} />
-      
+
       <Main>
 
         <Eventos>
           <HeaderEventos />
           <EventoList eventos={eventos} />
         </Eventos>
-      
+
         <Ocorrencias>
           <OcorrenciaList ocorrencias={ocorrencias} handleDadosComplementares={handleDadosComplementares} />
         </Ocorrencias>
@@ -41,7 +41,7 @@ function Monitor() {
       </Main>
       {showModal ? <ModalOcorrencia
         dataOcorrencia={ocorrenciaModal || {}}
-        setColocaOcorrenciasNaTela={setColocaOcorrenciasNaTela}
+        setColocaOcorrenciasNaTela={setOcorrencias}
       /> : <></>}
     </Container>
   )
