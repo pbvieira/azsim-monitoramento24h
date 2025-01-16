@@ -2,10 +2,10 @@ import { Fragment } from "react";
 import PropTypes from 'prop-types';
 import { CardDiv, CardBody, NomeOcorrencia, DescricaoOcorrencia } from "../styles";
 
-function CardOcorrencia({ index, dataOcorrencia, PegaDadosComplementares, gravidadeClass }) {
+function CardOcorrencia({ index, dataOcorrencia, handleDadosComplementares, gravidadeClass }) {
     return (
         <Fragment key={index}>
-            <CardDiv onClick={() => { PegaDadosComplementares(dataOcorrencia.id, dataOcorrencia.evento.idcliente) }} data-bs-toggle="modal" data-bs-target={`#modal-${dataOcorrencia.id}`} gravidade={gravidadeClass}>
+            <CardDiv onClick={() => { handleDadosComplementares(dataOcorrencia.id, dataOcorrencia.evento.idcliente) }} data-bs-toggle="modal" data-bs-target={`#modal-${dataOcorrencia.id}`} gravidade={gravidadeClass}>
                 <CardBody id='cardOcorrencia'
                     gravidade={gravidadeClass} >
                     <DescricaoOcorrencia title={dataOcorrencia && dataOcorrencia.evento ? dataOcorrencia.evento.destatus : ""}>
@@ -32,7 +32,7 @@ CardOcorrencia.propTypes = {
             nmcliente: PropTypes.string,
         }).isRequired,
     }).isRequired,
-    PegaDadosComplementares: PropTypes.func.isRequired,
+    handleDadosComplementares: PropTypes.func.isRequired,
     gravidadeClass: PropTypes.string.isRequired,
 };
 export default CardOcorrencia;
