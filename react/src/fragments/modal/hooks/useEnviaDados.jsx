@@ -1,14 +1,14 @@
 import api from "../../../services/api";
-import useAtualizaOcorrencias from "./useAtualizaOcorrencias"; // ajuste o caminho conforme necessário
+import useAtualizaOcorrencias from "./useAtualizaOcorrencias";
 
 const useEnviaDados = (dataOcorrencia, reset, setColocaOcorrenciasNaTela, setEncerra) => {
-    const { atualizarListaOcorrencias } = useAtualizaOcorrencias();
+    const atualizarListaOcorrencias = useAtualizaOcorrencias();
 
     const handleEnviarDados = async (formData, encerra) => {
         try {
             console.log(encerra);
             formData.aberta = encerra;
-            const response = await api.post('ocorrencia', formData);
+            const response = await api.post('ocorrencias', formData);
 
             if (response.status === 200) {
                 setColocaOcorrenciasNaTela((ocorrenciasAntigas) => {

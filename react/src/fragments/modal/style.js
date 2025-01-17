@@ -12,7 +12,7 @@ justify-content: center;
 align-items: center;
 width: 100%;
 min-height:60px ;
-background: linear-gradient(to bottom right, #02005e, #001e52);
+background:  #1d4b96;
 color: #FFF;
 `
 export const Informacoes = styled.div`
@@ -22,7 +22,7 @@ flex-direction: row;
 align-items: center;
 width: 100%;
 min-height:90px ;
-background: linear-gradient( #d1d1d1, #d0d0d0);
+background: lightgray;
 color: #000;
 padding: 05px 10px;
 font-weight: 500;
@@ -38,7 +38,15 @@ flex-direction: row;
 
 export const Formulario = styled.div`
 width: 50%;
+max-height: 100vh;
 padding: 10px;
+display: flex;
+
+form{
+    overflow-y: auto;
+scrollbar-width: auto;
+}
+
 `
 export const InformacoesTabs = styled.div`
 width: 50%;
@@ -46,28 +54,58 @@ color: #000;
 text-decoration: none;
 `
 export const Tabs = styled.div`
-width: auto;
-display: inline;
-justify-content: center;
-align-items: center;
-margin: 0;
+width: 100%;
+    display: flex;
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 20px;
+    min-height: 40px;
+
+    ul{
+        list-style: none;
+        border-bottom: none;
+        
+         button{
+        color: #000;
+        }
+
+    }
+
+
+.nav-link{
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    color: #000;
+    border-radius: 0px!important;
+    &:hover {
+        background: #f9f9f9;
+    }}
+
+
+    .nav-link.active{
+        background: #f0f0f0;
+        border-bottom: 2px solid #000;
+
+    }
+
 `
 
 export const FundoContatos = styled.div`
 display: flex;
 flex-direction: column;
-align-items: center;
+align-items: start;
 justify-content: start;
 overflow-y: auto;
 scrollbar-width: auto;
 max-height: 100vh;
 
 
-.cardsTeste{
+.contentTabs{
     width: 100%;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: start;
     justify-content: start;
     max-height: 550px;
 }
@@ -79,7 +117,7 @@ display: flex;
 flex-direction: row;
 justify-content: space-between;
 align-items: center;
-background: linear-gradient( #d1d1d1, #d0d0d0);
+background:rgba(214, 214, 214, 0.63);
 padding: 20px;
 border-radius: 8px;
 margin-bottom: 10px;
@@ -92,33 +130,45 @@ display: flex;
 flex-direction: row;
 justify-content: space-between;
 align-items: center;
-background: linear-gradient( #d1d1d1, #d0d0d0);
+background:rgba(214, 214, 214, 0.63);;
 padding: 20px;
 border-radius: 8px;
 margin-bottom: 10px;
 
 `
+export const CardViagem = styled.div`
+width: 80%;
+display: flex;
+flex-direction: row;
+justify-content: space-between;
+align-items: center;
+background:rgba(214, 214, 214, 0.63);;
+padding: 20px;
+border-radius: 8px;
+margin-bottom: 10px;
+`
+
 export const Row = styled.div`
 width: 100%;
 display: flex;
 flex-direction: column;
 justify-content: space-between;
 align-items: start;
-background: linear-gradient( #d1d1d1, #d0d0d0);
+background: transparent;
 `
 export const FundoSetores = styled.div`
 display: flex;
 flex-direction: column;
-align-items: center;
+align-items: start;
 justify-content: start;
 overflow-y: auto;
 scrollbar-width: auto;
 
-.cardsTeste{
+.contentTabs{
     width: 100%;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: start;
     justify-content: start;
     max-height: 550px;
 }
@@ -129,9 +179,9 @@ flex-direction: column;
 align-items: start;
 justify-content: start;
 overflow-y: auto;
-width: 70%;
+width: 80%;
 height: 10%;
-background: #454545;
+background:rgb(69, 69, 69);
 color: #FFF;
 margin-top: 20px;
 margin-bottom: 20px;
@@ -142,37 +192,23 @@ padding: 10px;
 export const FundoViagem = styled.div`
 display: flex;
 flex-direction: column;
-align-items: center;
+align-items: start;
 justify-content: start;
 overflow-y: auto;
 scrollbar-width: auto;
-max-height: 100vh;
 
 
-.cardsTeste{
+.contentTabs{
     width: 100%;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: start;
     justify-content: start;
     max-height: 550px;
 }
 `
 
-export const CardViagem = styled.div`
-display: flex;
-flex-direction: column;
-align-items: start;
-justify-content: start;
-overflow-y: auto;
-width: 90%;
-height: 10%;
-color: #000;
-margin-top: 20px;
-margin-bottom: 20px;
-border-radius: 8px;
-padding: 10px;
-`
+
 
 export const RowViagem = styled.div`
 width: 100%;
@@ -180,7 +216,6 @@ display: flex;
 flex-direction: column;
 justify-content: space-between;
 align-items: start;
-background: linear-gradient( #d1d1d1, #d0d0d0);
 padding: 20px;
 border-radius: 8px;
 white-space: nowrap;
