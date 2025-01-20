@@ -17,12 +17,12 @@ import useDeslocamento from './hooks/useSelectDeslocamento';
 import useCamposDeslocamento from './hooks/useCamposDeslocamentoPreenchidos';
 import useTipoOcorrencia from './hooks/useTipoOcorrencia';
 
-function ModalOcorrencia({ dataOcorrencia, setColocaOcorrenciasNaTela }) {
+function ModalOcorrencia({ dataOcorrencia, setOcorrencias }) {
     const { register, handleSubmit, formState: { errors }, reset, setValue } = useForm();
     const [selectedCategory, setSelectedCategory] = useState('');
     const [modalOpen, setModalOpen] = useState(null);
     const [showModal, setShowModal] = useState(false);
-    const [encerra, setEncerra] = useState(null)
+    const [aberta, setAberta] = useState(null)
     const [selectedValue, setSelectedValue] = useState(dataOcorrencia.deslocamento ? "sim" : "nao");
     const botaoRef = useRef(null);
 
@@ -30,8 +30,8 @@ function ModalOcorrencia({ dataOcorrencia, setColocaOcorrenciasNaTela }) {
     const camposDeslocamentoPreenchidos = useCamposDeslocamento;
     const handleSelectDeslocamento = useDeslocamento(setSelectedValue)
     useSetValuesCampos(setModalOpen, dataOcorrencia, setValue, setSelectedValue)
-    const handleEnviarDados = useEnviaDados(dataOcorrencia, reset, setColocaOcorrenciasNaTela, setEncerra)
-    const handleOnSubmit = useOnSubmit(dataOcorrencia, camposDeslocamentoPreenchidos, setShowModal, handleEnviarDados, setModalOpen)
+    const handleEnviarDados = useEnviaDados(dataOcorrencia, reset, setOcorrencias, setAberta)
+    const handleOnSubmit = useOnSubmit(dataOcorrencia, camposDeslocamentoPreenchidos, handleEnviarDados, setModalOpen)
     const handleSubCategoryOptions = useSubCategoryOptions()
     const filteredSubCategories = handleSubCategoryOptions[selectedCategory] || [];
 
@@ -43,7 +43,7 @@ function ModalOcorrencia({ dataOcorrencia, setColocaOcorrenciasNaTela }) {
 
     return (
         modalOpen && <div className={`modal fade show`} id={`modal-${dataOcorrencia.id}`} tabIndex="-1" aria-labelledby={`modalLabel-${dataOcorrencia.id}`} aria-hidden={!modalOpen} style={{ display: modalOpen ? 'block' : 'none' }} data-bs-backdrop="false">
-            {showModal && <Modal setEncerra={setEncerra} setShowModal={setShowModal} handleSubmit={handleSubmit} onSubmit={handleOnSubmit} dataOcorrencia={dataOcorrencia} />}
+            {showModal && <Modal setAberta={setAberta} setShowModal={setShowModal} handleSubmit={handleSubmit} onSubmit={handleOnSubmit} dataOcorrencia={dataOcorrencia} />}
             <div className="modal-dialog modal-fullscreen">
                 <div className="modal-content">
                     <HeaderModal>
@@ -58,7 +58,7 @@ function ModalOcorrencia({ dataOcorrencia, setColocaOcorrenciasNaTela }) {
                     <footer className="modal-footer justify-content-start">
                         <div className="row">
                             <div className="col-2 ms-1">
-                                <button ref={botaoRef} id="dismiss-button" type="button" className="btn btn-secondary" onClick={handleSubmit((formData) => handleOnSubmit(formData, dataOcorrencia.id, null))} >Fechar</button>
+                                <button ref={botaoRef} id="dismiss-button" type="button" className="btn btn-secondary" onClick={() => setShowModal(true)} >Fechar</button>
                             </div>
                         </div>
                     </footer>
@@ -76,7 +76,7 @@ ModalOcorrencia.propTypes = {
     register: PropTypes.func,
     selectedValue: PropTypes.string,
     handleSelectDeslocamento: PropTypes.func,
-    setColocaOcorrenciasNaTela: PropTypes.func
+    setOcorrencias: PropTypes.func
 };
 
 export default ModalOcorrencia
