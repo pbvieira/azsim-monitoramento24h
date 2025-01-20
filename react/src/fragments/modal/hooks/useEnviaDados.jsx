@@ -1,25 +1,26 @@
 import api from "../../../services/api";
-import useAtualizaOcorrencias from "./useAtualizaOcorrencias"; // ajuste o caminho conforme necessário
+import useAtualizaOcorrencias from "./useAtualizaOcorrencias";
 
-const useEnviaDados = (dataOcorrencia, reset, setColocaOcorrenciasNaTela, setEncerra) => {
-    const { atualizarListaOcorrencias } = useAtualizaOcorrencias();
+const useEnviaDados = (dataOcorrencia, reset, setOcorrencias, setAberta) => {
+    const atualizarListaOcorrencias = useAtualizaOcorrencias();
 
-    const handleEnviarDados = async (formData, encerra) => {
+    const handleEnviarDados = async (formData, aberta) => {
         try {
-            console.log(encerra);
-            formData.aberta = encerra;
-            const response = await api.post('ocorrencia', formData);
+            console.log(aberta);
+            formData.aberta = aberta;
+            console.log('Dados Envio', formData)
+            const response = await api.post('ocorrencias', formData);
 
             if (response.status === 200) {
-                setColocaOcorrenciasNaTela((ocorrenciasAntigas) => {
+                setOcorrencias((ocorrenciasAntigas) => {
                     const novasOcorrencias = atualizarListaOcorrencias(
                         ocorrenciasAntigas,
                         dataOcorrencia,
                         response.data,
-                        encerra
+                        aberta
                     );
                     reset();
-                    if (encerra) setEncerra(null);
+                    if (aberta) setAberta(null);
                     return novasOcorrencias;
                 });
             } else {

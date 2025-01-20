@@ -16,7 +16,7 @@ function TabsInformacoes({ dataOcorrencia }) {
     return (
         <InformacoesTabs>
             <Tabs>
-                <ul className="nav nav-tabs text-center mt-3 ms-2 justify-content-center" id="myTab" role="tablist">
+                <ul className="nav nav-tabs text-start mt-3 ms-2 justify-content-start" id="myTab" role="tablist">
                     <li className="nav-item" role="presentation">
                         <button title="Tab Contatos" className="nav-link active" id={`contatos-tab-${dataOcorrencia.id}`} data-bs-toggle="tab"
                             data-bs-target={`#contatos-${dataOcorrencia.id}`} type="button" role="tab" aria-controls="contatos"
@@ -41,9 +41,9 @@ function TabsInformacoes({ dataOcorrencia }) {
 
                 <div className="tab-pane fade show active" id={`contatos-${dataOcorrencia.id}`} role="tabpanel"
                     aria-labelledby={`contatos-tab-${dataOcorrencia.id}`}>
-                    <div className="divInformacoesContatos p-3 mt-2 mb-2">
+                    <div className="p-3 mt-2 mb-2">
                         <FundoContatos>
-                            <div className="cardsTeste">
+                            <div className="contentTabs">
 
                                 {dataOcorrencia?.cliente?.contatos?.length > 0 ? (
                                     dataOcorrencia.cliente.contatos.map((contato, index) => (
@@ -79,79 +79,84 @@ function TabsInformacoes({ dataOcorrencia }) {
 
                 <div className="tab-pane fade" id={`setorizacao-${dataOcorrencia.id}`} role="tabpanel" aria-labelledby={`setorizacao-tab-${dataOcorrencia.id}`}>
 
+                    <div className="ps-3 mb-2">
 
-                    <FundoSetores>
-                        <CardHeaderSetores>
-                            <div className="row">
-                                <div className="col">
-                                    <div className="mt-1 h6" title={dataOcorrencia?.cliente?.codificador || "Não disponível"}>
-                                        <i className="bi bi-upc"></i>Codificador: <span />
-                                        {dataOcorrencia?.cliente?.codificador || "Não disponível"}
-                                    </div>
-                                    <div className="mt-1 h6" title={dataOcorrencia?.cliente?.modeloCentral || "Não disponível"}>
-                                        <i className="bi bi-modem"></i>Modelo central: <span />
-                                        {dataOcorrencia?.cliente?.modeloCentral || "Não disponível"}
+                        <FundoSetores>
+                            <CardHeaderSetores>
+                                <div className="row">
+                                    <div className="col">
+                                        <div className="mt-1 h6" title={dataOcorrencia?.cliente?.codificador || "Não disponível"}>
+                                            <i className="bi bi-upc"></i>Codificador: <span />
+                                            {dataOcorrencia?.cliente?.codificador || "Não disponível"}
+                                        </div>
+                                        <div className="mt-1 h6" title={dataOcorrencia?.cliente?.modeloCentral || "Não disponível"}>
+                                            <i className="bi bi-modem"></i>Modelo central: <span />
+                                            {dataOcorrencia?.cliente?.modeloCentral || "Não disponível"}
+                                        </div>
                                     </div>
                                 </div>
+                            </CardHeaderSetores>
+                            <div className="contentTabs">
+                                {dataOcorrencia?.cliente?.setores?.length > 0 ? (
+                                    dataOcorrencia.cliente.setores.map((setor, index) => (
+                                        <CardSetores key={index}>
+                                            <Row>
+                                                <div>
+                                                    <div title={setor.setor || "Não disponível"}>Setor:  {setor.setor || "Não disponível"} &nbsp;</div>
+                                                    <div>Local da instalação: {setor.localizacao || "Não disponível"}</div>
+                                                </div>
+                                                <div title={setor.observacao || "Não disponível"}>Observações:  {setor.observacao || "Nenhuma observação"}</div>
+                                            </Row>
+
+                                        </CardSetores>
+                                    ))
+                                ) : (
+                                    <div className="col">
+                                        Nenhum Setor cadastrado.
+                                    </div>
+                                )}
                             </div>
-                        </CardHeaderSetores>
-                        <div className="cardsTeste">
-                            {dataOcorrencia?.cliente?.setores?.length > 0 ? (
-                                dataOcorrencia.cliente.setores.map((setor, index) => (
-                                    <CardSetores key={index}>
-                                        <Row>
-                                            <div>
-                                                <div title={setor.setor || "Não disponível"}>Setor:  {setor.setor || "Não disponível"} &nbsp;</div>
-                                                <div>Local da instalação: {setor.localizacao || "Não disponível"}</div>
-                                            </div>
-                                            <div title={setor.observacao || "Não disponível"}>Observações:  {setor.observacao || "Nenhuma observação"}</div>
-                                        </Row>
-
-                                    </CardSetores>
-                                ))
-                            ) : (
-                                <div className="col">
-                                    Nenhum Setor cadastrado.
-                                </div>
-                            )}
-                        </div>
-                    </FundoSetores>
+                        </FundoSetores>
+                    </div>
 
                 </div>
 
 
                 <div className="tab-pane fade" id={`viagens-${dataOcorrencia.id}`} role="tabpanel" aria-labelledby={`viagens-tab-${dataOcorrencia.id}`}>
-                    <div className="cardsTeste">
+                    <div className="p-3 mt-2 mb-2">
 
-                        {dataOcorrencia?.cliente?.viagens?.length > 0 ? (
-                            dataOcorrencia.cliente.viagens.map((viagem, index) => (
-                                <FundoViagem key={index}>
-                                    <CardViagem>
-                                        <RowViagem>
-                                            <div>
-                                                <div title={viagem.dataSaida ? formatBackendDate(viagem.dataSaida) : "Não disponível"}>
-                                                    Data saída: <span />
-                                                    {viagem.dataSaida ? formatBackendDate(viagem.dataSaida) : "Não disponível"}
-                                                </div>
-                                                <div title={viagem.dataVolta ? formatBackendDate(viagem.dataVolta) : "Não disponível"}>
-                                                    Data volta: <span />
-                                                    {viagem.dataVolta ? formatBackendDate(viagem.dataVolta) : "Não disponível"}
-                                                </div>
-                                            </div>
-                                            <div>
-                                                <div title={viagem.procedimento || "Não disponível"}>Procedimentos:  {viagem.procedimento || "Nenhum procedimento registrado"}</div>
-                                                <div title={viagem.observacao || "Não disponível"}>Observações: {viagem.observacao || "Nenhuma observação"}</div>
-                                            </div>
-                                        </RowViagem>
-                                    </CardViagem>
-                                </FundoViagem>
+                        <FundoViagem>
+                            <div className="contentTabs">
+                                {dataOcorrencia?.cliente?.viagens?.length > 0 ? (
+                                    dataOcorrencia.cliente.viagens.map((viagem, index) => (
 
-                            ))
-                        ) : (
-                            <div className="col t-center">
-                                Nenhuma viagem cadastrada.
+                                        <CardViagem key={index}>
+                                            <RowViagem>
+                                                <div>
+                                                    <div title={viagem.dataSaida ? formatBackendDate(viagem.dataSaida) : "Não disponível"}>
+                                                        Data saída: <span />
+                                                        {viagem.dataSaida ? formatBackendDate(viagem.dataSaida) : "Não disponível"}
+                                                    </div>
+                                                    <div title={viagem.dataVolta ? formatBackendDate(viagem.dataVolta) : "Não disponível"}>
+                                                        Data volta: <span />
+                                                        {viagem.dataVolta ? formatBackendDate(viagem.dataVolta) : "Não disponível"}
+                                                    </div>
+                                                </div>
+                                                <div>
+                                                    <div title={viagem.procedimento || "Não disponível"}>Procedimentos:  {viagem.procedimento || "Nenhum procedimento registrado"}</div>
+                                                    <div title={viagem.observacao || "Não disponível"}>Observações: {viagem.observacao || "Nenhuma observação"}</div>
+                                                </div>
+                                            </RowViagem>
+                                        </CardViagem>
+
+                                    ))
+                                ) : (
+                                    <div className="col t-center">
+                                        Nenhuma viagem cadastrada.
+                                    </div>
+                                )}
                             </div>
-                        )}
+                        </FundoViagem>
                     </div>
                 </div>
             </div>

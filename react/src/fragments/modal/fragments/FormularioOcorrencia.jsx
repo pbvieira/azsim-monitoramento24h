@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import PropTypes from 'prop-types';
 import { format, parseISO, isValid, addHours } from 'date-fns';
 import { Formulario } from '../style';
@@ -12,7 +13,8 @@ function applyHourMask(value) {
     return formattedValue;
 }
 
-function FormularioOcorrencia({ dataOcorrencia, handleSubmit, onSubmit, register, handleSelectTipoOcorrencia, errors, selectedValue, handleSelectDeslocamento, filteredSubCategories }) {
+function FormularioOcorrencia({ handleLastFieldBlur, dataOcorrencia, handleSubmit, onSubmit, register, handleSelectTipoOcorrencia, errors, selectedValue, handleSelectDeslocamento, filteredSubCategories }) {
+
 
     const AplicaMascara = (event) => {
         event.target.value = applyHourMask(event.target.value);
@@ -249,7 +251,8 @@ function FormularioOcorrencia({ dataOcorrencia, handleSubmit, onSubmit, register
                 <div className="row ms-2 me-2 mt-2 mb-3">
                     <div className="col-sm">
                         <label htmlFor="resumo" className="form-label">Resumo*</label>
-                        <textarea {...register("resumo", { required: false })} className="form-control" id={`resumo${dataOcorrencia.id}`} rows="3"></textarea>
+                        <textarea {...register("resumo", { required: false })} className="form-control" id={`resumo${dataOcorrencia.id}`} rows="3" onBlur={handleLastFieldBlur}
+                        ></textarea>
                         {errors.resumo && <span className='fieldRequired'>Campo obrigatório</span>}
                     </div>
                 </div>
@@ -266,18 +269,6 @@ function FormularioOcorrencia({ dataOcorrencia, handleSubmit, onSubmit, register
                         {errors.procedimentos && <span className='fieldRequired'>Campo obrigatório</span>}
                     </div>
                 </div>
-                {/* <div className="form-check ms-4">
-                    <input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" />
-                    <label className="form-check-label" htmlFor="flexRadioDefault1">
-                        Enviar
-                    </label>
-                </div>
-                <div className="form-check ms-4">
-                    <input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked />
-                    <label className="form-check-label" htmlFor="flexRadioDefault2">
-                        Encerrar
-                    </label>
-                </div> */}
                 {errors.envio && <span className='fieldRequired'>Campo obrigatório</span>}
 
             </form>

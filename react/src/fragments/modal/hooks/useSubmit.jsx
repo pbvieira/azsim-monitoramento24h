@@ -1,6 +1,6 @@
 
-const useOnSubmit = (dataOcorrencia, camposDeslocamentoPreenchidos, setShowModal, handleEnviarDados, setModalOpen) => {
-    const handleOnSubmit = async (formData, id, encerra) => {
+const useOnSubmit = (dataOcorrencia, camposDeslocamentoPreenchidos, handleEnviarDados, setModalOpen) => {
+    const handleOnSubmit = async (formData, id, aberta) => {
         try {
             formData.id = id;
             formData.evento = dataOcorrencia.evento;
@@ -10,20 +10,12 @@ const useOnSubmit = (dataOcorrencia, camposDeslocamentoPreenchidos, setShowModal
             const camposObrigatoriosPreenchidos = formData.tipoocorrencia && formData.subtipoocorrencia && formData.operador && formData.resumo;
             const todosCamposPreenchidos = formData.deslocamento ? camposDeslocamentoPreenchidos(formData) : true;
 
-            if (encerra === null && camposObrigatoriosPreenchidos && todosCamposPreenchidos) {
-                setShowModal(true);
-                return;
-            } else if (encerra === true && camposObrigatoriosPreenchidos && todosCamposPreenchidos) {
+            if (aberta === true && camposObrigatoriosPreenchidos && todosCamposPreenchidos) {
                 await handleEnviarDados(formData, true);
                 setModalOpen(false)
-            } else if (encerra === false && camposObrigatoriosPreenchidos && todosCamposPreenchidos) {
+            } else if (aberta === false && camposObrigatoriosPreenchidos && todosCamposPreenchidos) {
                 await handleEnviarDados(formData, false);
                 setModalOpen(false)
-            } else {
-                if (encerra === null) {
-                    await handleEnviarDados(formData, false);
-                    setModalOpen(false)
-                }
             }
         } catch (error) {
             console.error('Erro ao enviar a ocorrência:', error);

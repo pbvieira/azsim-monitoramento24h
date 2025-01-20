@@ -41,7 +41,7 @@ function Monitor() {
       </Main>
       {showModal ? <ModalOcorrencia
         dataOcorrencia={ocorrenciaModal || {}}
-        setColocaOcorrenciasNaTela={setOcorrencias}
+        setOcorrencias={setOcorrencias}
       /> : <></>}
     </Container>
   )
