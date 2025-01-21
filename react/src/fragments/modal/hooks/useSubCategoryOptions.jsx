@@ -41,8 +41,8 @@ const useSubCategoryOptions = () => {
             { value: 'desativacao remota', label: 'DESATIVAÇÃO REMOTA MTA' },
             { value: 'ponto base', label: 'PONTO BASE' },
         ],
-        '5': [{ value: '', label: '' }],
-        '7': [{ value: '', label: '' }],
+        '5': [{ value: 'suporte', label: 'SUPORTE' }],
+        '7': [{ value: 'ronda', label: 'RONDA' }],
     }), []);
 };
 

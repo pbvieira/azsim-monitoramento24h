@@ -16,6 +16,7 @@ import useSubCategoryOptions from './hooks/useSubCategoryOptions';
 import useDeslocamento from './hooks/useSelectDeslocamento';
 import useCamposDeslocamento from './hooks/useCamposDeslocamentoPreenchidos';
 import useTipoOcorrencia from './hooks/useTipoOcorrencia';
+import { ca } from 'date-fns/locale';
 
 function ModalOcorrencia({ dataOcorrencia, setOcorrencias }) {
     const { register, handleSubmit, formState: { errors }, reset, setValue } = useForm();
@@ -35,10 +36,16 @@ function ModalOcorrencia({ dataOcorrencia, setOcorrencias }) {
     const handleSubCategoryOptions = useSubCategoryOptions()
     const filteredSubCategories = handleSubCategoryOptions[selectedCategory] || [];
 
-    const handleLastFieldBlur = () => {
-        if (botaoRef.current) {
-            botaoRef.current.click();
+    const handleLastFieldBlur = (formData) => {
+        console.log(formData)
+        if (formData.operador && formData.tipoocorrencia && formData.subtipoocorrencia && formData.resumo) {
+            console.log('Aqui')
+            if (botaoRef.current) {
+                botaoRef.current.click();
+            }
+            return
         }
+        return
     };
 
     return (

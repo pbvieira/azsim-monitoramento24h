@@ -40,7 +40,7 @@ function FormularioOcorrencia({ handleLastFieldBlur, dataOcorrencia, handleSubmi
             <form onSubmit={handleSubmit(onSubmit)}>
                 <div className="row ms-1 me-2 mt-2">
                     <div className="col">
-                        <label htmlFor="tipoocorrencia" className="form-label">Categoria</label>
+                        <label htmlFor="tipoocorrencia" className="form-label">Categoria*</label>
                         <select
                             {...register("tipoocorrencia", { required: false })}
                             id={`tipoocorrencia${dataOcorrencia.id}`}
@@ -57,7 +57,7 @@ function FormularioOcorrencia({ handleLastFieldBlur, dataOcorrencia, handleSubmi
                         {errors.categoria && <span className='fieldRequired'>Campo obrigatório</span>}
                     </div>
                     <div className="col">
-                        <label htmlFor="subtipoocorrencia" className="form-label">Sub-Categoria</label>
+                        <label htmlFor="subtipoocorrencia" className="form-label">Sub-Categoria*</label>
                         <select
                             {...register("subtipoocorrencia", { required: false })}
                             id={`subtipoocorrencia${dataOcorrencia.id}`}
@@ -72,7 +72,7 @@ function FormularioOcorrencia({ handleLastFieldBlur, dataOcorrencia, handleSubmi
                     </div>
 
                     <div className="col">
-                        <label htmlFor="operador" className="form-label">Operador</label>
+                        <label htmlFor="operador" className="form-label">Operador*</label>
                         <input {...register("operador", { required: false })} type="text" className="form-control" id={`operador${dataOcorrencia.id}`} aria-label=".form-select example" />
                         {errors.operador && <span className='fieldRequired'>Campo obrigatório</span>}
                     </div>
@@ -251,7 +251,7 @@ function FormularioOcorrencia({ handleLastFieldBlur, dataOcorrencia, handleSubmi
                 <div className="row ms-2 me-2 mt-2 mb-3">
                     <div className="col-sm">
                         <label htmlFor="resumo" className="form-label">Resumo*</label>
-                        <textarea {...register("resumo", { required: false })} className="form-control" id={`resumo${dataOcorrencia.id}`} rows="3" onBlur={handleLastFieldBlur}
+                        <textarea {...register("resumo", { required: false })} className="form-control" id={`resumo${dataOcorrencia.id}`} rows="3" onBlur={(handleSubmit((formData) => handleLastFieldBlur(formData)))}
                         ></textarea>
                         {errors.resumo && <span className='fieldRequired'>Campo obrigatório</span>}
                     </div>

@@ -1,7 +1,6 @@
 /* eslint-disable react/prop-types */
 import ReactInputMask from "react-input-mask";
 import { Input, Row } from "../../../../components/Formularios/Form";
-import ErrorCard from "../../../../fragments/ErrorCard/ErrorCard";
 
 export function DadosBasicosForm({ dadosBasicos, register, setDadosBasicos, errors, natureza, handleChangeNatureza }) {
     return (
@@ -22,9 +21,11 @@ export function DadosBasicosForm({ dadosBasicos, register, setDadosBasicos, erro
                     <option value="Montenegro">Montenegro</option>
                     <option value="Porto Alegre">Porto Alegre</option>
                 </select>
-                {errors.unidade && <ErrorCard message="O campo unidade deve ser preenchido." />}
 
+
+                <label htmlFor="habil" className="form-label">Hábil</label>
                 <Input
+                    id="habil"
                     type="text"
                     placeholder="Hábil"
                     name="codHabil"
@@ -34,9 +35,9 @@ export function DadosBasicosForm({ dadosBasicos, register, setDadosBasicos, erro
                     onChange={(e) => setDadosBasicos({ ...dadosBasicos, codHabil: e.target.value })}
                 />
 
+
                 <Input
                     className='form-control'
-
                     type="text"
                     placeholder="Condor"
                     name="codCondor"
@@ -55,7 +56,6 @@ export function DadosBasicosForm({ dadosBasicos, register, setDadosBasicos, erro
                     value={dadosBasicos.codificador || ""}
                     onChange={(e) => setDadosBasicos({ ...dadosBasicos, codificador: e.target.value })}
                 />
-                {errors.codificador && <ErrorCard message="O campo codificador deve ser preenchido." />}
             </Row>
 
             <Row>
@@ -82,7 +82,6 @@ export function DadosBasicosForm({ dadosBasicos, register, setDadosBasicos, erro
                     value={dadosBasicos.documento || ""}
                     onChange={(e) => setDadosBasicos({ ...dadosBasicos, documento: e.target.value })}
                 />
-                {errors.documento && <ErrorCard message="O campo CPF/CNPJ deve ser preenchido." />}
             </Row>
 
             <Row>
@@ -107,7 +106,6 @@ export function DadosBasicosForm({ dadosBasicos, register, setDadosBasicos, erro
                     onChange={(e) => setDadosBasicos({ ...dadosBasicos, nome: e.target.value })}
                     className={`form-control ${errors.nome ? 'is-invalid' : ''}`}
                 />
-                {errors.nome && <ErrorCard message="O campo Nome/Razão Social deve ser preenchido." />}
 
                 <Input
                     className='form-control'
