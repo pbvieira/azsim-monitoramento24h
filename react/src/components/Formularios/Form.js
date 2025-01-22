@@ -64,9 +64,14 @@ overflow-y: auto;
 scrollbar-width: auto;
 `
 export const Row = styled.div`
+width: 100%;
 display: flex;
 gap: 10px;
 margin: 10px;
+
+.inputComLabel{
+  width: 100%;
+}
 `
 
 export const Card = styled.div`
