@@ -21,7 +21,7 @@ import useFormSubmission from './hooks/useFormSubmission';
 
 function ModalOcorrencia({ dataOcorrencia, setOcorrencias }) {
     const { register, handleSubmit, formState: { errors }, reset, setValue } = useForm();
-    const [selectedCategory, setSelectedCategory] = useState('');
+    const [selectedCategory, setSelectedCategory] = useState(dataOcorrencia.tipoocorrencia);
     const [modalOpen, setModalOpen] = useState(null);
     const [showModal, setShowModal] = useState(false);
     const [aberta, setAberta] = useState(null)
@@ -35,9 +35,10 @@ function ModalOcorrencia({ dataOcorrencia, setOcorrencias }) {
     const handleEnviarDados = useEnviaDados(dataOcorrencia, reset, setOcorrencias, setAberta)
     const handleOnSubmit = useOnSubmit(dataOcorrencia, camposDeslocamentoPreenchidos, handleEnviarDados, setModalOpen)
     const handleSubCategoryOptions = useSubCategoryOptions()
-    const filteredSubCategories = handleSubCategoryOptions[selectedCategory] || [];
+    const filteredSubCategories = handleSubCategoryOptions[selectedCategory] || [dataOcorrencia.tipoocorrencia];
     const { handleLastFieldBlur, handleButtonAction } = useFormSubmission(handleSubmit, dataOcorrencia, handleOnSubmit, botaoRef, setShowModal);
 
+    console.log(selectedCategory)
 
     return (
         modalOpen && <div className={`modal fade show`} id={`modal-${dataOcorrencia.id}`} tabIndex="-1" aria-labelledby={`modalLabel-${dataOcorrencia.id}`} aria-hidden={!modalOpen} style={{ display: modalOpen ? 'block' : 'none' }} data-bs-backdrop="false">
