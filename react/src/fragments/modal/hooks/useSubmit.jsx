@@ -13,6 +13,9 @@ const useOnSubmit = (dataOcorrencia, camposDeslocamentoPreenchidos, handleEnviar
             if (aberta === true && camposObrigatoriosPreenchidos && todosCamposPreenchidos) {
                 await handleEnviarDados(formData, true);
                 setModalOpen(false)
+            } else if (aberta === true && !camposObrigatoriosPreenchidos) {
+                await handleEnviarDados(formData, true);
+                setModalOpen(false)
             } else if (aberta === false && camposObrigatoriosPreenchidos && todosCamposPreenchidos) {
                 await handleEnviarDados(formData, false);
                 setModalOpen(false)

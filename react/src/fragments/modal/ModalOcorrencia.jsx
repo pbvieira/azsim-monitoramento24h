@@ -16,10 +16,12 @@ import useSubCategoryOptions from './hooks/useSubCategoryOptions';
 import useDeslocamento from './hooks/useSelectDeslocamento';
 import useCamposDeslocamento from './hooks/useCamposDeslocamentoPreenchidos';
 import useTipoOcorrencia from './hooks/useTipoOcorrencia';
+import { ca } from 'date-fns/locale';
+import useFormSubmission from './hooks/useFormSubmission';
 
 function ModalOcorrencia({ dataOcorrencia, setOcorrencias }) {
     const { register, handleSubmit, formState: { errors }, reset, setValue } = useForm();
-    const [selectedCategory, setSelectedCategory] = useState('');
+    const [selectedCategory, setSelectedCategory] = useState(dataOcorrencia.tipoocorrencia);
     const [modalOpen, setModalOpen] = useState(null);
     const [showModal, setShowModal] = useState(false);
     const [aberta, setAberta] = useState(null)
@@ -33,13 +35,10 @@ function ModalOcorrencia({ dataOcorrencia, setOcorrencias }) {
     const handleEnviarDados = useEnviaDados(dataOcorrencia, reset, setOcorrencias, setAberta)
     const handleOnSubmit = useOnSubmit(dataOcorrencia, camposDeslocamentoPreenchidos, handleEnviarDados, setModalOpen)
     const handleSubCategoryOptions = useSubCategoryOptions()
-    const filteredSubCategories = handleSubCategoryOptions[selectedCategory] || [];
+    const filteredSubCategories = handleSubCategoryOptions[selectedCategory] || [dataOcorrencia.tipoocorrencia];
+    const { handleLastFieldBlur, handleButtonAction } = useFormSubmission(handleSubmit, dataOcorrencia, handleOnSubmit, botaoRef, setShowModal);
 
-    const handleLastFieldBlur = () => {
-        if (botaoRef.current) {
-            botaoRef.current.click();
-        }
-    };
+    console.log(selectedCategory)
 
     return (
         modalOpen && <div className={`modal fade show`} id={`modal-${dataOcorrencia.id}`} tabIndex="-1" aria-labelledby={`modalLabel-${dataOcorrencia.id}`} aria-hidden={!modalOpen} style={{ display: modalOpen ? 'block' : 'none' }} data-bs-backdrop="false">
@@ -58,7 +57,7 @@ function ModalOcorrencia({ dataOcorrencia, setOcorrencias }) {
                     <footer className="modal-footer justify-content-start">
                         <div className="row">
                             <div className="col-2 ms-1">
-                                <button ref={botaoRef} id="dismiss-button" type="button" className="btn btn-secondary" onClick={() => setShowModal(true)} >Fechar</button>
+                                <button ref={botaoRef} id="dismiss-button" type="button" className="btn btn-secondary" onClick={(handleSubmit((formData) => handleButtonAction(formData)))} >Fechar</button>
                             </div>
                         </div>
                     </footer>
