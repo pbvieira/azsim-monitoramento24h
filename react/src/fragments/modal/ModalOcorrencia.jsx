@@ -38,8 +38,6 @@ function ModalOcorrencia({ dataOcorrencia, setOcorrencias }) {
     const filteredSubCategories = handleSubCategoryOptions[selectedCategory] || [dataOcorrencia.tipoocorrencia];
     const { handleLastFieldBlur, handleButtonAction } = useFormSubmission(handleSubmit, dataOcorrencia, handleOnSubmit, botaoRef, setShowModal);
 
-    console.log(selectedCategory)
-
     return (
         modalOpen && <div className={`modal fade show`} id={`modal-${dataOcorrencia.id}`} tabIndex="-1" aria-labelledby={`modalLabel-${dataOcorrencia.id}`} aria-hidden={!modalOpen} style={{ display: modalOpen ? 'block' : 'none' }} data-bs-backdrop="false">
             {showModal && <Modal setAberta={setAberta} setShowModal={setShowModal} handleSubmit={handleSubmit} onSubmit={handleOnSubmit} dataOcorrencia={dataOcorrencia} />}

@@ -8,15 +8,17 @@ const useOnSubmit = (dataOcorrencia, camposDeslocamentoPreenchidos, handleEnviar
             formData.deslocamento = formData.deslocamento === 'sim';
 
             const camposObrigatoriosPreenchidos = formData.tipoocorrencia && formData.subtipoocorrencia && formData.operador && formData.resumo;
-            const todosCamposPreenchidos = formData.deslocamento ? camposDeslocamentoPreenchidos(formData) : true;
 
-            if (aberta === true && camposObrigatoriosPreenchidos && todosCamposPreenchidos) {
+            if (aberta === true && camposObrigatoriosPreenchidos) {
+                console.log('aqui')
                 await handleEnviarDados(formData, true);
                 setModalOpen(false)
             } else if (aberta === true && !camposObrigatoriosPreenchidos) {
+                console.log('aqui')
                 await handleEnviarDados(formData, true);
                 setModalOpen(false)
-            } else if (aberta === false && camposObrigatoriosPreenchidos && todosCamposPreenchidos) {
+            } else if (aberta === false && camposObrigatoriosPreenchidos) {
+                console.log('aqui')
                 await handleEnviarDados(formData, false);
                 setModalOpen(false)
             }
