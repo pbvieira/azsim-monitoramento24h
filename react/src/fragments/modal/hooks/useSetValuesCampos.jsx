@@ -1,6 +1,6 @@
 import { useEffect } from "react";
-
 const useSetValuesCampos = (setModalOpen, dataOcorrencia, setValue, setSelectedValue) => {
+
     useEffect(() => {
         setModalOpen(true)
         if (dataOcorrencia) {
@@ -10,15 +10,16 @@ const useSetValuesCampos = (setModalOpen, dataOcorrencia, setValue, setSelectedV
             setValue('deslocamento', dataOcorrencia.deslocamento || 'nao');
             setValue('idagente', dataOcorrencia.idagente || '');
             setValue('agente', dataOcorrencia.agente || '');
-            setValue('horaSaida', dataOcorrencia.horaSaida || '');
-            setValue('horaChegada', dataOcorrencia.horaChegada || '');
             setValue('tempDeslocamento', dataOcorrencia.tempDeslocamento || '');
-            setValue('horaSaidaLocal', dataOcorrencia.horaSaidaLocal || '');
-            setValue('horaChegadaEmpresa', dataOcorrencia.horaChegadaEmpresa || '');
             setValue('tempRetorno', dataOcorrencia.tempRetorno || '');
-            setValue('horaAbateLacre', dataOcorrencia.horaAbateLacre || '');
-            setValue('horaLacre', dataOcorrencia.horaLacre || '');
             setValue('tempAtendimento', dataOcorrencia.tempAtendimento || '');
+            setValue('lacre', dataOcorrencia.lacre || '');
+            setValue('horaaberturalacre', dataOcorrencia.horaaberturalacre || '');
+            setValue('horasaidacliente', dataOcorrencia.horasaidacliente || '');
+            setValue('horasaidaemp', dataOcorrencia.horasaidaemp || '');
+            setValue('horalacre', dataOcorrencia.horalacre || '');
+            setValue('horachegadacliente', dataOcorrencia.horachegadacliente || '');
+            setValue('horachegadaemp', dataOcorrencia.horachegadaemp || '');
             setValue('kmSaida', dataOcorrencia.kmsaida || '');
             setValue('kmRetorno', dataOcorrencia.kmretorno || '');
             setValue('kmTotal', dataOcorrencia.kmtotal || '');
@@ -27,8 +28,9 @@ const useSetValuesCampos = (setModalOpen, dataOcorrencia, setValue, setSelectedV
             setValue('ocorrenciapolicialresumo', dataOcorrencia.ocorrenciapolicialresumo || '');
             setSelectedValue(dataOcorrencia.deslocamento ? 'sim' : 'nao');
         }
+        console.log(dataOcorrencia)
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [dataOcorrencia, setValue]);
+    }, [dataOcorrencia]);
 }
 
 export default useSetValuesCampos
