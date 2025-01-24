@@ -1,7 +1,6 @@
 /* eslint-disable react/prop-types */
 import PropTypes from 'prop-types';
 import { Formulario } from '../style';
-import { useConvertHoraToFrontend } from './hooks/useConvertTime';
 
 function applyHourMask(value) {
     let formattedValue = value.replace(/\D/g, '');
@@ -15,14 +14,10 @@ function applyHourMask(value) {
 
 function FormularioOcorrencia({ handleLastFieldBlur, dataOcorrencia, handleSubmit, onSubmit, register, handleSelectTipoOcorrencia, errors, selectedValue, handleSelectDeslocamento, filteredSubCategories }) {
 
-    const { convertHoraToFrontend } = useConvertHoraToFrontend();
 
     const AplicaMascara = (event) => {
         event.target.value = applyHourMask(event.target.value);
     };
-
-
-
 
 
     return (
@@ -137,7 +132,6 @@ function FormularioOcorrencia({ handleLastFieldBlur, dataOcorrencia, handleSubmi
                                         className="form-control"
                                         id={`horasaidaemp${dataOcorrencia.id}`}
                                         onChange={AplicaMascara}
-                                        defaultValue={dataOcorrencia.horasaidaemp ? convertHoraToFrontend(dataOcorrencia.horasaidaemp) : ''}
                                     />
                                     {errors.horasaidaemp && <span className='fieldRequired'>Campo obrigatório</span>}
                                 </div>
@@ -150,7 +144,6 @@ function FormularioOcorrencia({ handleLastFieldBlur, dataOcorrencia, handleSubmi
                                         className="form-control"
                                         id={`horachegadacliente${dataOcorrencia.id}`}
                                         onChange={AplicaMascara}
-                                        defaultValue={dataOcorrencia.horachegadacliente ? convertHoraToFrontend(dataOcorrencia.horachegadacliente) : ''}
                                     />
                                     {errors.horachegadacliente && <span className='fieldRequired'>Campo obrigatório</span>}
                                 </div>
@@ -163,7 +156,6 @@ function FormularioOcorrencia({ handleLastFieldBlur, dataOcorrencia, handleSubmi
                                         className="form-control"
                                         id={`horasaidacliente${dataOcorrencia.id}`}
                                         onChange={AplicaMascara}
-                                        defaultValue={dataOcorrencia.horasaidacliente ? convertHoraToFrontend(dataOcorrencia.horasaidacliente) : ''}
                                     />
                                     {errors.horasaidacliente && <span className='fieldRequired'>Campo obrigatório</span>}
                                 </div>
@@ -176,7 +168,6 @@ function FormularioOcorrencia({ handleLastFieldBlur, dataOcorrencia, handleSubmi
                                         className="form-control"
                                         id={`horachegadaemp${dataOcorrencia.id}`}
                                         onChange={AplicaMascara}
-                                        defaultValue={dataOcorrencia.horachegadaemp ? convertHoraToFrontend(dataOcorrencia.horachegadaemp) : ''}
                                     />
                                     {errors.horachegadaemp && <span className='fieldRequired'>Campo obrigatório</span>}
                                 </div>
@@ -191,7 +182,6 @@ function FormularioOcorrencia({ handleLastFieldBlur, dataOcorrencia, handleSubmi
                                         className="form-control"
                                         id={`horaaberturalacre${dataOcorrencia.id}`}
                                         onChange={AplicaMascara}
-                                        defaultValue={dataOcorrencia.horaaberturalacre ? convertHoraToFrontend(dataOcorrencia.horaaberturalacre) : ''}
                                     />
                                     {errors.horaaberturalacre && <span className='fieldRequired'>Campo obrigatório</span>}
                                 </div>
@@ -204,7 +194,6 @@ function FormularioOcorrencia({ handleLastFieldBlur, dataOcorrencia, handleSubmi
                                         className="form-control"
                                         id={`horalacre${dataOcorrencia.id}`}
                                         onChange={AplicaMascara}
-                                        defaultValue={dataOcorrencia.horalacre ? convertHoraToFrontend(dataOcorrencia.horalacre) : ''}
                                     />
                                     {errors.horalacre && <span className='fieldRequired'>Campo obrigatório</span>}
                                 </div>

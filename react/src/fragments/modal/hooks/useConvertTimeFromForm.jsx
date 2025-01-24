@@ -1,11 +1,10 @@
-import useConvertHoraToBackend from "../fragments/hooks/useConvertTime";
+import { useConvertHoraToBackend } from "../fragments/hooks/useConvertTime";
 
 const useConverteHoraFromForm = () => {
     const { convertHoraToBackend } = useConvertHoraToBackend();
 
     const converterHoraFromForm = (datas) => {
         if (!datas) return null;
-
         try {
             const datasConvertidas = Object.entries(datas).reduce((acc, [key, value]) => {
                 acc[key] = value !== '' ? convertHoraToBackend(value) : value;

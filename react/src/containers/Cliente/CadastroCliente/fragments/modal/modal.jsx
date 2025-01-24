@@ -86,8 +86,6 @@ function Modal({ dadosBasicos, setDadosBasicos, setShowModal, index, tabSelected
         setShowModal
     });
 
-    console.log(index)
-
     return (
         <Background>
             {tabSelected === 'contatos' && (
