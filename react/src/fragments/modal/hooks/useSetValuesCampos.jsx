@@ -1,5 +1,7 @@
 import { useEffect } from "react";
+import { useConvertHoraToFrontend } from "../fragments/hooks/useConvertTime";
 const useSetValuesCampos = (setModalOpen, dataOcorrencia, setValue, setSelectedValue) => {
+    const { convertHoraToFrontend } = useConvertHoraToFrontend();
 
     useEffect(() => {
         setModalOpen(true)
@@ -13,13 +15,13 @@ const useSetValuesCampos = (setModalOpen, dataOcorrencia, setValue, setSelectedV
             setValue('tempDeslocamento', dataOcorrencia.tempDeslocamento || '');
             setValue('tempRetorno', dataOcorrencia.tempRetorno || '');
             setValue('tempAtendimento', dataOcorrencia.tempAtendimento || '');
-            setValue('lacre', dataOcorrencia.lacre || '');
-            setValue('horaaberturalacre', dataOcorrencia.horaaberturalacre || '');
-            setValue('horasaidacliente', dataOcorrencia.horasaidacliente || '');
-            setValue('horasaidaemp', dataOcorrencia.horasaidaemp || '');
-            setValue('horalacre', dataOcorrencia.horalacre || '');
-            setValue('horachegadacliente', dataOcorrencia.horachegadacliente || '');
-            setValue('horachegadaemp', dataOcorrencia.horachegadaemp || '');
+            setValue('lacre', convertHoraToFrontend(dataOcorrencia.lacre) || '');
+            setValue('horaaberturalacre', convertHoraToFrontend(dataOcorrencia.horaaberturalacre) || '');
+            setValue('horasaidacliente', convertHoraToFrontend(dataOcorrencia.horasaidacliente) || '');
+            setValue('horasaidaemp', convertHoraToFrontend(dataOcorrencia.horasaidaemp) || '');
+            setValue('horalacre', convertHoraToFrontend(dataOcorrencia.horalacre) || '');
+            setValue('horachegadacliente', convertHoraToFrontend(dataOcorrencia.horachegadacliente) || '');
+            setValue('horachegadaemp', convertHoraToFrontend(dataOcorrencia.horachegadaemp) || '');
             setValue('kmSaida', dataOcorrencia.kmsaida || '');
             setValue('kmRetorno', dataOcorrencia.kmretorno || '');
             setValue('kmTotal', dataOcorrencia.kmtotal || '');

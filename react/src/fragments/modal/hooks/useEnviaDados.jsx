@@ -17,6 +17,7 @@ const useEnviaDados = (dataOcorrencia, reset, setOcorrencias, setAberta) => {
                 horasaidacliente: formData.horasaidacliente,
                 horasaidaemp: formData.horasaidaemp,
             };
+            console.log('data do form no envio', formData)
             const horasConvertidas = converterHoraFromForm(camposDeHora);
             formData = {
                 ...formData,
