@@ -17,13 +17,11 @@ const useEnviaDados = (dataOcorrencia, reset, setOcorrencias, setAberta) => {
                 horasaidacliente: formData.horasaidacliente,
                 horasaidaemp: formData.horasaidaemp,
             };
-            console.log('data do form no envio', formData)
             const horasConvertidas = converterHoraFromForm(camposDeHora);
             formData = {
                 ...formData,
                 ...horasConvertidas,
             };
-            console.log('Dados Envio', formData)
             const response = await api.post('ocorrencias', formData);
             if (response.status === 200) {
                 setOcorrencias((ocorrenciasAntigas) => {

@@ -133,7 +133,6 @@ function FormularioOcorrencia({ handleLastFieldBlur, dataOcorrencia, handleSubmi
                                         id={`horasaidaemp${dataOcorrencia.id}`}
                                         onChange={AplicaMascara}
                                     />
-                                    {console.log((dataOcorrencia.horasaidaemp))}
                                     {errors.horasaidaemp && <span className='fieldRequired'>Campo obrigatório</span>}
                                 </div>
                                 <div className="col">

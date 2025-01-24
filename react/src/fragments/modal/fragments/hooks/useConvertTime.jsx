@@ -3,7 +3,6 @@ import { addHours, format, parseISO } from "date-fns";
 export const useConvertHoraToBackend = () => {
     const convertHoraToBackend = (horaMinuto) => {
         if (!horaMinuto) return null;
-        console.log(horaMinuto)
         try {
             const [hora, minuto] = horaMinuto.split(":");
             const dataCompleta = new Date();

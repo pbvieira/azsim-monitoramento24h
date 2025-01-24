@@ -6,9 +6,7 @@ const useFormSubmission = (handleSubmit, dataOcorrencia, handleOnSubmit, botaoRe
     };
 
     const handleLastFieldBlur = (formData) => {
-        console.log(formData);
         if (validateForm(formData)) {
-            console.log('Aqui');
             setShowModal(true);
         }
     };

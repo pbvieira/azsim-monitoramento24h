@@ -7,7 +7,6 @@ const useConverteHoraFromForm = () => {
         if (!datas) return null;
         try {
             const datasConvertidas = Object.entries(datas).reduce((acc, [key, value]) => {
-                console.log(acc, key, value)
                 acc[key] = value !== '' ? convertHoraToBackend(value) : value;
                 return acc;
             }, {});

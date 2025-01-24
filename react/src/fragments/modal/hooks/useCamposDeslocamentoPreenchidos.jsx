@@ -1,6 +1,5 @@
 const useCamposDeslocamento = () => {
     const camposDeslocamentoPreenchidos = (formData) => {
-        console.log('campos', formData)
         return (
             formData.ocorrenciapolicialresumo &&
             formData.agente &&

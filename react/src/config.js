@@ -6,7 +6,4 @@ const config = {
     mode: import.meta.env.MODE,
 };
 
-console.log(`Ambiente: ${config.mode}`);
-console.log(`URL base da API: ${config.baseUrl}`);
-
 export default config;

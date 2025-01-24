@@ -10,15 +10,12 @@ const useOnSubmit = (dataOcorrencia, camposDeslocamentoPreenchidos, handleEnviar
             const camposObrigatoriosPreenchidos = formData.tipoocorrencia && formData.subtipoocorrencia && formData.operador && formData.resumo;
 
             if (aberta === true && camposObrigatoriosPreenchidos) {
-                console.log('aqui')
                 await handleEnviarDados(formData, true);
                 setModalOpen(false)
             } else if (aberta === true && !camposObrigatoriosPreenchidos) {
-                console.log('aqui')
                 await handleEnviarDados(formData, true);
                 setModalOpen(false)
             } else if (aberta === false && camposObrigatoriosPreenchidos) {
-                console.log('aqui')
                 await handleEnviarDados(formData, false);
                 setModalOpen(false)
             }

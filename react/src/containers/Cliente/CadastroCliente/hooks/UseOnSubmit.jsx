@@ -14,7 +14,6 @@ const useSubmitCliente = (idCliente, dadosBasicos, carregarDadosCliente, setErro
     const reloadPage = useReloadPage();
 
     const submitHandler = async (data, showAlert = true) => {
-        console.log(data);
         const camposObrigatorios = ['unidade', 'natureza', 'documento', 'nome'];
         validarCamposObrigatorios(data, camposObrigatorios, setError);
         if (loading) return;

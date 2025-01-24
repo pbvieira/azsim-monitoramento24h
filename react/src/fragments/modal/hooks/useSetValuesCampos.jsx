@@ -30,7 +30,6 @@ const useSetValuesCampos = (setModalOpen, dataOcorrencia, setValue, setSelectedV
             setValue('ocorrenciapolicialresumo', dataOcorrencia.ocorrenciapolicialresumo || '');
             setSelectedValue(dataOcorrencia.deslocamento ? 'sim' : 'nao');
         }
-        console.log(dataOcorrencia)
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [dataOcorrencia]);
 }
