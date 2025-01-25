@@ -9,7 +9,7 @@ import OcorrenciaList from './fragments/RenderOcorrenciaCard';
 import ModalOcorrencia from "../../fragments/modal/ModalOcorrencia";
 import HeaderEventos from "./fragments/HeaderEventos";
 import useConectaSocket from "./hooks/useConectaSocket";
-import useDadosComplementares from "./hooks/useDadosComplementares";
+import useDadosOcorrencia from "./hooks/useDadosOcorrencia.jsx";
 import HeaderPage from "../../components/HeaderPages";
 
 function Monitor() {
@@ -20,7 +20,7 @@ function Monitor() {
 
   useConectaSocket(setOcorrencias, setEventos);
 
-  const handleDadosComplementares = useDadosComplementares(setOcorrenciaModal, setShowModal);
+  const handleDadosOcorrencia = useDadosOcorrencia(setOcorrenciaModal, setShowModal);
 
   return (
     <Container>
@@ -35,7 +35,7 @@ function Monitor() {
         </Eventos>
 
         <Ocorrencias>
-          <OcorrenciaList ocorrencias={ocorrencias} handleDadosComplementares={handleDadosComplementares} />
+          <OcorrenciaList ocorrencias={ocorrencias} handleDadosOcorrencia={handleDadosOcorrencia} />
         </Ocorrencias>
 
       </Main>
