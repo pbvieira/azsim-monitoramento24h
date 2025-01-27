@@ -75,14 +75,18 @@ margin: 10px;
 `
 
 export const Card = styled.div`
-min-width: 32%;
-max-width: 32%;
+background:rgb(255, 255, 255);
+color: #000!important;
+min-width: 100%;
+max-width: 100%;
+min-height: 40px;
+max-height: 40px;
 position: relative;
 height: auto;
-justify-content: start;
-align-items: start;
+justify-content: space-between;
+align-items: center;
 display: flex;
-flex-direction: column;
+flex-direction: row;
 padding: 10px;
 gap: 20px;
 border: 1px solid #d0d0d0;
@@ -91,24 +95,39 @@ white-space: nowrap;
 text-overflow: ellipsis;
 
   .div{
-    max-width: 95%;
-    min-width: 95%;
+    max-width: 100%;
+    min-width: 100%;
     height: 30px;
     display: flex;
-    justify-content: space-between;
+    align-items: center;
+  }
+
+  .informations{
+    max-width: 80%;
+    min-width: 80%;
+    height: 30px;
+    display: flex;
     align-items: center;
   }
 
     h6 {
+      min-width: 50%;
+      max-width: 50%;
       margin: 0;
-      min-width: 100%;
-      max-width:100%;
       white-space: nowrap;
       text-overflow: ellipsis;
       overflow: hidden;
     }
 
-.btnExluir{
+    .actions{
+      min-width: 20%;
+      max-width: 20%;
+      display: flex;
+      justify-content: end;
+      right: 0;
+    }
+
+.btnExcluir{
 background-color: transparent;
 color: #9f0000;
 border : none;
@@ -151,48 +170,4 @@ span{
 
 export const Input = styled.input`
 
-`
-export const DropdownContainer = styled.div`
-  position: relative;
-  display: inline-block;
-  width: 5%;
-`;
-
-
-export const DropdownContent = styled.div`
-  display: ${prop => (prop.show ? 'flex!important' : 'none!important')};
-  min-width: 150px!important;
-  max-width: 150px!important;
-  height: 100px!important;
-  padding: 05px;
-  text-align: left;
-  position: absolute;
-  margin-top: 0px;
-  margin-left: 0px;
-  flex-direction: column;
-  background-color: #fff;
-  border: 1px solid  #f0f0f0;
-  z-index: 99;
-`;
-
-export const DropdownItem = styled.button`
-  width: 100%;
-  color: black;
-  border: none;
-  text-decoration: none;
-  display: block;
-background-color:${prop => (prop.excluir ? '#dc3545!important' : 'gray!important')};
-margin: 1px 0px;
-color: #fff;
-border-radius: none!important;
-
-  &:hover {
-opacity: 0.7;
-color: #fff;
-}
-`;
-
-export const Options = styled.div`
-width: auto!important;
-position: relative;
 `

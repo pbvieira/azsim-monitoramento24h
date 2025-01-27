@@ -13,38 +13,24 @@ function ContatosForm({ dadosBasicos, handleOpenModal, deleteItem }) {
         return phoneNumber ? phoneNumber.formatNational() : phone;
     }
 
-    const groupedContatos = [];
-    for (let i = 0; i < dadosBasicos.contatos.length; i += 3) {
-        groupedContatos.push(dadosBasicos.contatos.slice(i, i + 3));
-    }
-
     return (
         <>
             <Row>
-                <h4>Contatos </h4>
+                <h4>Contatos</h4>
             </Row>
-            {groupedContatos.length > 0 ? (
-                groupedContatos.map((group, groupIndex) => (
-                    <Row key={groupIndex}>
-                        {group.map((contato, index) => (
-                            <CardInformacoes
-                                index={index}
-                                key={index}
-                                title1={"Nome"}
-                                text1={contato.nome ? contato.nome : ""}
-                                title2={"Tel"}
-                                text2={formatPhoneNumber(contato.telefone) || ""}
-                                title3={"Senha"}
-                                text3={contato.senha ? contato.senha : ""}
-                                title4={"Contra Senha"}
-                                text4={contato.contraSenha ? contato.contraSenha : ""}
-                                title5={"Observações"}
-                                text5={contato.observacao ? contato.observacao : ""}
-                                handleOpenModal={handleOpenModal}
-                                deleteItem={deleteItem}
-                                item={'contatos'}
-                            />
-                        ))}
+            {dadosBasicos.contatos.length > 0 ? (
+                dadosBasicos.contatos.map((contato, index) => (
+                    <Row key={index}>
+                        <CardInformacoes
+                            index={index}
+                            title1={"Nome"}
+                            text1={contato.nome ? contato.nome : ""}
+                            title2={"Tel"}
+                            text2={formatPhoneNumber(contato.telefone) || ""}
+                            handleOpenModal={handleOpenModal}
+                            deleteItem={deleteItem}
+                            item={'contatos'}
+                        />
                     </Row>
                 ))
             ) : (
