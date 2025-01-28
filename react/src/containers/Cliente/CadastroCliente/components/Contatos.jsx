@@ -30,6 +30,7 @@ function ContatosForm({ dadosBasicos, handleOpenModal, deleteItem }) {
                             handleOpenModal={handleOpenModal}
                             deleteItem={deleteItem}
                             item={'contatos'}
+                            typeDataDelete={'esse contato'}
                         />
                     </Row>
                 ))

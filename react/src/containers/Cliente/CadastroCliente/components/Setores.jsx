@@ -5,34 +5,28 @@ import { Input, Row } from "../../../../components/Formularios/Form"
 
 function SetoresForm({ dadosBasicos, handleOpenModal, deleteItem }) {
 
-    const groupedSetores = [];
-    for (let i = 0; i < dadosBasicos.setores.length; i += 3) {
-        groupedSetores.push(dadosBasicos.setores.slice(i, i + 3));
-    }
     return (
         <>
             <Row>
                 <h4>Setores</h4>
             </Row>
 
-            {groupedSetores.length > 0 ? (
-                groupedSetores.map((group, groupIndex) => (
-                    <Row key={groupIndex}>
-                        {group.map((setor, index) => (
-                            <CardInformacoes
-                                index={index}
-                                key={index}
-                                title1={"Setor"}
-                                text1={setor.setor ? String(setor.setor).trim() : ""}
-                                title2={"Local Instalação"}
-                                text2={setor.localizacao ? String(setor.localizacao).trim() : ""}
-                                title3={"Observações"}
-                                text3={setor.observacao ? (setor.observacao) : ""}
-                                handleOpenModal={handleOpenModal}
-                                deleteItem={deleteItem}
-                                ItemParaDelete={'setores'}
-                            />
-                        ))}
+            {dadosBasicos.setores.length > 0 ? (
+                dadosBasicos.setores.map((setor, index) => (
+                    <Row key={index}>
+                        <CardInformacoes
+                            index={index}
+                            key={index}
+                            title1={"Setor"}
+                            text1={setor.setor ? String(setor.setor).trim() : ""}
+                            title2={"Local Instalação"}
+                            text2={setor.localizacao ? String(setor.localizacao).trim() : ""}
+                            handleOpenModal={handleOpenModal}
+                            deleteItem={deleteItem}
+                            item={'setores'}
+                            typeDataDelete={'esse setor'}
+                        />
+
                     </Row>
                 ))
             ) : (
