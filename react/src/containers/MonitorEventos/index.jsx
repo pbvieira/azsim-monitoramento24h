@@ -6,7 +6,7 @@ import { useState } from 'react';
 import { Container, Eventos, Main, Ocorrencias } from "./styles";
 import EventoList from './fragments/RenderEventoCard';
 import OcorrenciaList from './fragments/RenderOcorrenciaCard';
-import ModalOcorrencia from "../../fragments/modal/ModalOcorrencia";
+import ModalOcorrencia from "../../fragments/modalOcorrencia/ModalOcorrencia";
 import HeaderEventos from "./fragments/HeaderEventos";
 import useConectaSocket from "./hooks/useConectaSocket";
 import useDadosComplementares from "./hooks/useDadosComplementares";
