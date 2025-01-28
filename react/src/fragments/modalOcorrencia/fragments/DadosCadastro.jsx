@@ -16,7 +16,7 @@ function TabsInformacoes({ dataOcorrencia }) {
     return (
         <InformacoesTabs>
             <Tabs>
-                <ul className="nav nav-tabs text-start mt-3 ms-2 justify-content-start" id="myTab" role="tablist">
+                <ul className="nav nav-tabs text-start mt-3 justify-content-start" id="myTab" role="tablist">
                     <li className="nav-item" role="presentation">
                         <button title="Tab Contatos" className="nav-link active" id={`contatos-tab-${dataOcorrencia.id}`} data-bs-toggle="tab"
                             data-bs-target={`#contatos-${dataOcorrencia.id}`} type="button" role="tab" aria-controls="contatos"

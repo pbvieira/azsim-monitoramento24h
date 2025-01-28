@@ -1,20 +1,20 @@
 import api from "../../../services/api";
 
-const useDadosComplementares = (setOcorrenciaModal, setShowModal) => {
+const useDadosOcorrencia = (setOcorrenciaModal, setShowModal) => {
 
     const handleDadosComplementares = async (id, idcliente) => {
         try {
-            const [response, responseCliente] = await Promise.all([
+            const [responseOcorrencia, responseCliente] = await Promise.all([
                 api.get(`ocorrencias/${id}`),
                 api.get(`clientes/${idcliente}`)
             ]);
 
-            const dadosCombinados = {
-                ...response.data,
+            const dadosOcorrencia = {
+                ...responseOcorrencia.data,
                 cliente: responseCliente.data
             };
 
-            setOcorrenciaModal(dadosCombinados);
+            setOcorrenciaModal(dadosOcorrencia);
             setShowModal(true);
 
         } catch (error) {
@@ -25,4 +25,4 @@ const useDadosComplementares = (setOcorrenciaModal, setShowModal) => {
     return handleDadosComplementares
 }
 
-export default useDadosComplementares
+export default useDadosOcorrencia

@@ -3,7 +3,7 @@
 import PropTypes from "prop-types";
 import CardOcorrencia from "./CardOcorrencia";
 
-const OcorrenciaList = ({ ocorrencias, handleDadosComplementares }) => {
+const OcorrenciaList = ({ ocorrencias, handleDadosOcorrencia }) => {
     const renderOcorrenciaCard = (dataOcorrencia, index) => {
         if (!dataOcorrencia.id) return null;
 
@@ -17,7 +17,7 @@ const OcorrenciaList = ({ ocorrencias, handleDadosComplementares }) => {
                 index={index}
                 dataOcorrencia={dataOcorrencia}
                 gravidadeClass={gravidadeClass}
-                handleDadosComplementares={handleDadosComplementares}
+                handleDadosOcorrencia={handleDadosOcorrencia}
             />
         );
     };
@@ -36,7 +36,7 @@ OcorrenciaList.propTypes = {
             gravidade: PropTypes.string,
         })
     ).isRequired,
-    handleDadosComplementares: PropTypes.func.isRequired,
+    handleDadosOcorrencia: PropTypes.func.isRequired,
 };
 
 export default OcorrenciaList;
