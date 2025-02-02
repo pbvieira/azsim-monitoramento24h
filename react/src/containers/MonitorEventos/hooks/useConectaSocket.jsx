@@ -6,77 +6,130 @@ import Swal from 'sweetalert2';
 import config from '../../../config';
 import api from '../../../services/api';
 
-const useConectaSocket = (setOcorrencias, setEventos) => {
+const MAX_ITENS = 250;
+const RECONNECT_INTERVAL = 5000;
+const RECONNECT_TIMEOUT = 15 * 60 * 1000;
 
+const useConectaSocket = (setOcorrencias, setEventos) => {
     const stompClientRef = useRef(null);
+    const reconnectTimeoutRef = useRef(null);
+    const connectionStartTimeRef = useRef(null);
 
     useEffect(() => {
-        const socket = new SockJS(`${config.baseUrl}/monitor-websocket`);
-        const client = Stomp.over(socket);
-
-        const connectCallBack = async () => {
-            console.log('Conexão WebSocket estabelecida com sucesso!');
-            stompClientRef.current = client;
-            
-            client.subscribe('/topic/eventos', (message) => {
-                const dadosRecebidos = JSON.parse(message.body);
-                setEventos((eventos) => [dadosRecebidos, ...eventos]);
-            });
-
-            client.subscribe('/topic/ocorrencias', (message) => {
-                const dadosRecebidos = JSON.parse(message.body);
-                if (dadosRecebidos.evento.idcliente != null) {
-                    setOcorrencias((ocorrencias) => [dadosRecebidos, ...ocorrencias]);
-                }
-            });
-
-            try {
-                const ocorrenciasResponse = await api.get('/ocorrencias');
-                setOcorrencias(Array.isArray(ocorrenciasResponse.data) ? ocorrenciasResponse.data : []);
-
-                const eventosResponse = await api.get('/eventos');
-                setEventos(Array.isArray(eventosResponse.data) ? eventosResponse.data : []);
-            } catch (error) {
-                console.error('Erro ao buscar dados iniciais:', error);
-            }
-        };
+        let socket
 
         const connect = () => {
-            client.connect({}, connectCallBack, (error) => {
-                console.error('Erro ao conectar no servidor do monitor de eventos:', error);
-                setTimeout(() => {
-                    if (!stompClientRef.current || !stompClientRef.current.connected) {
-                        Swal.fire({
-                            title: 'Erro!',
-                            text: 'Erro ao conectar. Por favor, tente novamente.',
-                            icon: 'error',
-                            confirmButtonText: 'Ok'
+            if (!connectionStartTimeRef.current) {
+                connectionStartTimeRef.current = Date.now();
+            }
+
+            socket = new SockJS(`${config.baseUrl}/monitor-websocket`);
+            const client = Stomp.over(socket);
+
+            const connectCallBack = async () => {
+                console.log("Conexão WebSocket estabelecida com sucesso!");
+                stompClientRef.current = client;
+
+                // Limpa qualquer tentativa de reconexão pendente
+                if (reconnectTimeoutRef.current) {
+                    clearTimeout(reconnectTimeoutRef.current);
+                    reconnectTimeoutRef.current = null;
+                }
+
+                client.subscribe("/topic/eventos", (message) => {
+                    const dadosRecebidos = JSON.parse(message.body);
+                    setEventos((prevEventos) => {
+                        const newEventos = [...prevEventos];
+                        if (newEventos.length >= MAX_ITENS) {
+                            newEventos.shift();
+                        }
+
+                        newEventos.push(dadosRecebidos);
+                        return newEventos;
+                    });
+                });
+
+                client.subscribe("/topic/ocorrencias", (message) => {
+                    const dadosRecebidos = JSON.parse(message.body);
+                    if (dadosRecebidos.evento.idcliente != null) {
+                        setOcorrencias((prevOcorrencias) => {
+                            const newOcorrencias = [...prevOcorrencias];
+                            if (newOcorrencias.length >= MAX_ITENS) {
+                                newOcorrencias.shift();
+                            }
+                            newOcorrencias.push(dadosRecebidos);
+                            return newOcorrencias;
                         });
                     }
-                }, 5000);
-            });
+                });
+
+                try {
+                    const ocorrenciasResponse = await api.get("/ocorrencias");
+                    setOcorrencias(
+                        Array.isArray(ocorrenciasResponse.data)
+                            ? ocorrenciasResponse.data.slice(-MAX_ITENS)
+                            : []
+                    );
+
+                    const eventosResponse = await api.get("/eventos");
+                    setEventos(
+                        Array.isArray(eventosResponse.data)
+                            ? eventosResponse.data.slice(-MAX_ITENS)
+                            : []
+                    );
+                } catch (error) {
+                    console.error("Erro ao buscar dados iniciais:", error);
+                }
+            };
+
+            const errorCallBack = (error) => {
+                console.error("Erro na conexão WebSocket:", error);
+                attemptReconnect();
+            };
+
+            client.connect({}, connectCallBack, errorCallBack);
+
+            socket.onclose = () => {
+                console.warn("Socket fechado. Tentando reconectar...");
+                attemptReconnect();
+            };
+
         };
 
-        const reconnect = () => {
-            if (stompClientRef.current !== null) {
-                stompClientRef.current.disconnect();
+        const attemptReconnect = () => {
+            // Verifica se o tempo máximo de reconexão foi atingido
+            if (Date.now() - connectionStartTimeRef.current >= RECONNECT_TIMEOUT) {
+                console.error("Não foi possível reconectar ao websocket.");
+                Swal.fire({
+                    title: "Erro!",
+                    text: "Não foi possível reconectar com o servidor. Entre em contato com o suporte!",
+                    icon: "error",
+                    confirmButtonText: "Ok",
+                });
+                return;
             }
-            connect();
-        };
 
-        socket.onclose = () => {
-            reconnect();
+            // Tenta reconectar após o intervalo definido
+            reconnectTimeoutRef.current = setTimeout(() => {
+                console.log("Tentando reconectar...");
+                connect();
+            }, RECONNECT_INTERVAL);
         };
 
         connect();
 
         return () => {
-            socket.close();
-            if (stompClientRef.current !== null) {
+            if (reconnectTimeoutRef.current) {
+                clearTimeout(reconnectTimeoutRef.current);
+            }
+            if (socket) {
+                socket.close();
+            }
+            if (stompClientRef.current) {
                 stompClientRef.current.disconnect();
             }
         };
-    }, []);
+    }, [setEventos, setOcorrencias]);
 };
 
 export default useConectaSocket;
