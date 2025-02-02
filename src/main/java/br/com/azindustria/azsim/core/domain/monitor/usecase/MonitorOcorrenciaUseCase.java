@@ -20,7 +20,12 @@ public class MonitorOcorrenciaUseCase implements MonitorOcorrenciaService {
 
     @Override
     public Ocorrencia findById(String id) {
-        return monitorOcorrenciaRepository.findById(id);
+        Ocorrencia ocorrencia = monitorOcorrenciaRepository.findById(id);
+        if (Objects.isNull(ocorrencia.getDataatendimento())) {
+            ocorrencia.setDataatendimento(new Date());
+            return save(ocorrencia);
+        }
+        return ocorrencia;
     }
 
     public List<Ocorrencia> findTop50ByOrderByDatacadastroDesc() {
