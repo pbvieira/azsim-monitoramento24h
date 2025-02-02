@@ -5,6 +5,7 @@ import br.com.azindustria.azsim.core.application.in.MonitorOcorrenciaService;
 import br.com.azindustria.azsim.core.application.out.MonitorOcorrenciaRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -28,6 +29,14 @@ public class MonitorOcorrenciaUseCase implements MonitorOcorrenciaService {
 
     @Override
     public Ocorrencia save(Ocorrencia ocorrencia) {
+        if (Objects.isNull(ocorrencia.getDataatendimento())) {
+            ocorrencia.setDataatendimento(new Date());
+            return save(ocorrencia);
+        }
+
+        if (!ocorrencia.isAberta() && Objects.isNull(ocorrencia.getDataencerramento())) {
+            ocorrencia.setDataencerramento(new Date());
+        }
         return monitorOcorrenciaRepository.save(ocorrencia);
     }
 
