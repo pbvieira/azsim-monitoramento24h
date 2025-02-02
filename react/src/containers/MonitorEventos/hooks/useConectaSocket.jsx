@@ -19,10 +19,6 @@ const useConectaSocket = (setOcorrencias, setEventos) => {
         let socket
 
         const connect = () => {
-            if (!connectionStartTimeRef.current) {
-                connectionStartTimeRef.current = Date.now();
-            }
-
             socket = new SockJS(`${config.baseUrl}/monitor-websocket`);
             const client = Stomp.over(socket);
 
@@ -90,6 +86,7 @@ const useConectaSocket = (setOcorrencias, setEventos) => {
             client.connect({}, connectCallBack, errorCallBack);
 
             socket.onclose = () => {
+                connectionStartTimeRef.current = Date.now();
                 console.warn("Socket fechado. Tentando reconectar...");
                 attemptReconnect();
             };
