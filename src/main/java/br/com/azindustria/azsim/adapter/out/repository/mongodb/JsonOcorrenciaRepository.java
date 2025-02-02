@@ -10,4 +10,8 @@ import java.util.List;
 public interface JsonOcorrenciaRepository extends MongoRepository<OcorrenciaDocument, String> {
 
     List<OcorrenciaDocument> findTop50ByOrderByDatacadastroDesc();
+
+    OcorrenciaDocument findByEventoCodificadorAndEventoStatusAndEventoReferenciaAndAberta(Integer codificador, String status, String referencia, boolean aberta);
+
+
 }

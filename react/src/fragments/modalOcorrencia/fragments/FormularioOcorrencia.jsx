@@ -30,8 +30,7 @@ function FormularioOcorrencia({ handleLastFieldBlur, dataOcorrencia, handleSubmi
                             {...register("tipoocorrencia", { required: false })}
                             id={`tipoocorrencia${dataOcorrencia.id}`}
                             className="form-select"
-                            onChange={handleSelectTipoOcorrencia}
-                        >
+                            onChange={handleSelectTipoOcorrencia}>
                             <option value="">Selecione uma Categoria</option>
                             <option value="1">ACIONAMENTO TÉCNICO</option>
                             <option value="2">ACIONAMENTO OPERACIONAL</option>
@@ -45,13 +44,18 @@ function FormularioOcorrencia({ handleLastFieldBlur, dataOcorrencia, handleSubmi
                         <label htmlFor="subtipoocorrencia" className="form-label">Sub-Categoria*</label>
                         <select
                             {...register("subtipoocorrencia", { required: false })}
-                            id={`subtipoocorrencia${dataOcorrencia.id}`}
-                            className="form-select"
-                        >
+                            id="subtipoocorrencia"
+                            className="form-select">
                             <option value="">Selecione uma Sub-Categoria</option>
-                            {filteredSubCategories.map(sub => (
-                                <option key={sub.value} value={sub.value}>{sub.label}</option>
-                            ))}
+                            {filteredSubCategories[0] != null ? (
+                                filteredSubCategories.map((sub) => (
+                                    <option key={sub.value} value={sub.value}>
+                                        {sub.label}
+                                    </option>
+                                ))
+                            ) : (
+                                <option disabled>Sub-categorias indisponíveis</option>
+                            )}
                         </select>
                         {errors.subCategoria && <span className='fieldRequired'>Campo obrigatório</span>}
                     </div>
@@ -230,8 +234,7 @@ function FormularioOcorrencia({ handleLastFieldBlur, dataOcorrencia, handleSubmi
                 <div className="row ms-2 me-2 mt-2 mb-3">
                     <div className="col-sm">
                         <label htmlFor="resumo" className="form-label">Resumo*</label>
-                        <textarea {...register("resumo", { required: false })} className="form-control" id={`resumo${dataOcorrencia.id}`} rows="3" onBlur={(handleSubmit((formData) => handleLastFieldBlur(formData)))}
-                        ></textarea>
+                        <textarea {...register("resumo", { required: false })} className="form-control" id={`resumo${dataOcorrencia.id}`} rows="3" onBlur={(handleSubmit((formData) => handleLastFieldBlur(formData)))}></textarea>
                         {errors.resumo && <span className='fieldRequired'>Campo obrigatório</span>}
                     </div>
                 </div>

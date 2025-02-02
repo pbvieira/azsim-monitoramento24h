@@ -10,7 +10,6 @@ import br.com.azindustria.azsim.core.application.in.MonitorEventoService;
 import br.com.azindustria.azsim.core.application.out.GestaoClienteRepository;
 import br.com.azindustria.azsim.core.application.out.GestaoConfigEventoRepository;
 import br.com.azindustria.azsim.core.application.out.MonitorEventoRepository;
-import br.com.azindustria.azsim.core.application.out.MonitorOcorrenciaRepository;
 import br.com.azindustria.azsim.core.mapper.EventoMapper;
 import br.com.azindustria.azsim.core.mapper.OcorrenciaMapper;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
@@ -25,19 +24,16 @@ public class MonitorEventoUseCase implements MonitorEventoService {
     private final SimpMessagingTemplate simpMessagingTemplate;
 
     private final MonitorEventoRepository monitorEventoRepository;
-    private final MonitorOcorrenciaRepository monitorOcorrenciaRepository;
     private final GestaoClienteRepository gestaoClienteRepository;
     private final GestaoConfigEventoRepository gestaoConfigEventoRepository;
+    private final MonitorOcorrenciaUseCase monitorOcorrenciaUseCase;
 
-    public MonitorEventoUseCase(SimpMessagingTemplate simpMessagingTemplate, MonitorEventoRepository monitorEventoRepository,
-                                MonitorOcorrenciaRepository monitorOcorrenciaRepository, GestaoClienteRepository gestaoClienteRepository,
-                                GestaoConfigEventoRepository gestaoConfigEventoRepository) {
-
+    public MonitorEventoUseCase(SimpMessagingTemplate simpMessagingTemplate, MonitorEventoRepository monitorEventoRepository, GestaoClienteRepository gestaoClienteRepository, GestaoConfigEventoRepository gestaoConfigEventoRepository, MonitorOcorrenciaUseCase monitorOcorrenciaUseCase) {
         this.simpMessagingTemplate = simpMessagingTemplate;
         this.monitorEventoRepository = monitorEventoRepository;
-        this.monitorOcorrenciaRepository = monitorOcorrenciaRepository;
         this.gestaoClienteRepository = gestaoClienteRepository;
         this.gestaoConfigEventoRepository = gestaoConfigEventoRepository;
+        this.monitorOcorrenciaUseCase = monitorOcorrenciaUseCase;
     }
 
     @Override
@@ -46,6 +42,7 @@ public class MonitorEventoUseCase implements MonitorEventoService {
         Cliente cliente = gestaoClienteRepository.findOneByCodificador(evento.getCodificador());
         ConfigEvento configEvento = gestaoConfigEventoRepository.findByStsAndReferencia1(evento.getStatus(), evento.getReferencia());
         evento.complementarDados(cliente, configEvento);
+        evento.setDatacadastro(new Date());
         evento = monitorEventoRepository.save(evento);
 
         EventoVO eventoResponse = EventoMapper.INSTANCE.toEventoVO(evento);
@@ -55,15 +52,18 @@ public class MonitorEventoUseCase implements MonitorEventoService {
             Ocorrencia ocorrencia = new Ocorrencia();
             ocorrencia.setEvento(evento);
             ocorrencia.setDatacadastro(new Date());
-            OcorrenciaVO ocorrenciaResponse = OcorrenciaMapper.INSTANCE.toOcorrenciaVO(monitorOcorrenciaRepository.save(ocorrencia));
-            this.simpMessagingTemplate.convertAndSend("/topic/ocorrencias", ocorrenciaResponse);
+
+            if (!monitorOcorrenciaUseCase.ocorrenciaEmAntendimento(ocorrencia)) {
+                OcorrenciaVO ocorrenciaResponse = OcorrenciaMapper.INSTANCE.toOcorrenciaVO(monitorOcorrenciaUseCase.save(ocorrencia));
+                this.simpMessagingTemplate.convertAndSend("/topic/ocorrencias", ocorrenciaResponse);
+            }
         }
 
         return eventoResponse;
     }
 
-    public List<Evento> findTop250ByOrderByDataeventoDesc() {
-        return monitorEventoRepository.findTop250ByOrderByDataeventoDesc();
+    public List<Evento> findTop250ByOrderByDatacadastroDesc() {
+        return monitorEventoRepository.findTop250ByOrderByDatacadastroDesc();
     }
 
 

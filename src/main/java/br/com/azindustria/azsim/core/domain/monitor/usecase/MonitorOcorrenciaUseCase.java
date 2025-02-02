@@ -6,6 +6,7 @@ import br.com.azindustria.azsim.core.application.out.MonitorOcorrenciaRepository
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class MonitorOcorrenciaUseCase implements MonitorOcorrenciaService {
@@ -28,5 +29,24 @@ public class MonitorOcorrenciaUseCase implements MonitorOcorrenciaService {
     @Override
     public Ocorrencia save(Ocorrencia ocorrencia) {
         return monitorOcorrenciaRepository.save(ocorrencia);
+    }
+
+    @Override
+    public boolean ocorrenciaEmAntendimento(Ocorrencia ocorrencia) {
+        Ocorrencia ocorrenciaPai = null;
+
+        if (Objects.isNull(ocorrencia.getId())) {
+            ocorrenciaPai = monitorOcorrenciaRepository.findByEventoCodificadorAndEventoStatusAndEventoReferenciaAndAberta(
+                    ocorrencia.getEvento().getCodificador(),
+                    ocorrencia.getEvento().getStatus(),
+                    ocorrencia.getEvento().getReferencia(),
+                    true);
+        }
+
+        if (Objects.isNull(ocorrenciaPai)) {
+            return false;
+        }
+
+        return true;
     }
 }

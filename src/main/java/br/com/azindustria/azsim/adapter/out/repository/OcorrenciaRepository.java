@@ -15,14 +15,14 @@ public class OcorrenciaRepository implements MonitorOcorrenciaRepository {
 
     JsonOcorrenciaRepository JsonOcorrenciaRepository;
 
+    public OcorrenciaRepository(JsonOcorrenciaRepository JsonOcorrenciaRepository) {
+        this.JsonOcorrenciaRepository = JsonOcorrenciaRepository;
+    }
+
     @Override
     public List<Ocorrencia> findTop50ByOrderByDatacadastroDesc() {
         List<OcorrenciaDocument> ocorrenciaDocuments = JsonOcorrenciaRepository.findTop50ByOrderByDatacadastroDesc();
         return ocorrenciaDocuments.stream().map(OcorrenciaMapper.INSTANCE::toOcorrencia).collect(Collectors.toList());
-    }
-
-    public OcorrenciaRepository(JsonOcorrenciaRepository JsonOcorrenciaRepository) {
-        this.JsonOcorrenciaRepository = JsonOcorrenciaRepository;
     }
 
     @Override
@@ -35,5 +35,10 @@ public class OcorrenciaRepository implements MonitorOcorrenciaRepository {
     @Override
     public Ocorrencia findById(String id) {
         return OcorrenciaMapper.INSTANCE.toOcorrencia(JsonOcorrenciaRepository.findById(id).orElse(null));
+    }
+
+    @Override
+    public Ocorrencia findByEventoCodificadorAndEventoStatusAndEventoReferenciaAndAberta(Integer codificador, String status, String referencia, boolean aberta) {
+        return OcorrenciaMapper.INSTANCE.toOcorrencia(JsonOcorrenciaRepository.findByEventoCodificadorAndEventoStatusAndEventoReferenciaAndAberta(codificador, status, referencia, aberta));
     }
 }

@@ -14,6 +14,8 @@ public class EventoDocument {
     @Id
     private String id;
 
+    private Date datacadastro;
+
     @Indexed
     private String unidade;
 

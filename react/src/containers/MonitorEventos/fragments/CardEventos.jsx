@@ -69,7 +69,7 @@ function CardEventos({ index, gravidadeClassEvento, data }) {
         <Fragment key={index}>
             <Row gravidade={gravidadeClassEvento}>
                 <DataEvento>
-                    <span title={data.dataevento ? new Date(data.dataevento).toLocaleString('pt-BR') : 'N/E'}> {data.dataevento ? new Date(data.dataevento).toLocaleString('pt-BR') : 'N/E'}</span>
+                    <span title={data.datacadastro ? new Date(data.datacadastro).toLocaleString('pt-BR') : 'N/E'}> {data.datacadastro ? new Date(data.datacadastro).toLocaleString('pt-BR') : 'N/E'}</span>
                 </DataEvento>
                 <CodificadorEvento codificador={codificadorClass} onClick={handleCodificadorClick}>
                     <span title={data.codificador ? data.codificador : 'N/E'}> {data.codificador ? data.codificador : 'N/E'}</span>

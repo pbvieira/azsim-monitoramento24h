@@ -27,8 +27,8 @@ public class EventoRepository implements MonitorEventoRepository {
     }
 
     @Override
-    public List<Evento> findTop250ByOrderByDataeventoDesc() {
-        List<EventoDocument> eventoDocuments = JsonEventoRepository.findFirst250ByOrderByDataeventoDesc();
+    public List<Evento> findTop250ByOrderByDatacadastroDesc() {
+        List<EventoDocument> eventoDocuments = JsonEventoRepository.findFirst250ByOrderByDatacadastroDesc();
         return eventoDocuments.stream().map(EventoMapper.INSTANCE::toEvento).collect(Collectors.toList());
     }
 

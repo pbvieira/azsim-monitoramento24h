@@ -11,6 +11,8 @@ import java.util.Date;
 @NoArgsConstructor
 public class EventoVO {
 
+    private Date datacadastro;
+
     private String unidade;
 
     private Integer ctx;

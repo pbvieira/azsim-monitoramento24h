@@ -16,6 +16,8 @@ import static java.util.Objects.nonNull;
 @NoArgsConstructor
 public class Evento {
 
+    private Date datacadastro;
+
     private String unidade;
 
     private Integer ctx;
@@ -58,7 +60,7 @@ public class Evento {
 
     public void complementarDados(Cliente cliente, ConfigEvento configEvento) {
         this.destatus = "Status não localizado";
-        this.nmcliente = String.format("%s (codificador não localizado)", this.codificador);
+        this.nmcliente = String.format(" [codificador %s não localizado]", this.codificador);
         this.alarme = 0;
         Integer numeroSetor = null;
 

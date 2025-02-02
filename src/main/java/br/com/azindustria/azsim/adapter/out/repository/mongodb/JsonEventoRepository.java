@@ -9,5 +9,5 @@ import java.util.List;
 @Repository
 public interface JsonEventoRepository extends MongoRepository<EventoDocument, String> {
 
-    List<EventoDocument> findFirst250ByOrderByDataeventoDesc();
+    List<EventoDocument> findFirst250ByOrderByDatacadastroDesc();
 }

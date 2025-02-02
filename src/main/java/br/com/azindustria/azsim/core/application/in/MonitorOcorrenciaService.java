@@ -12,4 +12,5 @@ public interface MonitorOcorrenciaService {
 
     List<Ocorrencia> findTop50ByOrderByDatacadastroDesc();
 
+    boolean ocorrenciaEmAntendimento(Ocorrencia ocorrencia);
 }
