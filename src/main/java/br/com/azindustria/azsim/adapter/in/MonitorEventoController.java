@@ -24,9 +24,9 @@ public class MonitorEventoController {
     }
 
     @PostMapping
-    ResponseEntity<EventoVO> salvar(@Validated @RequestBody EventoVO eventoVO) {
+    ResponseEntity<String> salvar(@Validated @RequestBody EventoVO eventoVO) {
         monitorEventoService.save(eventoVO);
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>("EVENTO-RECEBIDO-SUCESSO", HttpStatus.OK);
     }
 
     @GetMapping
