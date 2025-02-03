@@ -31,7 +31,7 @@ public class MonitorEventoController {
 
     @GetMapping
     public ResponseEntity<List<EventoVO>> buscarTodosEventos() {
-        List<Evento> ultimosEventos = monitorEventoService.findTop250ByOrderByDatacadastroDesc();
+        List<Evento> ultimosEventos = monitorEventoService.findTop200ByOrderByDatacadastroDesc();
         List<EventoVO> eventoVOs = ultimosEventos.stream()
                 .map(EventoMapper.INSTANCE::toEventoVO)
                 .collect(Collectors.toList());

@@ -8,5 +8,5 @@ public interface MonitorEventoRepository {
 
     Evento save(Evento evento);
 
-    List<Evento> findTop250ByOrderByDatacadastroDesc();
+    List<Evento> findTop200ByOrderByDatacadastroDesc();
 }

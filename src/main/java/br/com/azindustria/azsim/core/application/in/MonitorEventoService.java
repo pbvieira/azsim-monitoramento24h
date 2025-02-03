@@ -9,6 +9,6 @@ public interface MonitorEventoService {
 
     EventoVO save(EventoVO eventoVO);
 
-    List<Evento> findTop250ByOrderByDatacadastroDesc();
+    List<Evento> findTop200ByOrderByDatacadastroDesc();
 
 }

@@ -62,8 +62,8 @@ public class MonitorEventoUseCase implements MonitorEventoService {
         return eventoResponse;
     }
 
-    public List<Evento> findTop250ByOrderByDatacadastroDesc() {
-        return monitorEventoRepository.findTop250ByOrderByDatacadastroDesc();
+    public List<Evento> findTop200ByOrderByDatacadastroDesc() {
+        return monitorEventoRepository.findTop200ByOrderByDatacadastroDesc();
     }
 
 
