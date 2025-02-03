@@ -66,7 +66,7 @@ public class Evento {
 
         if (nonNull(configEvento)) {
             if (StringUtils.hasLength(configEvento.getSetor())) {
-                numeroSetor = Integer.parseInt(configEvento.getSetor(), 16);
+                numeroSetor = Integer.parseInt(configEvento.getSetor().replace("F", ""), 16);
             }
             this.destatus = configEvento.getDescricao();
         }
