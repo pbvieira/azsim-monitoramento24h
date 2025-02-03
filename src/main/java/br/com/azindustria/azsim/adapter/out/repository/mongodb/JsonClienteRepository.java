@@ -11,7 +11,7 @@ public interface JsonClienteRepository extends MongoRepository<ClienteDocument, 
 
     List<ClienteDocument> findAllByAtivo(boolean ativo);
 
-    ClienteDocument findOneByCodificador(Integer codificador);
+    ClienteDocument findOneByCodificadorAndUnidade(Integer codificador, String unidade);
 
     List<ClienteDocument> findByNomeLikeOrNomeFantasiaLikeAndAtivo(String nome, String nomeFantasia, boolean ativo);
 }

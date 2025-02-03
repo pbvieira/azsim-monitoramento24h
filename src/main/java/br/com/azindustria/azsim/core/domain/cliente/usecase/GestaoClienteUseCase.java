@@ -42,7 +42,7 @@ public class GestaoClienteUseCase implements GestaoClienteService {
     }
 
     @Override
-    public Cliente findOneByCodificador(Integer codificador) {
-        return gestaoClienteRepository.findOneByCodificador(codificador);
+    public Cliente findOneByCodificadorAndUnidade(Integer codificador, String unidade) {
+        return gestaoClienteRepository.findOneByCodificadorAndUnidade(codificador, unidade);
     }
 }

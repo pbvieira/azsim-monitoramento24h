@@ -13,7 +13,7 @@ public interface GestaoClienteRepository {
 
     List<Cliente> findByNomeOrNomeFantasia(String nome, String nomeFantasia);
 
-    Cliente findOneByCodificador(Integer codificador);
+    Cliente findOneByCodificadorAndUnidade(Integer codificador, String unidade);
 
     Cliente save(Cliente cliente) throws CodificadorEmUsoException;
 

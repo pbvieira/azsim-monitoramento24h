@@ -17,5 +17,5 @@ public interface GestaoClienteService {
 
     Cliente delete(String id);
 
-    Cliente findOneByCodificador(Integer codificador);
+    Cliente findOneByCodificadorAndUnidade(Integer codificador, String unidade);
 }

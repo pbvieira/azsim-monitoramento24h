@@ -47,13 +47,13 @@ class MonitorEventoUseCaseTest extends AzsimApplicationTest {
 
     @BeforeEach
     void setUp() {
-        Cliente clienteExistente = gestaoClienteService.findOneByCodificador(CODIFICADOR);
+        Cliente clienteExistente = gestaoClienteService.findOneByCodificadorAndUnidade(CODIFICADOR, "MONTENEGRO" );
 
         if (nonNull(clienteExistente)) {
             cliente = clienteExistente;
         } else {
             cliente = new Cliente();
-            cliente.setUnidade("montenegro");
+            cliente.setUnidade("MONTENEGRO");
             cliente.setCodCondor("codHabil");
             cliente.setCodHabil("codHabil");
             cliente.setNatureza(NaturezaEnum.JURIDICA);

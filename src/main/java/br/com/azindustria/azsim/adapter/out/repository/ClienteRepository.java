@@ -42,11 +42,11 @@ public class ClienteRepository implements GestaoClienteRepository {
     }
 
     @Override
-    public Cliente findOneByCodificador(Integer codificador) {
+    public Cliente findOneByCodificadorAndUnidade(Integer codificador, String unidade) {
         if (Objects.isNull(codificador)) {
             return new Cliente();
         }
-        return ClienteMapper.INSTANCE.toCliente(JsonClienteRepository.findOneByCodificador(codificador));
+        return ClienteMapper.INSTANCE.toCliente(JsonClienteRepository.findOneByCodificadorAndUnidade(codificador, unidade));
     }
 
     @Override
@@ -55,7 +55,7 @@ public class ClienteRepository implements GestaoClienteRepository {
         ClienteDocument clienteExistente = null;
 
         if (nonNull(clienteDocument.getCodificador())) {
-            clienteExistente = JsonClienteRepository.findOneByCodificador(clienteDocument.getCodificador());
+            clienteExistente = JsonClienteRepository.findOneByCodificadorAndUnidade(clienteDocument.getCodificador(), cliente.getUnidade());
         }
 
         if (nonNull(clienteExistente) && !clienteExistente.getId().equals(clienteDocument.getId())) {

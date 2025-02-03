@@ -39,7 +39,7 @@ public class MonitorEventoUseCase implements MonitorEventoService {
     @Override
     public EventoVO save(EventoVO eventoRequest) {
         Evento evento = EventoMapper.INSTANCE.toEvento(eventoRequest);
-        Cliente cliente = gestaoClienteRepository.findOneByCodificador(evento.getCodificador());
+        Cliente cliente = gestaoClienteRepository.findOneByCodificadorAndUnidade(evento.getCodificador(), eventoRequest.getUnidade());
         ConfigEvento configEvento = gestaoConfigEventoRepository.findByStsAndReferencia1(evento.getStatus(), evento.getReferencia());
         evento.complementarDados(cliente, configEvento);
         evento.setDatacadastro(new Date());

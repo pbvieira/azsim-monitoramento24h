@@ -39,7 +39,7 @@ class GestaoClienteUseCaseTest extends AzsimApplicationTest {
 
     @BeforeEach
     void setUp() {
-        Cliente clienteExistente = gestaoClienteService.findOneByCodificador(CODIFICADOR);
+        Cliente clienteExistente = gestaoClienteService.findOneByCodificadorAndUnidade(CODIFICADOR, "montenegro");
 
         if (nonNull(clienteExistente)) {
             cliente = clienteExistente;
