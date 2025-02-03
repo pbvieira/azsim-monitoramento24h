@@ -22,6 +22,7 @@ public class MonitorOcorrenciaUseCase implements MonitorOcorrenciaService {
     public Ocorrencia findById(String id) {
         Ocorrencia ocorrencia = monitorOcorrenciaRepository.findById(id);
         if (Objects.isNull(ocorrencia.getDataatendimento())) {
+            ocorrencia.setDataatendimento(new Date());
             return save(ocorrencia);
         }
         return ocorrencia;
@@ -33,8 +34,8 @@ public class MonitorOcorrenciaUseCase implements MonitorOcorrenciaService {
 
     @Override
     public Ocorrencia save(Ocorrencia ocorrencia) {
-        if (Objects.isNull(ocorrencia.getDataatendimento())) {
-            ocorrencia.setDataatendimento(new Date());
+        if (Objects.isNull(ocorrencia.getDatacadastro())) {
+            ocorrencia.setDatacadastro(new Date());
         }
 
         if (!ocorrencia.isAberta() && Objects.isNull(ocorrencia.getDataencerramento())) {
