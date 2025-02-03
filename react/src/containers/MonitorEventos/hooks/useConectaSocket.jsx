@@ -37,10 +37,10 @@ const useConectaSocket = (setOcorrencias, setEventos) => {
                     setEventos((prevEventos) => {
                         const newEventos = [...prevEventos];
                         if (newEventos.length >= MAX_ITENS) {
-                            newEventos.shift();
+                            newEventos.pop();
                         }
 
-                        newEventos.push(dadosRecebidos);
+                        newEventos.unshift(dadosRecebidos)
                         return newEventos;
                     });
                 });
@@ -51,9 +51,9 @@ const useConectaSocket = (setOcorrencias, setEventos) => {
                         setOcorrencias((prevOcorrencias) => {
                             const newOcorrencias = [...prevOcorrencias];
                             if (newOcorrencias.length >= MAX_ITENS) {
-                                newOcorrencias.shift();
+                                newOcorrencias.pop();
                             }
-                            newOcorrencias.push(dadosRecebidos);
+                            newOcorrencias.unshift(dadosRecebidos);
                             return newOcorrencias;
                         });
                     }
