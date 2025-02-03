@@ -61,9 +61,6 @@ public class Evento {
     }
 
     public void complementarDados(Cliente cliente, ConfigEvento configEvento) {
-        log.info(nonNull(cliente) ? cliente.toString() : "Cliente não localizado");
-        log.info(nonNull(configEvento) ? configEvento.toString() : "Config Evento não localizado");
-
         this.destatus = "Status não localizado";
         this.nmcliente = String.format(" [codificador %s não localizado]", this.codificador);
         this.alarme = 0;
