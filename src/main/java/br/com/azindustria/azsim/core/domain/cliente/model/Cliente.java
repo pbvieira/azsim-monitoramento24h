@@ -2,12 +2,14 @@ package br.com.azindustria.azsim.core.domain.cliente.model;
 
 import br.com.azindustria.azsim.core.domain.cliente.type.NaturezaEnum;
 import lombok.Data;
+import lombok.ToString;
 
 import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
 @Data
+@ToString
 public class Cliente implements Serializable {
 
     private String id;

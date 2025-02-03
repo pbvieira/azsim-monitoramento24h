@@ -3,10 +3,12 @@ package br.com.azindustria.azsim.core.domain.monitor.model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString
 public class ConfigEvento {
 
     private String id;

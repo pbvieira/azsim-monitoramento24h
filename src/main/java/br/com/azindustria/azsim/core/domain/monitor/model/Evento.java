@@ -5,12 +5,14 @@ import br.com.azindustria.azsim.core.domain.cliente.model.Setor;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.util.StringUtils;
 
 import java.util.Date;
 
 import static java.util.Objects.nonNull;
 
+@Slf4j
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -59,6 +61,9 @@ public class Evento {
     }
 
     public void complementarDados(Cliente cliente, ConfigEvento configEvento) {
+        log.info(nonNull(cliente) ? cliente.toString() : "Cliente não localizado");
+        log.info(nonNull(configEvento) ? configEvento.toString() : "Config Evento não localizado");
+
         this.destatus = "Status não localizado";
         this.nmcliente = String.format(" [codificador %s não localizado]", this.codificador);
         this.alarme = 0;
@@ -66,7 +71,10 @@ public class Evento {
 
         if (nonNull(configEvento)) {
             if (StringUtils.hasLength(configEvento.getSetor())) {
-                numeroSetor = Integer.parseInt(configEvento.getSetor().replace("F", ""), 16);
+                String setor = configEvento.getSetor().replaceAll("F", "");
+                if (StringUtils.hasLength(setor)) {
+                    numeroSetor = Integer.parseInt(setor, 16);
+                }
             }
             this.destatus = configEvento.getDescricao();
         }
