@@ -60,14 +60,14 @@ scrollbar-width: auto;
 `
 
 export const Nome = styled.div`
-width: 25%;
+width: 40%;
 `
 export const Codificador = styled.div`
-width: 25%;
+width: 15%;
 `
 export const Unidade = styled.div`
-width: 25%;
+width: 35%;
 `
 export const VerMais = styled.div`
-width: 25%;
+width: 10%;
 `

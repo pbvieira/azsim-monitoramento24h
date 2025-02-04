@@ -16,7 +16,7 @@ function CardInformacoes({ index, title1, text1, title2, text2, handleOpenModal,
                     </div>
 
                     <div className="actions">
-                        <button className="btn btnOptions" onClick={() => { handleOpenModal(index) }}>Ver mais</button>
+                        <button className="btn btnOptions" onClick={() => { handleOpenModal(index) }}>Editar</button>
                         <button className="btn btnExcluir" onClick={() => { setShowModalConfirmacao(true) }}>Deletar</button>
                     </div>
                 </div>
