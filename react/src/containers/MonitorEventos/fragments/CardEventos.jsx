@@ -1,10 +1,11 @@
+/* eslint-disable react/prop-types */
 import { useState, Fragment, useEffect, useCallback } from "react";
 import PropTypes from 'prop-types';
 import axios from "axios";
 import { CidadeEvento, CodificadorEvento, DataEvento, NomeEvento, Row, StatusEvento } from "../styles";
 import api from "../../../services/api";
 
-function CardEventos({ index, gravidadeClassEvento, data }) {
+function CardEventos({ index, borderColor, data }) {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [filtro, setFiltro] = useState('');
     const [clientes, setClientes] = useState([]);
@@ -67,7 +68,9 @@ function CardEventos({ index, gravidadeClassEvento, data }) {
 
     return (
         <Fragment key={index}>
-            <Row gravidade={gravidadeClassEvento}>
+            <Row style={{
+                borderLeft: `10px solid ${borderColor}`
+            }}>
                 <DataEvento>
                     <span title={data.datacadastro ? new Date(data.datacadastro).toLocaleString('pt-BR') : 'N/E'}> {data.datacadastro ? new Date(data.datacadastro).toLocaleString('pt-BR') : 'N/E'}</span>
                 </DataEvento>

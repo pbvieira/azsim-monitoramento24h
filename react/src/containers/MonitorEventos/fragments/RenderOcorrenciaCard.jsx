@@ -2,21 +2,27 @@
 // OcorrenciaCard.js
 import PropTypes from "prop-types";
 import CardOcorrencia from "./CardOcorrencia";
+import { useEffect, useRef } from "react";
 
 const OcorrenciaList = ({ ocorrencias, handleDadosOcorrencia }) => {
+    const tamanhoListaOcorrencias = useRef(ocorrencias.length);
+
+    useEffect(() => {
+        if (ocorrencias.length > tamanhoListaOcorrencias.current) {
+            const somOcorrencia = new Audio('/audio/somOcorrencia.mp3');
+            somOcorrencia.play();
+        }
+        tamanhoListaOcorrencias.current = ocorrencias.length;
+    }, [ocorrencias]);
+
+
     const renderOcorrenciaCard = (dataOcorrencia, index) => {
         if (!dataOcorrencia.id) return null;
-
-        const gravidadeClass = dataOcorrencia.gravidade === 'normal' ? 'normal-gravidade' :
-            dataOcorrencia.gravidade === 'moderada' ? 'moderada-gravidade' :
-                'grave-gravidade';
-
         return (
             <CardOcorrencia
                 key={index}
                 index={index}
                 dataOcorrencia={dataOcorrencia}
-                gravidadeClass={gravidadeClass}
                 handleDadosOcorrencia={handleDadosOcorrencia}
             />
         );

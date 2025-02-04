@@ -74,7 +74,6 @@ text-transform:uppercase;
 white-space: nowrap;
 font-size: 70%;
 font-weight: 600;
-border-left: 10px solid red;
 `
 
 export const DataEvento = styled.div`

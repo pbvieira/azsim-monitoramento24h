@@ -7,8 +7,21 @@ const EventoList = ({ eventos }) => {
     const renderEventCard = (data, index) => {
         if (data.id) return null;
 
-        const gravidadeClassEvento = data.gravidade === '' ? 'evento-normal-gravidade' : 'evento-grave-gravidade';
-        return <CardEventos key={index} index={index} data={data} gravidadeClassEvento={gravidadeClassEvento} />;
+        const borderColor = (() => {
+            switch (data.grupo) {
+                case 'ALR':
+                    return 'red';
+                case 'EME':
+                    return 'orange';
+                case 'MNT':
+                    return 'yellow';
+                case 'MNB':
+                    return 'green';
+                default:
+                    return 'gray';
+            }
+        })();
+        return <CardEventos key={index} index={index} data={data} borderColor={borderColor} />;
     };
 
     return (
