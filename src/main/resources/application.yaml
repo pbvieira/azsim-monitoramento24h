@@ -16,3 +16,15 @@ spring:
 logging:
   level:
     ROOT: INFO
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always
+  metrics:
+    enable:
+      all: true
