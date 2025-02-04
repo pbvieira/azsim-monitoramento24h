@@ -17,7 +17,7 @@ function ModalSetor({ setor, setShowModal, setSetor, handleSave, index }) {
                     <Input placeholder="Localização" value={setor.localizacao} onChange={(e) => setSetor({ ...setor, localizacao: e.target.value })} type="text" />
                 </Row>
                 <Row>
-                    <Input placeholder="Observações" value={setor.observacao} onChange={(e) => setSetor({ ...setor, observacao: e.target.value })}></Input>
+                    <textarea className='textAreaModal' placeholder="Observações" value={setor.observacao} onChange={(e) => setSetor({ ...setor, observacao: e.target.value })}></textarea>
                 </Row>
             </Form>
             <Buttons>

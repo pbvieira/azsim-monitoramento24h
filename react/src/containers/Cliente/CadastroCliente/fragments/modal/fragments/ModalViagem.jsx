@@ -18,7 +18,7 @@ function ModalViagem({ viagens, setShowModal, setViagens, handleViagensDateChang
                     <Input placeholder="Contato Not. Volta" value={viagens.nomeContatoNotificacaoVolta} onChange={(e) => setViagens({ ...viagens, nomeContatoNotificacaoVolta: e.target.value })} type="text" />
                 </Row>
                 <Row>
-                    <Input placeholder="Observações" value={viagens.observacao} onChange={(e) => setViagens({ ...viagens, observacao: e.target.value })} type="text" />
+                    <textarea className='textAreaModal' placeholder="Observações" value={viagens.observacao} onChange={(e) => setViagens({ ...viagens, observacao: e.target.value })} type="text" />
 
 
                 </Row>
@@ -43,7 +43,7 @@ function ModalViagem({ viagens, setShowModal, setViagens, handleViagensDateChang
                     </ReactInputMask>
                 </Row>
                 <Row>
-                    <Input placeholder="Procedimentos" value={viagens.procedimentos} onChange={(e) => setViagens({ ...viagens, procedimentos: e.target.value })}></Input>
+                    <textarea className='textAreaModal' placeholder="Procedimentos" value={viagens.procedimentos} onChange={(e) => setViagens({ ...viagens, procedimentos: e.target.value })}></textarea>
                 </Row>
             </Form>
             <Buttons>

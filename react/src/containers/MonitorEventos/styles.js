@@ -120,7 +120,6 @@ font-weight: 600;
 text-align: start;
 cursor: pointer;
 transition: 0.2s opacity ease-in-out;
-border-left: 10px solid red;
 border-radius: 8px 8px 8px 8px;
 
 &:hover{

@@ -1,11 +1,12 @@
+/* eslint-disable react/prop-types */
 import { Fragment } from "react";
 import PropTypes from 'prop-types';
 import { CardDiv, CardBody, NomeOcorrencia, DescricaoOcorrencia } from "../styles";
 
-function CardOcorrencia({ index, dataOcorrencia, handleDadosOcorrencia }) {
+function CardOcorrencia({ index, dataOcorrencia, handleDadosOcorrencia, borderColor }) {
     return (
         <Fragment key={index}>
-            <CardDiv onClick={() => { handleDadosOcorrencia(dataOcorrencia.id, dataOcorrencia.evento.idcliente) }} data-bs-toggle="modal" data-bs-target={`#modal-${dataOcorrencia.id}`} >
+            <CardDiv style={{ borderLeft: `10px solid ${borderColor}` }} onClick={() => { handleDadosOcorrencia(dataOcorrencia.id, dataOcorrencia.evento.idcliente) }} data-bs-toggle="modal" data-bs-target={`#modal-${dataOcorrencia.id}`} >
                 <CardBody id='cardOcorrencia'
                 >
                     <DescricaoOcorrencia title={dataOcorrencia && dataOcorrencia.evento ? dataOcorrencia.evento.destatus : ""}>
@@ -18,7 +19,7 @@ function CardOcorrencia({ index, dataOcorrencia, handleDadosOcorrencia }) {
                     </NomeOcorrencia>
                 </CardBody>
             </CardDiv>
-        </Fragment>
+        </Fragment >
     );
 }
 
