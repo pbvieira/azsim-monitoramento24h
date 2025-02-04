@@ -14,13 +14,14 @@ function FormButtons({ handleSubmit, onSubmit, onSubmitAndReload, handleOpenModa
                 <i className="bi bi-person-fill-add" /> Salvar e Adicionar Novo
             </Button>
 
+            {tabSelected !== '' && (
+                <button id='buttonNovoItem' className='btn ms-3 btn-secondary' onClick={() => handleOpenModal()}>Adicionar {tabSelected}</button>
+            )}
+
             <Link className="ms-3 btn btn-danger" to="/azsim/consultaCliente">
                 Cancelar
             </Link>
 
-            {tabSelected !== '' && (
-                <button id='buttonNovoItem' className='btn ms-3 btn-success' onClick={() => handleOpenModal()}>Adicionar {tabSelected}</button>
-            )}
         </Buttons>
     );
 }

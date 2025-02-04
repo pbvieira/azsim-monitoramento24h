@@ -101,9 +101,9 @@ padding: 10px;
 `
 export const Buttons = styled.div`
 display: flex;
-justify-content: end;
+justify-content: start;
 gap: 2%;
 position: absolute;
 bottom: 10px;
-right: 10px;
+left: 10px;
 `

@@ -48,10 +48,10 @@ function ModalViagem({ viagens, setShowModal, setViagens, handleViagensDateChang
             </Form>
             <Buttons>
                 <div className="divButton">
-                    <button id="btnCancelar" className="btn btn-danger" onClick={() => setShowModal(false)}>Cancelar</button>
+                    <button id="btnAdicionar" className="btn btn-secondary" onClick={handleSave}>Adicionar</button>
                 </div>
                 <div className="divButton">
-                    <button id="btnAdicionar" className="btn btn-success" onClick={handleSave}>Adicionar</button>
+                    <button id="btnCancelar" className="btn btn-danger" onClick={() => setShowModal(false)}>Cancelar</button>
                 </div>
             </Buttons>
         </>
