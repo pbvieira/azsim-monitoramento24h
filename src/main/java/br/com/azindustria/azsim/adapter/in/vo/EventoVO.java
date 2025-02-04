@@ -49,4 +49,6 @@ public class EventoVO {
 
     private Integer alarme = 0;
 
+    private String grupo;
+
 }

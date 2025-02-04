@@ -58,6 +58,8 @@ public class EventoDocument {
 
     private Integer alarme = 0;
 
+    private String grupo;
+
     public boolean isGeraOcorrencia() {
         return alarme == 1;
     }
