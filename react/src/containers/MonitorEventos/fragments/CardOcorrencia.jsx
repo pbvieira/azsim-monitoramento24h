@@ -34,6 +34,5 @@ CardOcorrencia.propTypes = {
         }).isRequired,
     }).isRequired,
     handleDadosOcorrencia: PropTypes.func.isRequired,
-    gravidadeClass: PropTypes.string.isRequired,
 };
 export default CardOcorrencia;

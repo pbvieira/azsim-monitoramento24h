@@ -12,11 +12,8 @@ on:
   push:
     branches: [ "master" ]
 
-  pull_request:
-    branches: [ "master" ]
-
 jobs:
-  build:
+  deploy:
 
     runs-on: ubuntu-latest
 
