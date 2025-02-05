@@ -8,27 +8,33 @@ import Swal from "sweetalert2";
 const OcorrenciaList = ({ ocorrencias, handleDadosOcorrencia }) => {
     const tamanhoListaOcorrencias = useRef(ocorrencias.length);
 
+
     useEffect(() => {
         if (ocorrencias.length > tamanhoListaOcorrencias.current) {
             const somOcorrencia = new Audio('/audio/somOcorrencia.mp3');
             somOcorrencia.play();
+
+            const novaOcorrencia = ocorrencias[0];
+            const clienteNome = novaOcorrencia?.evento?.nmcliente || 'Cliente desconhecido';
+
             Swal.fire({
                 title: "Nova ocorrência recebida!",
-                text: "Nova ocorrência recebida, verifique o quanto antes!",
+                text: `Nova ocorrência recebida de ${clienteNome}`,
                 icon: "warning",
                 confirmButtonText: "Ok",
             });
+
         }
         tamanhoListaOcorrencias.current = ocorrencias.length;
     }, [ocorrencias]);
 
 
+
     const renderOcorrenciaCard = (dataOcorrencia, index) => {
 
         if (!dataOcorrencia.id) return null;
-
         const borderColor = (() => {
-            switch (dataOcorrencia.grupo) {
+            switch (dataOcorrencia.evento.grupo) {
                 case 'ALR':
                     return 'red';
                 case 'EME':
