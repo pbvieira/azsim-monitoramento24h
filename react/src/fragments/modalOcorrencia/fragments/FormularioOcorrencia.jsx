@@ -25,20 +25,20 @@ function FormularioOcorrencia({ handleLastFieldBlur, dataOcorrencia, handleSubmi
                 <div className="row ms-1 me-2 mt-2">
                     <div className="col">
                         <label htmlFor="datacadastro" className="form-label fw-bold">Data Cadastro</label>
-                        <input {...register("datacadastro", {required: false})} type="text" className="form-control"
-                               id={`datacadastro${dataOcorrencia.id}`} aria-label=".form-select example"/>
+                        <input disabled value={dataOcorrencia.datacadastro} {...register("datacadastro", { required: false })} type="text" className="form-control"
+                            id={`datacadastro${dataOcorrencia.id}`} aria-label=".form-select example" />
                     </div>
 
                     <div className="col">
                         <label htmlFor="dataatendimento" className="form-label fw-bold">Data Inicio Atendimento</label>
-                        <input {...register("dataatendimento", {required: false})} type="text" className="form-control"
-                               id={`dataatendimento${dataOcorrencia.id}`} aria-label=".form-select example"/>
+                        <input disabled value={dataOcorrencia.dataatendimento} {...register("dataatendimento", { required: false })} type="text" className="form-control"
+                            id={`dataatendimento${dataOcorrencia.id}`} aria-label=".form-select example" />
                     </div>
 
                     <div className="col">
                         <label htmlFor="dataencerramento" className="form-label fw-bold">Data Encerramento</label>
-                        <input {...register("dataencerramento", {required: false})} type="text" className="form-control"
-                               id={`dataencerramento${dataOcorrencia.id}`} aria-label=".form-select example"/>
+                        <input disabled value={dataOcorrencia.dataencerramento} {...register("dataencerramento", { required: false })} type="text" className="form-control"
+                            id={`dataencerramento${dataOcorrencia.id}`} aria-label=".form-select example" />
                     </div>
                 </div>
 
@@ -46,7 +46,7 @@ function FormularioOcorrencia({ handleLastFieldBlur, dataOcorrencia, handleSubmi
                     <div className="col">
                         <label htmlFor="tipoocorrencia" className="form-label fw-bold">Categoria*</label>
                         <select
-                            {...register("tipoocorrencia", {required: false})}
+                            {...register("tipoocorrencia", { required: false })}
                             id={`tipoocorrencia${dataOcorrencia.id}`}
                             className="form-select"
                             onChange={handleSelectTipoOcorrencia}>
@@ -63,7 +63,7 @@ function FormularioOcorrencia({ handleLastFieldBlur, dataOcorrencia, handleSubmi
                     <div className="col">
                         <label htmlFor="subtipoocorrencia" className="form-label fw-bold">Sub-Categoria*</label>
                         <select
-                            {...register("subtipoocorrencia", {required: false})}
+                            {...register("subtipoocorrencia", { required: false })}
                             id="subtipoocorrencia"
                             className="form-select">
                             <option value="">Selecione uma Sub-Categoria</option>
@@ -82,8 +82,8 @@ function FormularioOcorrencia({ handleLastFieldBlur, dataOcorrencia, handleSubmi
 
                     <div className="col">
                         <label htmlFor="operador" className="form-label fw-bold">Operador*</label>
-                        <input {...register("operador", {required: false})} type="text" className="form-control"
-                               id={`operador${dataOcorrencia.id}`} aria-label=".form-select example"/>
+                        <input {...register("operador", { required: false })} type="text" className="form-control"
+                            id={`operador${dataOcorrencia.id}`} aria-label=".form-select example" />
                         {errors.operador && <span className='fieldRequired'>Campo obrigatório</span>}
                     </div>
                 </div>
@@ -92,7 +92,7 @@ function FormularioOcorrencia({ handleLastFieldBlur, dataOcorrencia, handleSubmi
                 <div className="d-flex ms-3">
                     <div className="form-check">
                         <input
-                            {...register("deslocamento", {required: true})}
+                            {...register("deslocamento", { required: true })}
                             type="radio"
                             value="nao"
                             id={`deslocamento-nao-${dataOcorrencia.id}`}
@@ -101,12 +101,12 @@ function FormularioOcorrencia({ handleLastFieldBlur, dataOcorrencia, handleSubmi
                             checked={selectedValue === "nao"}
                         />
                         <label className="form-check-label"
-                               htmlFor={`deslocamento-nao-${dataOcorrencia.id}`}>Não &nbsp;&nbsp;</label>
+                            htmlFor={`deslocamento-nao-${dataOcorrencia.id}`}>Não &nbsp;&nbsp;</label>
                     </div>
 
                     <div className="form-check me-3">
                         <input
-                            {...register("deslocamento", {required: true})}
+                            {...register("deslocamento", { required: true })}
                             type="radio"
                             value="sim"
                             id={`deslocamento-sim-${dataOcorrencia.id}`}
@@ -126,7 +126,7 @@ function FormularioOcorrencia({ handleLastFieldBlur, dataOcorrencia, handleSubmi
                             <div className="col-6">
                                 <label htmlFor="agente" className="form-label fw-bold">Agente</label>
                                 <input
-                                    {...register("agente", {required: false})}
+                                    {...register("agente", { required: false })}
                                     disabled={selectedValue === 'nao'}
                                     id={`agente${dataOcorrencia.id}`}
                                     type="text"
@@ -142,7 +142,7 @@ function FormularioOcorrencia({ handleLastFieldBlur, dataOcorrencia, handleSubmi
                                 <div className="col">
                                     <label htmlFor="horasaidaemp" className="form-label fw-bold">H. Saída Empresa</label>
                                     <input
-                                        {...register("horasaidaemp", {required: false})}
+                                        {...register("horasaidaemp", { required: false })}
                                         disabled={selectedValue === 'nao'}
                                         type="text"
                                         className="form-control"
@@ -157,7 +157,7 @@ function FormularioOcorrencia({ handleLastFieldBlur, dataOcorrencia, handleSubmi
                                     <label htmlFor="horachegadacliente" className="form-label fw-bold">H. Cheg.
                                         Local</label>
                                     <input
-                                        {...register("horachegadacliente", {required: false})}
+                                        {...register("horachegadacliente", { required: false })}
                                         disabled={selectedValue === 'nao'}
                                         type="text"
                                         className="form-control"
@@ -171,7 +171,7 @@ function FormularioOcorrencia({ handleLastFieldBlur, dataOcorrencia, handleSubmi
                                 <div className="col">
                                     <label htmlFor="horasaidacliente" className="form-label fw-bold">H. Saída Local</label>
                                     <input
-                                        {...register("horasaidacliente", {required: false})}
+                                        {...register("horasaidacliente", { required: false })}
                                         disabled={selectedValue === 'nao'}
                                         type="text"
                                         className="form-control"
@@ -185,7 +185,7 @@ function FormularioOcorrencia({ handleLastFieldBlur, dataOcorrencia, handleSubmi
                                 <div className="col">
                                     <label htmlFor="horachegadaemp" className="form-label fw-bold">H. Cheg. Empresa</label>
                                     <input
-                                        {...register("horachegadaemp", {required: false})}
+                                        {...register("horachegadaemp", { required: false })}
                                         disabled={selectedValue === 'nao'}
                                         type="text"
                                         className="form-control"
@@ -201,7 +201,7 @@ function FormularioOcorrencia({ handleLastFieldBlur, dataOcorrencia, handleSubmi
                                     <label htmlFor="horaaberturalacre" className="form-label fw-bold">H. Abertura
                                         Lacre</label>
                                     <input
-                                        {...register("horaaberturalacre", {required: false})}
+                                        {...register("horaaberturalacre", { required: false })}
                                         disabled={selectedValue === 'nao'}
                                         type="text"
                                         className="form-control"
@@ -215,7 +215,7 @@ function FormularioOcorrencia({ handleLastFieldBlur, dataOcorrencia, handleSubmi
                                 <div className="col">
                                     <label htmlFor="horalacre" className="form-label fw-bold">H. Lacre</label>
                                     <input
-                                        {...register("horalacre", {required: false})}
+                                        {...register("horalacre", { required: false })}
                                         disabled={selectedValue === 'nao'}
                                         type="text"
                                         className="form-control"
@@ -228,7 +228,7 @@ function FormularioOcorrencia({ handleLastFieldBlur, dataOcorrencia, handleSubmi
                                 <div className="col">
                                     <label htmlFor="kmsaida" className="form-label fw-bold">Km de Saída</label>
                                     <input
-                                        {...register("kmsaida", {required: false})}
+                                        {...register("kmsaida", { required: false })}
                                         disabled={selectedValue === 'nao'}
                                         type="number"
                                         className="form-control"
@@ -241,7 +241,7 @@ function FormularioOcorrencia({ handleLastFieldBlur, dataOcorrencia, handleSubmi
                                 <div className="col">
                                     <label htmlFor="kmretorno" className="form-label fw-bold">Km de Retorno</label>
                                     <input
-                                        {...register("kmretorno", {required: false})}
+                                        {...register("kmretorno", { required: false })}
                                         disabled={selectedValue === 'nao'}
                                         type="number"
                                         className="form-control"
@@ -258,9 +258,9 @@ function FormularioOcorrencia({ handleLastFieldBlur, dataOcorrencia, handleSubmi
                 <div className="row ms-2 me-2 mt-2 mb-3">
                     <div className="col-sm">
                         <label htmlFor="resumo" className="form-label fw-bold">Resumo*</label>
-                        <textarea {...register("resumo", {required: false})} className="form-control"
-                                  id={`resumo${dataOcorrencia.id}`} rows="3"
-                                  onBlur={(handleSubmit((formData) => handleLastFieldBlur(formData)))}></textarea>
+                        <textarea {...register("resumo", { required: false })} className="form-control"
+                            id={`resumo${dataOcorrencia.id}`} rows="3"
+                            onBlur={(handleSubmit((formData) => handleLastFieldBlur(formData)))}></textarea>
                         {errors.resumo && <span className='fieldRequired'>Campo obrigatório</span>}
                     </div>
                 </div>

@@ -54,6 +54,16 @@ const useConectaSocket = (setOcorrencias, setEventos) => {
                                 newOcorrencias.pop();
                             }
                             newOcorrencias.unshift(dadosRecebidos);
+                            const somOcorrencia = new Audio('/audio/somOcorrencia.mp3');
+                            somOcorrencia.play();
+
+                            Swal.fire({
+                                title: "Nova ocorrência recebida!",
+                                text: `Nova ocorrência recebida de ${dadosRecebidos.evento.nmcliente}`,
+                                icon: "warning",
+                                confirmButtonText: "Ok",
+                            });
+
                             return newOcorrencias;
                         });
                     }

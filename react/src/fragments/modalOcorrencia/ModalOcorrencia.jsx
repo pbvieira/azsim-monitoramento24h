@@ -16,7 +16,6 @@ import useSubCategoryOptions from './hooks/useSubCategoryOptions';
 import useDeslocamento from './hooks/useSelectDeslocamento';
 import useCamposDeslocamento from './hooks/useCamposDeslocamentoPreenchidos';
 import useTipoOcorrencia from './hooks/useTipoOcorrencia';
-import { ca } from 'date-fns/locale';
 import useFormSubmission from './hooks/useFormSubmission';
 
 function ModalOcorrencia({ dataOcorrencia, setOcorrencias }) {
@@ -39,7 +38,7 @@ function ModalOcorrencia({ dataOcorrencia, setOcorrencias }) {
     const { handleLastFieldBlur, handleButtonAction } = useFormSubmission(handleSubmit, dataOcorrencia, handleOnSubmit, botaoRef, setShowModal);
 
     return (
-        modalOpen && <div className={`modal fade show`} id={`modal-${dataOcorrencia.id}`} tabIndex="-1" aria-labelledby={`modalLabel-${dataOcorrencia.id}`} aria-hidden={!modalOpen} style={{ display: modalOpen ? 'block' : 'none' }} data-bs-backdrop="false">
+        modalOpen && <div className={`modal fade show`} id={`modal-${dataOcorrencia.id}`} tabIndex="-1" aria-labelledby={`modalLabel-${dataOcorrencia.id}`} aria-hidden={!modalOpen} style={{ display: modalOpen ? 'block' : 'none' }} >
             {showModal && <Modal setAberta={setAberta} setShowModal={setShowModal} handleSubmit={handleSubmit} onSubmit={handleOnSubmit} dataOcorrencia={dataOcorrencia} />}
             <div className="modal-dialog modal-fullscreen">
                 <div className="modal-content">

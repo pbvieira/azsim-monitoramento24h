@@ -11,7 +11,7 @@ function Header({ dataOcorrencia }) {
             <Navbar>
                 <div >
                     <h3>
-                        {dataOcorrencia && dataOcorrencia.evento ? dataOcorrencia.evento.destatus : "nao disponivel"}
+                        {dataOcorrencia.evento.destatus} {dataOcorrencia.evento.local ? ' - ' + dataOcorrencia.evento.local : ''}
                     </h3>
                 </div>
             </Navbar>
