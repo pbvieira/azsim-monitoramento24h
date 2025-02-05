@@ -1,13 +1,14 @@
+/* eslint-disable react/prop-types */
 import { Fragment } from "react";
 import PropTypes from 'prop-types';
 import { CardDiv, CardBody, NomeOcorrencia, DescricaoOcorrencia } from "../styles";
 
-function CardOcorrencia({ index, dataOcorrencia, handleDadosOcorrencia, gravidadeClass }) {
+function CardOcorrencia({ index, dataOcorrencia, handleDadosOcorrencia, borderColor }) {
     return (
         <Fragment key={index}>
-            <CardDiv onClick={() => { handleDadosOcorrencia(dataOcorrencia.id, dataOcorrencia.evento.idcliente) }} data-bs-toggle="modal" data-bs-target={`#modal-${dataOcorrencia.id}`} gravidade={gravidadeClass}>
+            <CardDiv style={{ borderLeft: `10px solid ${borderColor}` }} onClick={() => { handleDadosOcorrencia(dataOcorrencia.id, dataOcorrencia.evento.idcliente) }} data-bs-toggle="modal" data-bs-target={`#modal-${dataOcorrencia.id}`} >
                 <CardBody id='cardOcorrencia'
-                    gravidade={gravidadeClass} >
+                >
                     <DescricaoOcorrencia title={dataOcorrencia && dataOcorrencia.evento ? dataOcorrencia.evento.destatus : ""}>
                         {dataOcorrencia && dataOcorrencia.evento ? dataOcorrencia.evento.destatus : ""} <span className="material-symbols-outlined">
                             zone_person_alert
@@ -18,7 +19,7 @@ function CardOcorrencia({ index, dataOcorrencia, handleDadosOcorrencia, gravidad
                     </NomeOcorrencia>
                 </CardBody>
             </CardDiv>
-        </Fragment>
+        </Fragment >
     );
 }
 

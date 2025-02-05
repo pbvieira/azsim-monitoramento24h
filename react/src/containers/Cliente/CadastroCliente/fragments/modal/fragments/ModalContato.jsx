@@ -13,44 +13,66 @@ function ModalContato({ contato, setContato, handleDateChange, handleSave, setSh
             </div>
             <Form>
                 <Row>
-                    <Input placeholder="Nome" value={contato.nome} onChange={(e) => setContato({ ...contato, nome: e.target.value })} type="text" />
+                    <div className="inputComLabel" style={{ display: 'flex', width: '100%', flexDirection: 'column' }}>
+                        <label htmlFor="nome">Nome</label>
+                        <Input placeholder="Nome" name='nome' value={contato.nome} onChange={(e) => setContato({ ...contato, nome: e.target.value })} type="text" />
+                    </div>
                 </Row>
                 <Row>
-                    <Input placeholder="Senha" value={contato.senha} onChange={(e) => setContato({ ...contato, senha: e.target.value })} type="text" />
+                    <div className="inputComLabel" style={{ display: 'flex', width: '100%', flexDirection: 'column' }}>
+                        <label htmlFor="senha">Senha</label>
+                        <Input placeholder="Senha" name='senha' value={contato.senha} onChange={(e) => setContato({ ...contato, senha: e.target.value })} type="text" />
+                    </div>
                 </Row>
                 <Row>
-                    <Input placeholder="Contra-senha" value={contato.contraSenha} onChange={(e) => setContato({ ...contato, contraSenha: e.target.value })} type="text" />
+                    <div className="inputComLabel" style={{ display: 'flex', width: '100%', flexDirection: 'column' }}>
+                        <label htmlFor="contraSenha">Contra-senha</label>
+                        <Input placeholder="Contra-senha" name='contraSenha' value={contato.contraSenha} onChange={(e) => setContato({ ...contato, contraSenha: e.target.value })} type="text" />
+                    </div>
                 </Row>
                 <Row>
-                    <ReactInputMask
-                        mask="(99) 99999-9999"
-                        placeholder="Telefone"
-                        value={contato.telefone || ''}
-                        onChange={(e) => setContato({ ...contato, telefone: e.target.value })}                    >
-                        {(inputProps) => <Input {...inputProps}
-                            type="text" />}
-                    </ReactInputMask>                </Row>
-                <Row>
-                    <ReactInputMask
-                        mask="99/99/9999"
-                        placeholder="Data de Nascimento (dd/MM/yyyy)"
-                        value={contato.dataNascimento || ''}
-                        onChange={handleDateChange}
-                    >
-                        {(inputProps) => <Input {...inputProps}
-                            type="text" />}
-                    </ReactInputMask>
+                    <div className="inputComLabel" style={{ display: 'flex', width: '100%', flexDirection: 'column' }}>
+                        <label htmlFor="telefone">Telefone</label>
+                        <ReactInputMask
+                            mask="(99) 99999-9999"
+                            placeholder="Telefone"
+                            name='telefone'
+                            value={contato.telefone || ''}
+                            onChange={(e) => setContato({ ...contato, telefone: e.target.value })}                    >
+                            {(inputProps) => <Input {...inputProps}
+                                type="text" />}
+                        </ReactInputMask>
+                    </div>
                 </Row>
                 <Row>
-                    <Input placeholder="Observações" value={contato.observacao} onChange={(e) => setContato({ ...contato, observacao: e.target.value })}></Input>
+                    <div className="inputComLabel" style={{ display: 'flex', width: '100%', flexDirection: 'column' }}>
+                        <label htmlFor="dataNascimento">Data de Nascimento (dd/MM/yyyy)</label>
+                        <ReactInputMask
+                            mask="99/99/9999"
+                            name='dataNascimento'
+                            placeholder="Data de Nascimento (dd/MM/yyyy)"
+                            value={contato.dataNascimento || ''}
+                            onChange={handleDateChange}
+                        >
+                            {(inputProps) => <Input {...inputProps}
+                                type="text" />}
+                        </ReactInputMask>
+                    </div>
+
+                </Row>
+                <Row>
+                    <div className="inputComLabel" style={{ display: 'flex', width: '100%', flexDirection: 'column' }}>
+                        <label htmlFor="observacao">Observações</label>
+                        <textarea className='textAreaModal' placeholder="Observações" name='observacao' value={contato.observacao} onChange={(e) => setContato({ ...contato, observacao: e.target.value })}></textarea>
+                    </div>
                 </Row>
             </Form>
             <Buttons>
                 <div className="divButton">
-                    <button id="btnCancelar" className="btn btn-danger" onClick={() => setShowModal(false)}>Cancelar</button>
+                    <button id="btnAdicionar" className="btn btn-secondary" onClick={handleSave}>Adicionar</button>
                 </div>
                 <div className="divButton">
-                    <button id="btnAdicionar" className="btn btn-success" onClick={handleSave}>Adicionar</button>
+                    <button id="btnCancelar" className="btn btn-danger" onClick={() => setShowModal(false)}>Cancelar</button>
                 </div>
             </Buttons>
         </>

@@ -17,15 +17,15 @@ function ModalSetor({ setor, setShowModal, setSetor, handleSave, index }) {
                     <Input placeholder="Localização" value={setor.localizacao} onChange={(e) => setSetor({ ...setor, localizacao: e.target.value })} type="text" />
                 </Row>
                 <Row>
-                    <Input placeholder="Observações" value={setor.observacao} onChange={(e) => setSetor({ ...setor, observacao: e.target.value })}></Input>
+                    <textarea className='textAreaModal' placeholder="Observações" value={setor.observacao} onChange={(e) => setSetor({ ...setor, observacao: e.target.value })}></textarea>
                 </Row>
             </Form>
             <Buttons>
                 <div className="divButton">
-                    <button id="btnCancelar" className="btn btn-danger" onClick={() => setShowModal(false)}>Cancelar</button>
+                    <button id="btnAdicionar" className="btn btn-secondary" onClick={handleSave}>Adicionar</button>
                 </div>
                 <div className="divButton">
-                    <button id="btnAdicionar" className="btn btn-success" onClick={handleSave}>Adicionar</button>
+                    <button id="btnCancelar" className="btn btn-danger" onClick={() => setShowModal(false)}>Cancelar</button>
                 </div>
             </Buttons>
         </>

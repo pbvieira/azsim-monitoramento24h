@@ -2,22 +2,59 @@
 // OcorrenciaCard.js
 import PropTypes from "prop-types";
 import CardOcorrencia from "./CardOcorrencia";
+import { useEffect, useRef } from "react";
+import Swal from "sweetalert2";
 
 const OcorrenciaList = ({ ocorrencias, handleDadosOcorrencia }) => {
-    const renderOcorrenciaCard = (dataOcorrencia, index) => {
-        if (!dataOcorrencia.id) return null;
+    const tamanhoListaOcorrencias = useRef(ocorrencias.length);
 
-        const gravidadeClass = dataOcorrencia.gravidade === 'normal' ? 'normal-gravidade' :
-            dataOcorrencia.gravidade === 'moderada' ? 'moderada-gravidade' :
-                'grave-gravidade';
+
+    useEffect(() => {
+        if (ocorrencias.length > tamanhoListaOcorrencias.current) {
+            const somOcorrencia = new Audio('/audio/somOcorrencia.mp3');
+            somOcorrencia.play();
+
+            const novaOcorrencia = ocorrencias[0];
+            const clienteNome = novaOcorrencia?.evento?.nmcliente || 'Cliente desconhecido';
+
+            Swal.fire({
+                title: "Nova ocorrência recebida!",
+                text: `Nova ocorrência recebida de ${clienteNome}`,
+                icon: "warning",
+                confirmButtonText: "Ok",
+            });
+
+        }
+        tamanhoListaOcorrencias.current = ocorrencias.length;
+    }, [ocorrencias]);
+
+
+
+    const renderOcorrenciaCard = (dataOcorrencia, index) => {
+
+        if (!dataOcorrencia.id) return null;
+        const borderColor = (() => {
+            switch (dataOcorrencia.evento.grupo) {
+                case 'ALR':
+                    return 'red';
+                case 'EME':
+                    return 'orange';
+                case 'MNT':
+                    return 'yellow';
+                case 'MNB':
+                    return 'green';
+                default:
+                    return 'gray';
+            }
+        })();
 
         return (
             <CardOcorrencia
                 key={index}
                 index={index}
                 dataOcorrencia={dataOcorrencia}
-                gravidadeClass={gravidadeClass}
                 handleDadosOcorrencia={handleDadosOcorrencia}
+                borderColor={borderColor}
             />
         );
     };

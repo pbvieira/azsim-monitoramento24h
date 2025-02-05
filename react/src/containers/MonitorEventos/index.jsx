@@ -2,7 +2,7 @@ import "../../fragments/ErrorCard/init";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.min.js';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Container, Eventos, Main, Ocorrencias } from "./styles";
 import EventoList from './fragments/RenderEventoCard';
 import OcorrenciaList from './fragments/RenderOcorrenciaCard';
@@ -21,6 +21,10 @@ function Monitor() {
   useConectaSocket(setOcorrencias, setEventos);
 
   const handleDadosOcorrencia = useDadosOcorrencia(setOcorrenciaModal, setShowModal);
+
+  useEffect(() => {
+    console.log('nova', eventos)
+  }, [eventos])
 
   return (
     <Container>

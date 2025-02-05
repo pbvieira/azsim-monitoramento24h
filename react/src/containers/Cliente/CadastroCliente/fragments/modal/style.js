@@ -14,7 +14,7 @@ justify-content: center;
 export const Container = styled.div`
 background: #FFF;
 width: 25vw;
-height: 60vh;
+max-height: 60vh;
 display: flex;
 flex-direction: column;
 border-radius: 8px;
@@ -25,7 +25,7 @@ padding: 20px;
 gap: 2;
 text-align: start;
 overflow-y: auto;
-scrollbar-width: auto;
+scrollbar-width: scroll;
 
 #btnAdicionar{
     width: auto;
@@ -61,6 +61,7 @@ export const Form = styled.div`
 min-height: 90%;
 max-height: 90%;
 overflow-y: auto;
+scrollbar-width: auto;
 width: 100%;
 `
 
@@ -92,6 +93,14 @@ text-transform:uppercase;
 white-space: nowrap;
 font-size: 70%;
 
+.textAreaModal{
+    width: 100%;
+min-height: 100px;
+border: 1px solid #d0d0d0;
+border-radius: 8px;
+padding: 10px;
+}
+
 textarea{
 width: 50%;
 border: none;
@@ -101,9 +110,9 @@ padding: 10px;
 `
 export const Buttons = styled.div`
 display: flex;
-justify-content: end;
+justify-content: start;
 gap: 2%;
-position: absolute;
 bottom: 10px;
-right: 10px;
+margin-top: 2%;
+left: 10px;
 `
