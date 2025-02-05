@@ -51,7 +51,6 @@ public class MonitorEventoUseCase implements MonitorEventoService {
         if (evento.isGeraOcorrencia()) {
             Ocorrencia ocorrencia = new Ocorrencia();
             ocorrencia.setEvento(evento);
-            ocorrencia.setDatacadastro(new Date());
 
             if (!monitorOcorrenciaUseCase.ocorrenciaEmAntendimento(ocorrencia)) {
                 OcorrenciaVO ocorrenciaResponse = OcorrenciaMapper.INSTANCE.toOcorrenciaVO(monitorOcorrenciaUseCase.save(ocorrencia));

@@ -56,6 +56,8 @@ public class Evento {
 
     private Integer alarme = 0;
 
+    private String grupo;
+
     public boolean isGeraOcorrencia() {
         return alarme > 0 && nonNull(idcliente);
     }
@@ -67,6 +69,7 @@ public class Evento {
         Integer numeroSetor = null;
 
         if (nonNull(configEvento)) {
+            this.grupo = configEvento.getGrupo();
             if (StringUtils.hasLength(configEvento.getSetor())) {
                 String setor = configEvento.getSetor().replaceAll("F", "");
                 if (StringUtils.hasLength(setor)) {
