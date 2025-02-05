@@ -19,25 +19,25 @@ function FormularioOcorrencia({ handleLastFieldBlur, dataOcorrencia, handleSubmi
     };
 
     return (
-        <Formulario>
+        <Formulario className='mb-5' >
             <form onSubmit={handleSubmit(onSubmit)}>
 
                 <div className="row ms-1 me-2 mt-2">
                     <div className="col">
                         <label htmlFor="datacadastro" className="form-label fw-bold">Data Cadastro</label>
-                        <input disabled value={dataOcorrencia.datacadastro} {...register("datacadastro", { required: false })} type="text" className="form-control"
+                        <input disabled value={new Date(dataOcorrencia.datacadastro).toLocaleString('pt-BR')} {...register("datacadastro", { required: false })} type="text" className="form-control"
                             id={`datacadastro${dataOcorrencia.id}`} aria-label=".form-select example" />
                     </div>
 
                     <div className="col">
                         <label htmlFor="dataatendimento" className="form-label fw-bold">Data Inicio Atendimento</label>
-                        <input disabled value={dataOcorrencia.dataatendimento} {...register("dataatendimento", { required: false })} type="text" className="form-control"
+                        <input disabled value={new Date(dataOcorrencia.dataatendimento).toLocaleString('pt-BR')} {...register("dataatendimento", { required: false })} type="text" className="form-control"
                             id={`dataatendimento${dataOcorrencia.id}`} aria-label=".form-select example" />
                     </div>
 
                     <div className="col">
                         <label htmlFor="dataencerramento" className="form-label fw-bold">Data Encerramento</label>
-                        <input disabled value={dataOcorrencia.dataencerramento} {...register("dataencerramento", { required: false })} type="text" className="form-control"
+                        <input disabled value={dataOcorrencia.dataencerramento ? new Date(dataOcorrencia.dataencerramento).toLocaleString('pt-BR') : ''} {...register("dataencerramento", { required: false })} type="text" className="form-control"
                             id={`dataencerramento${dataOcorrencia.id}`} aria-label=".form-select example" />
                     </div>
                 </div>
@@ -279,7 +279,7 @@ function FormularioOcorrencia({ handleLastFieldBlur, dataOcorrencia, handleSubmi
                     </div>
                 </div>
 
-                <div className="row ms-2 me-2 mt-2 mb-3">
+                <div className="row ms-2 me-2 mt-2 mb-5">
                     <div className="col-sm">
                         <label htmlFor="ocorrenciapolicialresumo" className="form-label fw-bold">Ocorrência Policial</label>
                         <textarea

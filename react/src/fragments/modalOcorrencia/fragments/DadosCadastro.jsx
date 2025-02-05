@@ -79,9 +79,9 @@ function TabsInformacoes({ dataOcorrencia }) {
 
                 <div className="tab-pane fade" id={`setorizacao-${dataOcorrencia.id}`} role="tabpanel" aria-labelledby={`setorizacao-tab-${dataOcorrencia.id}`}>
 
-                    <div className="ps-3 mb-2">
+                    <div className="ps-3">
 
-                        <FundoSetores>
+                        <FundoSetores className=''>
                             <CardHeaderSetores>
                                 <div className="row">
                                     <div className="col">

@@ -34,19 +34,15 @@ export const Infos = styled.div`
 export const BodyModal = styled.div`
 display: flex;
 flex-direction: row;
+overflow-y: auto;
+scrollbar-width: auto;
+max-height: 95%;
 `
 
 export const Formulario = styled.div`
 width: 50%;
-max-height: 100vh;
 padding: 10px;
 display: flex;
-
-form{
-    overflow-y: auto;
-scrollbar-width: auto;
-}
-
 `
 export const InformacoesTabs = styled.div`
 width: 50%;
@@ -96,8 +92,6 @@ display: flex;
 flex-direction: column;
 align-items: start;
 justify-content: start;
-overflow-y: auto;
-scrollbar-width: auto;
 max-height: 100vh;
 
 
@@ -107,7 +101,6 @@ max-height: 100vh;
     flex-direction: column;
     align-items: start;
     justify-content: start;
-    max-height: 550px;
 }
 `
 
@@ -161,8 +154,7 @@ display: flex;
 flex-direction: column;
 align-items: start;
 justify-content: start;
-overflow-y: auto;
-scrollbar-width: auto;
+margin-bottom: 30px;
 
 .contentTabs{
     width: 100%;
@@ -170,7 +162,6 @@ scrollbar-width: auto;
     flex-direction: column;
     align-items: start;
     justify-content: start;
-    max-height: 550px;
 }
 `
 export const CardHeaderSetores = styled.div`
@@ -194,8 +185,6 @@ display: flex;
 flex-direction: column;
 align-items: start;
 justify-content: start;
-overflow-y: auto;
-scrollbar-width: auto;
 
 
 .contentTabs{
@@ -204,12 +193,8 @@ scrollbar-width: auto;
     flex-direction: column;
     align-items: start;
     justify-content: start;
-    max-height: 550px;
 }
 `
-
-
-
 export const RowViagem = styled.div`
 width: 100%;
 display: flex;
