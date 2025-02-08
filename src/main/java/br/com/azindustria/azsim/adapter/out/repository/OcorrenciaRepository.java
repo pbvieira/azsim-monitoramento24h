@@ -38,7 +38,7 @@ public class OcorrenciaRepository implements MonitorOcorrenciaRepository {
     }
 
     @Override
-    public Ocorrencia findByEventoCodificadorAndEventoStatusAndEventoReferenciaAndAberta(Integer codificador, String status, String referencia, boolean aberta) {
-        return OcorrenciaMapper.INSTANCE.toOcorrencia(JsonOcorrenciaRepository.findByEventoCodificadorAndEventoStatusAndEventoReferenciaAndAberta(codificador, status, referencia, aberta));
+    public Ocorrencia findByEventoCodificadorAndEventoStatusAndAberta(Integer codificador, String status, boolean aberta) {
+        return OcorrenciaMapper.INSTANCE.toOcorrencia(JsonOcorrenciaRepository.findByEventoCodificadorAndEventoStatusAndAberta(codificador, status, aberta));
     }
 }

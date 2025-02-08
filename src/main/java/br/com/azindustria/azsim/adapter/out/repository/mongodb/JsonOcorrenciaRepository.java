@@ -11,7 +11,7 @@ public interface JsonOcorrenciaRepository extends MongoRepository<OcorrenciaDocu
 
     List<OcorrenciaDocument> findTop50ByOrderByDatacadastroDesc();
 
-    OcorrenciaDocument findByEventoCodificadorAndEventoStatusAndEventoReferenciaAndAberta(Integer codificador, String status, String referencia, boolean aberta);
+    OcorrenciaDocument findByEventoCodificadorAndEventoStatusAndAberta(Integer codificador, String status, boolean aberta);
 
 
 }

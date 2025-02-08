@@ -49,10 +49,9 @@ public class MonitorOcorrenciaUseCase implements MonitorOcorrenciaService {
         Ocorrencia ocorrenciaPai = null;
 
         if (Objects.isNull(ocorrencia.getId())) {
-            ocorrenciaPai = monitorOcorrenciaRepository.findByEventoCodificadorAndEventoStatusAndEventoReferenciaAndAberta(
+            ocorrenciaPai = monitorOcorrenciaRepository.findByEventoCodificadorAndEventoStatusAndAberta(
                     ocorrencia.getEvento().getCodificador(),
                     ocorrencia.getEvento().getStatus(),
-                    ocorrencia.getEvento().getReferencia(),
                     true);
         }
 
