@@ -274,7 +274,7 @@ class MonitorEventoUseCaseTest extends AzsimApplicationTest {
         assertEquals("INVASAO SETOR", evento.getDestatus());
         assertNotNull(evento.getDataevento());
         assertNull(evento.getIdcliente());
-        assertEquals(" [codificador 12345689 não localizado]", evento.getNmcliente());
+        assertNull(null);
         assertNull(evento.getNumsetor());
         assertNull(evento.getLocal());
         assertNull(evento.getEndereco());
