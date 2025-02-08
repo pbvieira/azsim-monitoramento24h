@@ -89,8 +89,6 @@ public class Evento {
                 this.alarme = configEvento.getAlarme();
             }
 
-            log.info("CLIENTE: " + cliente.toString());
-
             if (nonNull(cliente.getSetores()) && nonNull(numeroSetor)) {
                 Integer finalNumeroSetor = numeroSetor;
                 Setor setor = cliente.getSetores().stream()
