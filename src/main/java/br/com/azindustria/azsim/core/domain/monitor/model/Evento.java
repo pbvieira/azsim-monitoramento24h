@@ -64,7 +64,7 @@ public class Evento {
 
     public void complementarDados(Cliente cliente, ConfigEvento configEvento) {
         this.destatus = "Status não localizado";
-        this.nmcliente = null;
+        this.nmcliente = " - ";
         this.alarme = 0;
         Integer numeroSetor = null;
 

@@ -274,7 +274,7 @@ class MonitorEventoUseCaseTest extends AzsimApplicationTest {
         assertEquals("INVASAO SETOR", evento.getDestatus());
         assertNotNull(evento.getDataevento());
         assertNull(evento.getIdcliente());
-        assertNull(null);
+        assertEquals(" - ", evento.getNmcliente());
         assertNull(evento.getNumsetor());
         assertNull(evento.getLocal());
         assertNull(evento.getEndereco());
