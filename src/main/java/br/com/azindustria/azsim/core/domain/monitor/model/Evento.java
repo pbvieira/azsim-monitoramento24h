@@ -92,7 +92,7 @@ public class Evento {
             if (nonNull(cliente.getSetores()) && nonNull(numeroSetor)) {
                 Integer finalNumeroSetor = numeroSetor;
                 Setor setor = cliente.getSetores().stream()
-                        .filter(s -> s.getSetor().equals(finalNumeroSetor))
+                        .filter(s ->  finalNumeroSetor.equals(s.getSetor()))
                         .findFirst().orElse(null);
 
                 if (nonNull(setor)) {
