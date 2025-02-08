@@ -1,11 +1,11 @@
-import { Row, DataEvento, CodificadorEvento, StatusEvento, NomeEvento, CidadeEvento } from "../styles";
+import { Row, DataEvento, CodificadorEvento, StatusEvento, NomeCliente, CidadeEvento } from "../styles";
 
 const HeaderEventos = () => (
     <Row className="header">
         <DataEvento>Data</DataEvento>
         <CodificadorEvento>Cod.</CodificadorEvento>
         <StatusEvento>Status</StatusEvento>
-        <NomeEvento>Nome</NomeEvento>
+        <NomeCliente>Nome</NomeCliente>
         <CidadeEvento>Cidade</CidadeEvento>
     </Row>
 );

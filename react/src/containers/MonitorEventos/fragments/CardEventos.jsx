@@ -2,68 +2,15 @@
 import { useState, Fragment, useEffect, useCallback } from "react";
 import PropTypes from 'prop-types';
 import axios from "axios";
-import { CidadeEvento, CodificadorEvento, DataEvento, NomeEvento, Row, StatusEvento } from "../styles";
+import { CidadeEvento, CodificadorEvento, DataEvento, NomeCliente, Row, StatusEvento } from "../styles";
 import api from "../../../services/api";
 
 function CardEventos({ index, borderColor, data }) {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [filtro, setFiltro] = useState('');
-    const [clientes, setClientes] = useState([]);
-    const [codificador, setCodificador] = useState(null);
-
-    const handleCodificadorClick = () => {
-        if (data.nmcliente.startsWith(' - ')) {
-            setCodificador(data.codificador);
-            setIsModalOpen(true);
-        }
-    };
-
-    const codificadorClass = data.nmcliente.startsWith(' - ') ? 'clickable' : 'disabled';
 
     const closeModal = () => {
         setIsModalOpen(false);
-    };
-
-    const buscarClientes = useCallback(async () => {
-        try {
-            let response;
-            if (filtro) {
-                response = await api.get(`/clientes?nome=${filtro}`);
-            } else {
-                response = await api.get('/clientes');
-            }
-            const clientesSemCodificador = response.data.filter(cliente => !cliente.codificador);
-            setClientes(clientesSemCodificador);
-        } catch (error) {
-            console.log(error);
-        }
-    }, [filtro]);
-
-    useEffect(() => {
-        if (filtro) {
-            buscarClientes();
-        } else {
-            setClientes([]);
-        }
-    }, [filtro, buscarClientes]);
-
-    const clientesFiltrados = clientes.filter((cliente) =>
-        cliente.nome.toLowerCase().includes(filtro.toLowerCase())
-    );
-
-    const clientesParaExibir = filtro ? clientesFiltrados : [];
-
-    const handleVincularCodificador = async (cliente) => {
-        cliente.codificador = codificador;
-
-        try {
-            await axios.post(`http://127.0.0.1:8080/api/cliente`, cliente);
-            setIsModalOpen(false);
-            alert('Codificador vinculado com sucesso!');
-        } catch (error) {
-            console.log(error);
-            alert('Erro ao vincular o codificador.');
-        }
     };
 
     return (
@@ -72,20 +19,20 @@ function CardEventos({ index, borderColor, data }) {
                 borderLeft: `10px solid ${borderColor}`
             }}>
                 <DataEvento>
-                    <span title={data.datacadastro ? new Date(data.datacadastro).toLocaleString('pt-BR') : 'N/E'}> {data.datacadastro ? new Date(data.datacadastro).toLocaleString('pt-BR') : 'N/E'}</span>
+                    <span title={data.datacadastro ? new Date(data.datacadastro).toLocaleString('pt-BR') : ' - '}> {data.datacadastro ? new Date(data.datacadastro).toLocaleString('pt-BR') : ' - '}</span>
                 </DataEvento>
-                <CodificadorEvento codificador={codificadorClass} onClick={handleCodificadorClick}>
-                    <span title={data.codificador ? data.codificador : 'N/E'}> {data.codificador ? data.codificador : 'N/E'}</span>
+                <CodificadorEvento>
+                    <span title={data.codificador ? data.codificador : ' - '}> {data.codificador ? data.codificador : ' - '}</span>
                 </CodificadorEvento>
                 <StatusEvento>
-                    <span> {data.status ? data.status.slice(0, 40) : 'N/E'} .{data.referencia ? data.referencia.slice(0, 40) : 'N/E'}</span> -  &nbsp;
-                    <span title={data.destatus ? data.destatus : 'N/E'}>{data.destatus ? data.destatus.slice(0, 40) : 'N/E'}</span>
+                    <span> {data.status ? data.status.slice(0, 40) : ' - '} .{data.referencia ? data.referencia.slice(0, 40) : ' - '}</span> -  &nbsp;
+                    <span title={data.destatus ? data.destatus : ' - '}>{data.destatus ? data.destatus.slice(0, 40) : ' - '}</span>
                 </StatusEvento>
-                <NomeEvento>
-                    <span title={data.nmcliente ? data.nmcliente : 'N/E'}>  {data.nmcliente ? data.nmcliente.slice(0, 40) : 'N/E'}</span>
-                </NomeEvento>
+                <NomeCliente>
+                    <span title={data.nmcliente ? data.nmcliente : ' - '}>  {data.nmcliente ? data.nmcliente.slice(0, 40) : ' - '}</span>
+                </NomeCliente>
                 <CidadeEvento>
-                    <span title={data.cidade ? data.cidade : 'N/E'}> {data.cidade ? data.cidade.slice(0, 40) : 'N/E'}</span>
+                    <span title={data.cidade ? data.cidade : ' - '}> {data.cidade ? data.cidade.slice(0, 40) : ' - '}</span>
                 </CidadeEvento>
             </Row>
             {

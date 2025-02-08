@@ -54,7 +54,7 @@ const useConectaSocket = (setOcorrencias, setEventos) => {
                                 newOcorrencias.pop();
                             }
                             newOcorrencias.unshift(dadosRecebidos);
-                            const somOcorrencia = new Audio('/audio/somOcorrencia.mp3');
+                            const somOcorrencia = new Audio('/azsim/audio/somOcorrencia.mp3');
                             somOcorrencia.play();
 
                             Swal.fire({

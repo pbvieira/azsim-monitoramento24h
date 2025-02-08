@@ -77,13 +77,13 @@ font-weight: 600;
 `
 
 export const DataEvento = styled.div`
-width: 16.66%;
+width: 10%;
 text-overflow: ellipsis;
 overflow: hidden;
-text-align: center;
+text-align: left;
 `
 export const CodificadorEvento = styled.div`
-width: 8%;
+width: 5%;
 text-overflow: ellipsis;
 overflow: hidden;
 text-align: center;
@@ -92,20 +92,20 @@ export const StatusEvento = styled.div`
 width: 16.66%;
 text-overflow: ellipsis;
 overflow: hidden;
-text-align: center;
+text-align: left;
 `
 export const DeStatus = styled.div`
 width: 16.66%;
 text-overflow: ellipsis;
 overflow: hidden;
 `
-export const NomeEvento = styled.div`
-width: 24%;
+export const NomeCliente = styled.div`
+width: 30%;
 text-overflow: ellipsis;
 overflow: hidden;
 `
 export const CidadeEvento = styled.div`
-width: 16.66%;
+width: 10%;
 text-overflow: ellipsis;
 overflow: hidden;
 position: relative;
