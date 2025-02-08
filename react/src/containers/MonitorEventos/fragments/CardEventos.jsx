@@ -12,13 +12,13 @@ function CardEventos({ index, borderColor, data }) {
     const [codificador, setCodificador] = useState(null);
 
     const handleCodificadorClick = () => {
-        if (data.nmcliente.includes('codificador não localizado')) {
+        if (data.nmcliente.startsWith(' - ')) {
             setCodificador(data.codificador);
             setIsModalOpen(true);
         }
     };
 
-    const codificadorClass = data.nmcliente.includes('codificador não localizado') ? 'clickable' : 'disabled';
+    const codificadorClass = data.nmcliente.startsWith(' - ') ? 'clickable' : 'disabled';
 
     const closeModal = () => {
         setIsModalOpen(false);
